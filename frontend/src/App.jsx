@@ -1,35 +1,184 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function AuthPage() {
+  const [isLogin, setIsLogin] = useState(false);
+
+  // Signup state
+  const [signupData, setSignupData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+  });
+
+  const handleSignupChange = (e) =>
+    setSignupData({ ...signupData, [e.target.name]: e.target.value });
+
+  const handleSignupSubmit = (e) => {
+    e.preventDefault();
+    console.log("Signup submitted:", signupData);
+  };
+
+  const toggleLogin = () => setIsLogin(!isLogin);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="min-h-screen flex items-center justify-center bg-blue-100">
+      <div className="relative w-[900px] h-[600px] flex rounded-xl overflow-hidden shadow-2xl">
+        {/* Right Panel */}
+        <div
+          className={`absolute top-0 right-0 w-1/2 h-full bg-[#0f172a] text-white p-12 flex flex-col justify-center items-center transition-all duration-700 ease-in-out ${
+            isLogin ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          <div className="flex flex-col items-center text-center">
+            <div className="w-20 h-20 bg-gray-800 rounded-full mb-4 flex items-center justify-center">
+              <span className="text-white font-bold text-lg">Logo</span>
+            </div>
+            <h1 className="text-4xl font-extrabold mb-2 text-blue-400 neon-text">
+              UPPERCLASS AI
+            </h1>
+            <p className="text-lg">
+              {isLogin
+                ? "Welcome back! Please login to continue."
+                : "Welcome! Join us and start learning AI."}
+            </p>
+          </div>
+        </div>
 
-export default App
+        {/* Sign-up Form */}
+        <div
+          className={`absolute top-0 left-0 w-1/2 h-full bg-white p-12 flex flex-col justify-center transition-all duration-700 ease-in-out ${
+            isLogin ? "-translate-x-full opacity-0" : "translate-x-0 opacity-100"
+          }`}
+        >
+          <h1 className="text-2xl font-bold text-black">Create an account</h1>
+          <p className="text-gray-600 text-xs mb-6">Let's get started with you</p>
+
+          <button className="w-full py-4 border-2 border-black rounded-xl mb-6 hover:bg-gray-100 transition flex items-center justify-center gap-3">
+            <span className="text-xl font-bold text-red-500">G</span>
+            Continue with Google
+          </button>
+
+          <div className="relative text-gray-600 mb-6">
+            <hr />
+            <span className="absolute left-1/2 -top-3 bg-white px-2 -translate-x-1/2 text-sm">
+              or
+            </span>
+          </div>
+
+          <form onSubmit={handleSignupSubmit} className="flex flex-col gap-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="flex flex-col">
+                <label className="text-sm mb-1 font-semibold text-gray-700">
+                  First Name
+                </label>
+                <input
+                  type="text"
+                  name="firstName"
+                  placeholder="Enter first name"
+                  value={signupData.firstName}
+                  onChange={handleSignupChange}
+                  required
+                  className="p-3 border-2 border-black rounded-lg focus:border-blue-500 outline-none transition"
+                />
+              </div>
+              <div className="flex flex-col">
+                <label className="text-sm mb-1 font-semibold text-gray-700">
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  name="lastName"
+                  placeholder="Enter last name"
+                  value={signupData.lastName}
+                  onChange={handleSignupChange}
+                  required
+                  className="p-3 border-2 border-black rounded-lg focus:border-blue-500 outline-none transition"
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-col">
+              <label className="text-sm mb-1 font-semibold text-gray-700">
+                Email Address
+              </label>
+              <input
+                type="email"
+                name="email"
+                placeholder="example@gmail.com"
+                value={signupData.email}
+                onChange={handleSignupChange}
+                required
+                className="p-3 border-2 border-black rounded-lg focus:border-blue-500 outline-none transition"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="py-3 mb-10 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition"
+            >
+              Create account
+            </button>
+          </form>
+
+          <div className="text-center">
+            <p className="text-black text-lg mt-9">
+              Already have an account?{" "}
+              <span
+                onClick={toggleLogin}
+                className="text-blue-600 hover:underline cursor-pointer"
+              >
+                Log in
+              </span>
+            </p>
+            <p className="text-gray-800 text-md mt-4">
+              By continuing, you agree to the Company's Terms <br />of Use and
+              Privacy Policy
+            </p>
+          </div>
+        </div>
+
+        {/* Login Form */}
+        <div
+          className={`absolute top-0 left-1/2 w-1/2 h-full bg-white p-12 flex flex-col justify-center transition-all duration-700 ease-in-out ${
+            isLogin ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
+          }`}
+        >
+          <h1 className="text-3xl font-bold mb-4 text-black">Log In</h1>
+          <form className="flex flex-col gap-4">
+            <input
+              type="email"
+              placeholder="Email Address"
+              className="p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 outline-none transition"
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              className="p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 outline-none transition"
+            />
+            <button className="mt-4 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition">
+              Log In
+            </button>
+          </form>
+
+          <p className="mt-6 text-gray-700">
+            Don't have an account?{" "}
+            <span
+              onClick={toggleLogin}
+              className="text-blue-600 cursor-pointer hover:underline"
+            >
+              Sign Up
+            </span>
+          </p>
+        </div>
+
+        {/* Neon Text */}
+        <style jsx>{`
+          .neon-text {
+            text-shadow: 0 0 5px #00f, 0 0 10px #00f, 0 0 20px #00f,
+              0 0 40px #0ff, 0 0 80px #0ff;
+          }
+        `}</style>
+      </div>
+    </div>
+  );
+}
