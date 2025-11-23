@@ -10,7 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +27,7 @@ SECRET_KEY = 'django-insecure-zscl5p78&)9uz*4dm4h!94oa-5ctztpn7ye99+ad=#^6vt3r^3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*", '.onrender.com',]
 
 
 # Application definition
@@ -130,6 +132,11 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+    "https://*.onrender.com",
+    "https://uniben-fasa-voting-system.netlify.app"
+]
 AUTH_USER_MODEL = 'users.CustomUser'
 
 REST_FRAMEWORK = {
