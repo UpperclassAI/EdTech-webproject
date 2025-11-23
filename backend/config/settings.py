@@ -129,3 +129,15 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost;3000",
     "http://127.0.0.1:3000",
 ]
+
+AUTH_USER_MODEL = 'users.CustomUser'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # Will be updated to use simplejwt or other token method later
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}

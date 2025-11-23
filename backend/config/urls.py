@@ -15,8 +15,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+from django.http import JsonResponse
+from django.views import View
 
+class RootView(View):
+    def get(self, request):
+        return JsonResponse({
+            "message": "UpperclassAI web API is running!",
+            "endpoints": {
+                "admin": "/admin/",
+                "api": "/api/",  # if you have API routes
+            },
+            "status": "active"
+        })
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include('courses.urls')),
+    path('api/', include('users.urls')),
 ]
