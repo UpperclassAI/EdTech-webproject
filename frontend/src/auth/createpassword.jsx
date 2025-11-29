@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import Navbar from "../Navbar.jsx";
 
 function CreatePassword() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
+
+  const navigate = useNavigate(); // <-- add this
 
   const passwordError =
     password.length > 0 && password.length < 8
@@ -19,14 +23,13 @@ function CreatePassword() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (passwordError || matchError) return;
-
     console.log("Password confirmed!");
   };
 
   return (
     <div className="min-h-screen bg-blue-100 flex items-center justify-center">
+      <Navbar />
       <div className="bg-white p-12 rounded-xl shadow-lg w-[400px] transition-all duration-300">
 
         <h1 className="text-xl font-bold text-black mb-6">Create password</h1>
@@ -54,11 +57,7 @@ function CreatePassword() {
                 {showPass ? <EyeOff size={20} /> : <Eye size={20} />}
               </span>
             </div>
-
-            {passwordError && (
-              <p className="text-red-500 text-xs mt-1">{passwordError}</p>
-            )}
-
+            {passwordError && <p className="text-red-500 text-xs mt-1">{passwordError}</p>}
             <p className="text-gray-500 text-xs mt-1">Must be at least 8 characters</p>
           </div>
 
@@ -83,18 +82,17 @@ function CreatePassword() {
                 {showConfirmPass ? <EyeOff size={20} /> : <Eye size={20} />}
               </span>
             </div>
-
-            {matchError && (
-              <p className="text-red-500 text-xs mt-1">{matchError}</p>
-            )}
-
+            {matchError && <p className="text-red-500 text-xs mt-1">{matchError}</p>}
             <p className="text-gray-500 text-xs mt-1">Both passwords must match</p>
           </div>
 
-          {/* Submit */}
+          {/* Navigate to Success page */}
           <button
-            type="submit"
-            className="py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition mt-4"
+            type="button"
+            onClick={() => {
+              if (!passwordError && !matchError) navigate("/auth/success");
+            }}
+            className="py-3 mb-6 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition"
           >
             Confirm Password
           </button>

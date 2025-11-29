@@ -1,4 +1,8 @@
 import Navbar from "./Navbar";
+import Footer from "./Footer";
+
+
+
 
 export default function Home() {
   return (
@@ -44,6 +48,7 @@ export default function Home() {
           </button>
         </div>
       </div>
+       <Footer />
     </div>
   );
 }

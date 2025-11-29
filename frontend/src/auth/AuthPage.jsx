@@ -1,6 +1,9 @@
 
 import { useState } from "react";
 import Navbar from "../Navbar.jsx";
+import { useNavigate } from "react-router-dom";
+
+
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(false);
@@ -10,6 +13,9 @@ export default function AuthPage() {
     lastName: "",
     email: "",
   });
+
+  
+const navigate = useNavigate();
 
   const handleSignupChange = (e) =>
     setSignupData({ ...signupData, [e.target.name]: e.target.value });
@@ -145,12 +151,14 @@ export default function AuthPage() {
               />
             </div>
 
-            <button
-              type="submit"
-              className="py-3 mb-6 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition"
-            >
-              Create account
-            </button>
+      <button
+  type="button" // change from "submit" to "button"
+  onClick={() => navigate("/auth/otp")} // navigate to OTP page
+  className="py-3 mb-6 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition"
+>
+  Create account
+</button>
+
           </form>
 
           <p className="text-center text-black text-lg mt-3">

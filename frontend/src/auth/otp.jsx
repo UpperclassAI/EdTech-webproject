@@ -1,12 +1,15 @@
 import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import Navbar from "../Navbar.jsx";
 
 function Otp() {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [error, setError] = useState("");
   const inputRefs = useRef([]);
+  const navigate = useNavigate(); // ← initialize navigate
 
   const handleChange = (value, index) => {
-    if (!/^[0-9]?$/.test(value)) return; // allow only numbers
+    if (!/^[0-9]?$/.test(value)) return;
 
     const newOtp = [...otp];
     newOtp[index] = value;
@@ -14,7 +17,7 @@ function Otp() {
     setError("");
 
     if (value && index < 3) {
-      inputRefs.current[index + 1].focus(); // move to next input
+      inputRefs.current[index + 1].focus();
     }
   };
 
@@ -33,26 +36,24 @@ function Otp() {
       return;
     }
 
-    alert("Code verified!");
+    // ✅ Navigate to create password page
+    navigate("/auth/create-password");
   };
 
   return (
     <div className="min-h-screen bg-blue-100 flex text-left items-center justify-center">
+      <Navbar />
       <div className="bg-white p-10 rounded-xl shadow-lg w-[380px] text-center">
-<div className="text-left">
-        <h2 className="text-xl font-bold text-black">Create an account</h2>
-        <p className="text-gray-600 text-xs mb-10">Let's get started with you</p>
+        <div className="text-left">
+          <h2 className="text-xl font-bold text-black">Create an account</h2>
+          <p className="text-gray-600 text-xs mb-10">Let's get started with you</p>
+          <p className="text-black mb-10">
+            We’ve sent a <b>4-digit verification code</b> to your gmail
+          </p>
+          <p className="text-gray-700 mb-10">Input the code.</p>
+        </div>
 
-        <p className="text-black mb-10">
-          We’ve sent a <b>4-digit verification code</b> to your gmail
-        </p>
-          <p className="text-gray-700 mb-10">
-          Input the code.
-        </p>
-</div>
         <form onSubmit={handleSubmit} className="flex flex-col items-center">
-
-          {/* OTP INPUTS */}
           <div className="flex gap-7 mb-6">
             {otp.map((digit, index) => (
               <input
@@ -69,20 +70,17 @@ function Otp() {
           </div>
 
           {/* ERROR MESSAGE */}
-          {error && (
-            <p className="text-red-500 text-sm -mt-4 mb-4">{error}</p>
-          )}
+          {error && <p className="text-red-500 text-sm -mt-4 mb-4">{error}</p>}
 
-          {/* SUBMIT BUTTON */}
           <button
             type="submit"
+             onClick={() => navigate("/auth/createpassword")} // navigate to OTP page
             className="w-full py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition"
           >
             Confirm Code
           </button>
         </form>
 
-        {/* RESEND */}
         <p className="text-gray-700 text-sm mt-6">
           Didn't get the code?{" "}
           <button className="text-blue-600 hover:underline">Resend</button>

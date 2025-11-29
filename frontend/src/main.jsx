@@ -1,18 +1,40 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import App from './App'
-import AuthPage from './auth/AuthPage.jsx'
-import './index.css'
+import App from './App';
+
+// Auth pages
+import AuthPage from './auth/AuthPage.jsx';
+import Otp from './auth/OTP.jsx'; 
+import CreatePassword from "./auth/createpassword.jsx";
+import Success from "./auth/success.jsx";
+
+// General pages
+import Pricing from './pages/Pricing.jsx';
+import About from './pages/About.jsx';
+import Courses from './pages/Courses.jsx';
+
+import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
+        {/* MAIN */}
         <Route path="/" element={<App />} />
+
+        {/* AUTH FLOW */}
         <Route path="/auth" element={<AuthPage />} />
+        <Route path="/auth/OTP" element={<Otp />} />
+        <Route path="/auth/CreatePassword" element={<CreatePassword />} />
+        <Route path="/auth/success" element={<Success />} />
+
+        {/* PLACEHOLDER PAGES */}
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/courses" element={<Courses />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
-)
+);
