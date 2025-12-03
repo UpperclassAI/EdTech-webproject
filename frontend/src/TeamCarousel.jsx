@@ -10,7 +10,6 @@ export default function TeamCarousel() {
       role: "AI Research Lead",
       company: "Google",
       avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=GoogleAnna",
-      description: "Leading AI research at Google with focus on machine learning applications",
       color: "from-blue-500 to-blue-600"
     },
     {
@@ -19,7 +18,6 @@ export default function TeamCarousel() {
       role: "UX Director",
       company: "Meta",
       avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Jonatja",
-      description: "Former UX director at Meta, specializing in AI interface design",
       color: "from-purple-500 to-purple-600"
     },
     {
@@ -28,7 +26,6 @@ export default function TeamCarousel() {
       role: "Tech Lead",
       company: "Microsoft",
       avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=BillyCenter",
-      description: "Tech lead at Microsoft, expert in cloud computing and AI integration",
       color: "from-green-500 to-green-600"
     },
     {
@@ -37,7 +34,6 @@ export default function TeamCarousel() {
       role: "Product Manager",
       company: "Apple",
       avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=EmaSipnes",
-      description: "Product manager at Apple, focusing on AI-powered product development",
       color: "from-red-500 to-red-600"
     },
     {
@@ -46,7 +42,6 @@ export default function TeamCarousel() {
       role: "Data Scientist",
       company: "Amazon",
       avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=AlexMorgan",
-      description: "Senior data scientist at Amazon AWS, specializing in predictive analytics",
       color: "from-orange-500 to-orange-600"
     },
     {
@@ -55,239 +50,95 @@ export default function TeamCarousel() {
       role: "AI Ethics Lead",
       company: "OpenAI",
       avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=SarahChen",
-      description: "Leading AI ethics and responsible AI development at OpenAI",
       color: "from-teal-500 to-teal-600"
     }
   ];
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [index, setIndex] = useState(0);
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === teamMembers.length - 1 ? 0 : prevIndex + 1
-    );
-  };
+  const next = () => setIndex((prev) => (prev + 1) % teamMembers.length);
+  const prev = () => setIndex((prev) => (prev - 1 + teamMembers.length) % teamMembers.length);
 
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? teamMembers.length - 1 : prevIndex - 1
-    );
-  };
-
-  const goToSlide = (index) => {
-    setCurrentIndex(index);
-  };
-
-  // Auto-play functionality
+  // Auto-play
   useEffect(() => {
-    if (!isAutoPlaying) return;
-    
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 4000);
-
-    return () => clearInterval(interval);
-  }, [isAutoPlaying]);
+    const timer = setInterval(() => next(), 4000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <div className="w-full bg-gradient-to-b from-white to-gray-50 py-16 md:py-24 px-4 md:px-8">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-800 mb-6">
-            Our <span className="text-blue-500">Team</span>
-          </h1>
-          <p className="text-gray-600 text-xl md:text-2xl max-w-3xl mx-auto">
-            Meet the experts behind our AI-powered learning platform
-          </p>
-        </motion.div>
+    <div className="w-full py-20 bg-gradient-to-b from-white to-gray-50">
+      <div className="max-w-7xl mx-auto px-6">
 
-        {/* Carousel Container */}
-        <div 
-          className="relative h-[600px] md:h-[700px] overflow-hidden rounded-3xl"
-          onMouseEnter={() => setIsAutoPlaying(false)}
-          onMouseLeave={() => setIsAutoPlaying(true)}
-        >
-          {/* Background Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50" />
+        {/* Title */}
+        <h1 className="text-5xl font-bold text-center mb-16 text-gray-800">
+          Our <span className="text-blue-500">Team</span>
+        </h1>
 
-          {/* Carousel Slides */}
-          <div className="relative h-full">
-            {teamMembers.map((member, index) => (
+        {/* MAIN FULL ROW SLIDER */}
+        <div className="relative overflow-hidden">
+          <motion.div
+            className="flex gap-10"
+            animate={{
+              x: `-${index * 350}px`, // card width
+              y: index % 2 === 0 ? -30 : 30 // zigzag up/down
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 90,
+              damping: 18
+            }}
+          >
+            {teamMembers.map((m) => (
               <motion.div
-                key={member.id}
-                className={`absolute inset-0 flex flex-col md:flex-row items-center justify-center p-8 md:p-12 ${
-                  index === currentIndex ? 'z-20' : 'z-10'
-                }`}
-                initial={false}
-                animate={{
-                  x: `${(index - currentIndex) * 100}%`,
-                  scale: index === currentIndex ? 1 : 0.9,
-                  opacity: Math.abs(index - currentIndex) <= 1 ? 1 : 0,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 100,
-                  damping: 20
-                }}
+                key={m.id}
+                className="w-[320px] bg-white rounded-3xl shadow-lg p-6 flex flex-col items-center"
+                whileHover={{ scale: 1.05 }}
               >
-                {/* Left Side - Avatar */}
-                <div className="flex-1 flex flex-col items-center justify-center mb-8 md:mb-0">
-                  <motion.div
-                    className="relative mb-8"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    {/* Avatar */}
-                    <div className="relative">
-                      <div className={`w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-r ${member.color} p-1`}>
-                        <div className="w-full h-full rounded-full bg-white overflow-hidden">
-                          <img
-                            src={member.avatar}
-                            alt={member.name}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                      </div>
-                      
-                      {/* Company Badge */}
-                      <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2">
-                        <div className="bg-white px-6 py-2 rounded-full shadow-lg">
-                          <span className="text-gray-700 font-bold text-lg">{member.company}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
+                {/* avatar */}
+                <div className={`w-40 h-40 rounded-full bg-gradient-to-r ${m.color} p-1`}>
+                  <img
+                    src={m.avatar}
+                    alt={m.name}
+                    className="w-full h-full rounded-full bg-white p-1"
+                  />
                 </div>
 
-                {/* Right Side - Content */}
-                <div className="flex-1 max-w-xl">
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3 }}
-                  >
-                    <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-                      {member.name}
-                    </h2>
-                    
-                    <div className="inline-block">
-                      <span className={`text-2xl md:text-3xl font-semibold bg-gradient-to-r ${member.color} bg-clip-text text-transparent`}>
-                        {member.role}
-                      </span>
-                      <div className="h-1 w-full bg-gradient-to-r from-blue-400 to-purple-400 rounded-full mt-2" />
-                    </div>
-                    
-                    <p className="text-gray-600 text-xl md:text-2xl mt-8 mb-10 leading-relaxed">
-                      {member.description}
-                    </p>
+                <h2 className="text-2xl font-bold mt-6">{m.name}</h2>
+                <p className="text-lg text-gray-600">{m.role}</p>
+                <p className="text-sm mt-2 text-gray-500">{m.company}</p>
 
-                    {/* Social Links */}
-                    <div className="flex space-x-4">
-                      <motion.a
-                        href="#"
-                        whileHover={{ y: -3 }}
-                        className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 hover:bg-blue-200 transition-colors"
-                      >
-                        <FaLinkedin className="text-xl" />
-                      </motion.a>
-                      <motion.a
-                        href="#"
-                        whileHover={{ y: -3 }}
-                        className="w-12 h-12 rounded-full bg-sky-100 flex items-center justify-center text-sky-600 hover:bg-sky-200 transition-colors"
-                      >
-                        <FaTwitter className="text-xl" />
-                      </motion.a>
-                    </div>
-                  </motion.div>
+                <p className="text-gray-600 mt-4 text-center">
+                  {m.description}
+                </p>
+
+                <div className="flex gap-4 mt-6">
+                  <a className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                    <FaLinkedin />
+                  </a>
+                  <a className="w-10 h-10 rounded-full bg-sky-100 flex items-center justify-center">
+                    <FaTwitter />
+                  </a>
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
 
-          {/* Navigation Buttons */}
-          <motion.button
-            onClick={prevSlide}
-            className="absolute left-4 md:left-8 top-1/2 transform -translate-y-1/2 z-30 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white shadow-xl flex items-center justify-center text-gray-700 hover:text-blue-600 hover:scale-110 transition-all"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+          {/* buttons */}
+          <button
+            onClick={prev}
+            className="absolute left-2 top-1/2 -translate-y-1/2 bg-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:scale-110"
           >
-            <FaChevronLeft className="text-xl md:text-2xl" />
-          </motion.button>
+            <FaChevronLeft />
+          </button>
 
-          <motion.button
-            onClick={nextSlide}
-            className="absolute right-4 md:right-8 top-1/2 transform -translate-y-1/2 z-30 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white shadow-xl flex items-center justify-center text-gray-700 hover:text-blue-600 hover:scale-110 transition-all"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+          <button
+            onClick={next}
+            className="absolute right-2 top-1/2 -translate-y-1/2 bg-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:scale-110"
           >
-            <FaChevronRight className="text-xl md:text-2xl" />
-          </motion.button>
-
-          {/* Dots Indicator */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 flex space-x-3">
-            {teamMembers.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentIndex 
-                    ? 'bg-blue-600 w-8' 
-                    : 'bg-gray-300 hover:bg-gray-400'
-                }`}
-              />
-            ))}
-          </div>
-
-          {/* Current Slide Indicator */}
-          <div className="absolute top-8 right-8 z-30">
-            <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
-              <span className="text-gray-700 font-semibold">
-                <span className="text-blue-600 text-xl">{currentIndex + 1}</span>
-                <span className="text-gray-400"> / {teamMembers.length}</span>
-              </span>
-            </div>
-          </div>
+            <FaChevronRight />
+          </button>
         </div>
 
-        {/* Team Grid Preview */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-16"
-        >
-          <h3 className="text-2xl font-semibold text-gray-700 mb-6 text-center">
-            Our Expert Team Members
-          </h3>
-          
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {teamMembers.map((member, index) => (
-              <motion.button
-                key={member.id}
-                onClick={() => goToSlide(index)}
-                whileHover={{ scale: 1.05 }}
-                className={`p-4 rounded-xl transition-all duration-300 ${
-                  index === currentIndex 
-                    ? 'bg-gradient-to-r from-blue-50 to-blue-100 border-2 border-blue-200' 
-                    : 'bg-white hover:bg-gray-50 border border-gray-100'
-                }`}
-              >
-                <div className="flex flex-col items-center">
-                  <div className={`w-12 h-12 rounded-full mb-3 bg-gradient-to-r ${member.color}`} />
-                  <span className="text-sm font-medium text-gray-700 text-center">
-                    {member.name.split(' ')[0]}
-                  </span>
-                </div>
-              </motion.button>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </div>
   );

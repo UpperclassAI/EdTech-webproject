@@ -29,7 +29,7 @@ export default function Home() {
       <Navbar />
 
       {/* HERO CONTENT */}
-      <div className="relative z-20 max-w-5xl px-50 mx-7 h-full flex flex-col justify-center">
+      <div className="relative z-20 max-w-5xl px- mx-7 h-full flex flex-col justify-center">
         <p className="text-white text-lg mb-5">
           Smart, Personalized, Powerful.
         </p>
