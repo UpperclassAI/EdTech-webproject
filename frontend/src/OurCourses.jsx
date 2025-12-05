@@ -24,7 +24,7 @@ export default function OurCourses() {
 
       {/* Animated Blur Circle */}
       <motion.div
-        className="absolute top-0 right-0 w-72 h-72 bg-blue-400 rounded-full filter blur-3xl opacity-40 -z-10"
+        className="absolute top-0 right-0 w-172 h-172 bg-blue-400/50 rounded-full filter blur-3xl opacity-40 z-1"
         animate={{
           x: [0, -20, 0],
           y: [0, 20, 0],

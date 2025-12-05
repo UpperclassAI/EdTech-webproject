@@ -1,6 +1,7 @@
 import { FaLightbulb, FaUserTie, FaShieldAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 
+
 // Generate random motion values
 const randomMove = () => ({
   x: Math.random() * 80 - 40,
