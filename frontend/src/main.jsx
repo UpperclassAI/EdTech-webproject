@@ -12,7 +12,20 @@ import Success from "./auth/success.jsx";
 import ResetPassword from './auth/ResetPassword.jsx';
 // dashboard 
 
+// import Overview from './dashboard/overview.jsx';
+// import Courses from './dashboard/courses.jsx';
+// import Achievements from './dashboard/Achievements.jsx';
+// import Avatar from './dashboard/avatar.jsx';
+
+
+// Dashboard layout
+import Dashboard from "./dashboard/Dashboard.jsx";
+
+// Dashboard pages
 import Overview from './dashboard/overview.jsx';
+import Courses from './dashboard/courses.jsx';
+import Achievements from "./dashboard/Achievements.jsx";
+import Avatar from './dashboard/avatar.jsx'; 
 
 // General pages
 // import Pricing from './pages/Pricing.jsx';
@@ -36,13 +49,18 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/auth/resetpassword" element={<ResetPassword  />}  />
 
 
-        {/* dashboard */}
-        <Route path="/dashboard/overview" element={<Overview />}  />
         
 
 
+      {/* DASHBOARD MAIN LAYOUT */}
+      <Route path="/dashboard" element={<Dashboard />}>
 
-
+        {/* CHILD PAGES */}
+        <Route index element={<Overview />} />
+        <Route path="courses" element={<Courses />} />
+        <Route path="achievements" element={<Achievements />} />
+        <Route path="avatar" element={<Avatar />} />
+   </Route>
 
 
         {/* PLACEHOLDER PAGES */}

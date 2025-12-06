@@ -183,13 +183,13 @@ export default function AuthPage() {
               className="p-3 border-2 border-gray-300 rounded-lg"
             />
          
-            <button
-              type="button"
-               onClick={() => navigate("/dashboard/overview")}
-              className="py-3 mb-6 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition"
-            >
-              log in
-            </button>
+             <button
+      type="button"
+      onClick={() => navigate("/dashboard")}
+      className="py-3 mb-6 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition"
+    >
+      Log in
+    </button>
           </form>
 
           <p className="mt-6 text-gray-700 text-center">

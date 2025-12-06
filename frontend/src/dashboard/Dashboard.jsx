@@ -4,8 +4,9 @@ import { FiSearch, FiUser } from "react-icons/fi";
 
 export default function Dashboard() {
   return (
-    <div className="flex w-full min-h-screen bg-gray-50">
-      {/* LEFT SIDEBAR */}
+    <div className="flex w-full min-h-screen bg-white">
+
+      {/* SIDEBAR stays fixed for all dashboard pages */}
       <Sidebar />
 
       {/* RIGHT CONTENT */}
@@ -35,7 +36,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* PAGE CONTENT */}
+        {/* ALL CHILD PAGES LOAD HERE */}
         <Outlet />
       </div>
     </div>

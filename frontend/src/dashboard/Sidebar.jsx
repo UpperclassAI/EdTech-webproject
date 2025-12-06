@@ -23,11 +23,14 @@ export default function Sidebar() {
       {/* NAV LINKS */}
       <nav className="flex flex-col gap-4">
 
-        {/* EACH NAV ITEM */}
-        <NavItem to="/auth" icon={<FaAddressCard />} label="Overview" />
-        <NavItem to="/dashboard/courses" icon={<FiBook />} label="Courses" />
-        <NavItem to="/dashboard/achievements" icon={<FiAward />} label="Achievements" />
-        <NavItem to="/dashboard/avatar" icon={<FiUser />} label="Avatar" />
+    
+
+
+        <NavItem to="/dashboard" label="Overview" icon={<FaAddressCard />} />
+<NavItem to="/dashboard/courses" label="Courses" icon={<FiBook />} />
+<NavItem to="/dashboard/achievements" label="Achievements" icon={<FiAward />} />
+<NavItem to="/dashboard/avatar" label="Avatar" icon={<FiUser />} />
+
 
       </nav>
 

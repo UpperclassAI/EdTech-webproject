@@ -1,13 +1,28 @@
-import { FiSearch, FiUser, FiChevronRight } from "react-icons/fi";
+import { FiSearch, FiUser } from "react-icons/fi";
 import { HiOutlineBadgeCheck } from "react-icons/hi";
 import { AiOutlineSchedule } from "react-icons/ai";
-import { FaBox, FaRegSmile } from "react-icons/fa";
+import { FaBookOpen, FaRegSmile } from "react-icons/fa";
+
 import Sidebar from "./Sidebar";
 import ChatBot from "./ChatBot";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
+
+import {
+  CircularProgressbar,
+  buildStyles,
+} from "react-circular-progressbar";
+
 import "react-circular-progressbar/dist/styles.css";
 
+// Chart Data
 const data = [
   { name: "Mon", time: 4 },
   { name: "Tue", time: 3 },
@@ -15,186 +30,195 @@ const data = [
   { name: "Thu", time: 2 },
   { name: "Fri", time: 6 },
   { name: "Sat", time: 4 },
-  { name: "Sun", time: 3 }
+  { name: "Sun", time: 3 },
 ];
-export default function Overview() {
-  return (
-    <div className="w-full min-h-screen font-sans text-gray-800 bg-white p-4 md:p-6 flex flex-col md:flex-row">
-      
-      {/* LEFT SIDEBAR */}
-      <Sidebar />
 
-      {/* MAIN DASHBOARD */}
-      <main className="flex-1 md:ml-6 flex flex-col gap-6 mt-6 md:mt-0">
+export default function Overview() {
+  const upcomingTasks = [
+    { name: "AI Introduction", date: "Nov 16th, 8:00 AM" },
+    { name: "Upperclass AI", date: "Nov 20th, 8:00 AM" },
+    { name: "Prompt Crafting", date: "Dec 5th, 12:00 PM" },
+  ];
+
+  const courses = [
+    "AI Introduction",
+    "Prompt Crafting",
+    "Machine Learning",
+    "Deep Learning",
+  ];
+
+  return (
+    <div className="w-full min-h-[88vh] bg-blue-50 p-4 md:p-6 flex">
+
+      {/* SIDEBAR */}
+      {/* <Sidebar /> */}
+
+      {/* MAIN */}
+      <main className="flex-1 ml-4 flex flex-col gap-5">
 
         {/* HEADER */}
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 mb-6">
+   
 
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-            <div>
-              <h2 className="text-lg font-medium">Welcome Peter Josh</h2>
-              <div className="text-xs text-gray-500">Student</div>
-            </div>
-
-            {/* Search - responsive width */}
-            <div className="relative">
-              <input
-                className="w-full sm:w-64 lg:w-80 pl-10 pr-4 py-2 rounded-lg bg-blue-100 border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-200"
-                placeholder="Search"
-              />
-              <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-            </div>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full border-2 border-blue-100 flex items-center justify-center">
-              <FiUser className="text-blue-600 text-xl" />
-            </div>
-          </div>
-
-        </div>
-
-        {/* --- ROW 1 --- */}
+        {/* FIRST ROW */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          
-          {/* LEFT CARD */}
-          <div className="bg-blue-100 rounded-xl p-4 flex items-center justify-between col-span-1 md:col-span-2">
+
+          {/* HERO CARD */}
+          <div className="col-span-2 bg-blue-100 rounded-xl p-4 flex justify-between items-center animate-[fadeUp_.7s_ease]">
             <div>
-              <div className="text-sm font-bold">Upperclass AI</div>
-              <div className="text-xs text-gray-500">We see the future</div>
+              <p className="text-sm font-bold">Upperclass AI</p>
+              <p className="text-xs text-gray-500">We see the future</p>
             </div>
-            <div className="w-20 h-14 md:w-24 md:h-16 bg-white flex items-center justify-center shadow rounded">
+            <div className="w-20 h-14 bg-white shadow rounded flex items-center justify-center text-lg">
               ▶
             </div>
           </div>
 
-          {/* RIGHT COLUMN */}
+          {/* RIGHT PROFILE + TASKS */}
           <div className="flex flex-col gap-4">
 
-            {/* USER CARD */}
-            <div className="bg-white rounded-xl p-4 border border-blue-100 flex flex-col items-center">
-              <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-gray-200 flex items-center justify-center mb-3">
+            {/* PROFILE */}
+            <div className="bg-white p-4 rounded-xl shadow flex flex-col items-center animate-[fadeUp_.75s_ease]">
+              <div className="w-20 h-20 rounded-full bg-gradient-to-r from-blue-500 to-blue-700 text-white flex items-center justify-center text-xl font-bold shadow">
                 PJ
               </div>
-              <div className="text-sm font-semibold">Peter Josh</div>
-              <div className="text-xs text-gray-400">Student</div>
-              <button className="mt-3 text-blue-500 text-xs">Edit</button>
+              <p className="mt-2 text-lg font-semibold">Peter Josh</p>
+              <p className="text-xs text-gray-500">Student</p>
+
+              <button className="mt-3 px-4 py-1 bg-blue-50 text-blue-600 rounded-md border border-blue-200">
+                Edit Profile
+              </button>
             </div>
 
             {/* UPCOMING TASKS */}
-            <div className="bg-white rounded-xl p-4 border border-blue-100 flex flex-col">
-              <div className="font-semibold mb-2">Upcoming Tasks</div>
-              <div className="space-y-2">
-                {[
-                  {name: "AI Introduction", date: "Nov 16th, 8:00 AM"},
-                  {name: "Upperclass AI", date: "Nov 20th, 8:00 AM"},
-                  {name: "Prompt Crafting", date: "Dec 5th, 12:00 PM"},
-                ].map(task => (
-                  <div key={task.name} className="flex items-start justify-between p-2 bg-gray-50 rounded">
+            <div className="bg-white p-4 rounded-xl border border-blue-100 animate-[fadeUp_.8s_ease]">
+              <p className="font-semibold mb-2 text-sm">Upcoming Tasks</p>
+
+              <div className="max-h-40 overflow-y-auto space-y-2">
+                {upcomingTasks.map((task) => (
+                  <div
+                    key={task.name}
+                    className="flex justify-between items-center bg-gray-50 p-2 rounded"
+                  >
                     <div className="flex items-center gap-3">
-                      <div className="w-6 h-6 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">●</div>
+                      <div className="w-6 h-6 bg-blue-50 rounded-full flex items-center justify-center text-blue-600">
+                        ●
+                      </div>
                       <div>
-                        <div className="text-sm font-medium">{task.name}</div>
-                        <div className="text-xs text-gray-400">{task.date}</div>
+                        <p className="text-sm font-medium">{task.name}</p>
+                        <p className="text-xs text-gray-400">{task.date}</p>
                       </div>
                     </div>
-                    <div className="text-gray-400">...</div>
+                    <span className="text-gray-400">...</span>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* AI TUTOR */}
-            <ChatBot />
-            
+            <div className="animate-[fadeUp_.9s_ease]">
+              <ChatBot />
+            </div>
 
             {/* MENTOR */}
-            <div className="bg-white rounded-xl p-4 border border-blue-100 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">M</div>
-              <div className="text-sm">Connect with Mentor</div>
+            <div className="bg-white p-4 rounded-xl border border-blue-100 flex items-center gap-3 animate-[fadeUp_1s_ease]">
+              <div className="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center text-blue-600">
+                👥
+              </div>
+              <p className="text-sm">Connect with Mentor</p>
             </div>
           </div>
         </div>
 
-        {/* --- ROW 2 --- */}
+        {/* SECOND ROW */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 
-          {/* CIRCLE PROGRESS */}
-      
- <div className="bg-white p-6 rounded-xl border border-blue-100 flex flex-col items-center">
-      <div className="w-32">
-        <CircularProgressbar 
-          value={82} 
-          text="82%" 
-          strokeWidth={10}
-          styles={buildStyles({
-            textColor: "#1e40af",
-            pathColor: "#1e40af",
-            trailColor: "#e5e7eb"
-          })}
-        />
-      </div>
-      <p className="text-sm text-gray-600 mt-2">Overall Progress</p>
-    </div>
+          {/* PROGRESS CIRCLE */}
+          <div className="bg-white p-4 rounded-xl border border-blue-100 flex flex-col items-center animate-[fadeUp_1.1s_ease]">
+            <div className="w-28">
+              <CircularProgressbar
+                value={82}
+                text={"82%"}
+                strokeWidth={9}
+                styles={buildStyles({
+                  pathColor: "#1e40af",
+                  textColor: "#1e40af",
+                  trailColor: "#e5e7eb",
+                })}
+              />
+            </div>
+            <p className="text-xs text-gray-600 mt-2">Overall Progress</p>
+          </div>
+
           {/* COURSES */}
-          <div className="bg-white rounded-xl p-4 border border-blue-100">
-            <div className="font-semibold mb-3">Courses</div>
-            <ul className="space-y-3 text-sm text-gray-700">
-              {["AI Introduction", "Prompt Crafting", "Machine Learning", "Deep Learning"].map(course => (
-                <li key={course} className="flex items-center gap-3">
-                  <div className="w-7 h-7 bg-blue-50 rounded-full flex items-center justify-center text-blue-600"><FaBox /></div>
-                  {course}
+          <div className="bg-white p-4 rounded-xl border border-blue-100 animate-[fadeUp_1.15s_ease]">
+            <p className="font-semibold mb-3">Courses</p>
+            <ul className="space-y-3">
+              {courses.map((c) => (
+                <li key={c} className="flex items-center gap-3 text-sm">
+                  <div className="w-7 h-7 bg-blue-50 rounded-full flex items-center justify-center text-blue-600">
+                    <FaBookOpen />
+                  </div>
+                  {c}
                 </li>
               ))}
             </ul>
           </div>
-
         </div>
 
-        {/* --- ROW 3 --- */}
+        {/* THIRD ROW */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 
           {/* BAR CHART */}
-          <div className="bg-white rounded-xl p-4 border border-blue-100">
-            <div className="flex items-center justify-between mb-3">
-              <div className="text-sm font-semibold">Time Spent</div>
-              <select className="text-sm bg-blue-50 px-2 py-1 rounded">
+          <div className="bg-white p-4 rounded-xl border border-blue-100 animate-[fadeUp_1.2s_ease]">
+            <div className="flex justify-between items-center mb-2">
+              <p className="text-sm font-semibold">Time Spent</p>
+              <select className="text-xs bg-blue-50 px-2 py-1 rounded">
                 <option>Week</option>
                 <option>Month</option>
               </select>
             </div>
-            
 
-            <div className="flex items-end gap-3 h-28">
-              {[10, 20, 12, 24, 14, 28].map((h, i) => (
-                <div key={i} className="w-6 bg-blue-600 rounded" style={{ height: `${h * 3}px` }}></div>
-              ))}
+            <div className="w-full h-56">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={data}>
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Bar dataKey="time" radius={[4, 4, 0, 0]} fill="#1e40af" />
+                </BarChart>
+              </ResponsiveContainer>
             </div>
           </div>
 
           {/* BUTTON GRID */}
-          <div className="bg-white rounded-xl p-4 border border-blue-100 grid grid-cols-2 gap-2 text-sm">
-            <button className="flex items-center gap-2 text-blue-600"><HiOutlineBadgeCheck /> Start a Project</button>
-            <button className="flex items-center gap-2 text-gray-600"><AiOutlineSchedule /> Ongoing Courses</button>
-            <button className="flex items-center gap-2 text-gray-600"><FiUser /> View Performance</button>
-            <button className="flex items-center gap-2 text-gray-600"><FaRegSmile /> New Courses</button>
+          <div className="bg-white p-4 rounded-xl border border-blue-100 grid grid-cols-2 gap-2 text-sm animate-[fadeUp_1.25s_ease]">
+
+            <button className="flex items-center gap-2 text-blue-600">
+              <HiOutlineBadgeCheck /> Start a Project
+            </button>
+
+            <button className="flex items-center gap-2 text-gray-600">
+              <AiOutlineSchedule /> Ongoing Courses
+            </button>
+
+            <button className="flex items-center gap-2 text-gray-600">
+              <FiUser /> View Performance
+            </button>
+
+            <button className="flex items-center gap-2 text-gray-600">
+              <FaRegSmile /> New Courses
+            </button>
           </div>
-
-      
-
         </div>
 
-        {/* --- ROW 4 --- */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-white rounded-xl p-4 border border-blue-100">
-                <div className="font-semibold mb-2">Latest Schedule</div>
-                <div className="text-sm text-gray-600">Nov 16: AI Introduction</div>
-                <div className="text-sm text-gray-600">Nov 20: Upperclass AI</div>
-             </div>
-
-         
+        {/* LAST ROW */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-[fadeUp_1.3s_ease]">
+          <div className="bg-white p-4 rounded-xl border border-blue-100">
+            <p className="font-semibold mb-2">Latest Schedule</p>
+            <p className="text-sm text-gray-600">Nov 16: AI Introduction</p>
+            <p className="text-sm text-gray-600">Nov 20: Upperclass AI</p>
+          </div>
         </div>
-
       </main>
     </div>
   );
