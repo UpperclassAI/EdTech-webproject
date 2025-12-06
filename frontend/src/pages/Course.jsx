@@ -1,5 +1,5 @@
 import Navbar from "../Navbar";
-export default function Courses() {
+export default function Course() {
   return (
     <div className="text-center mt-20 text-3xl font-bold">
           {/* NAVBAR */}

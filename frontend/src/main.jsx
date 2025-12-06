@@ -9,11 +9,28 @@ import AuthPage from './auth/AuthPage.jsx';
 import Otp from './auth/OTP.jsx'; 
 import CreatePassword from "./auth/createpassword.jsx";
 import Success from "./auth/success.jsx";
+import ResetPassword from './auth/ResetPassword.jsx';
+// dashboard 
+
+// import Overview from './dashboard/overview.jsx';
+// import Courses from './dashboard/courses.jsx';
+// import Achievements from './dashboard/Achievements.jsx';
+// import Avatar from './dashboard/avatar.jsx';
+
+
+// Dashboard layout
+import Dashboard from "./dashboard/Dashboard.jsx";
+
+// Dashboard pages
+import Overview from './dashboard/overview.jsx';
+import Courses from './dashboard/courses.jsx';
+import Achievements from "./dashboard/Achievements.jsx";
+import Avatar from './dashboard/avatar.jsx'; 
 
 // General pages
-import Pricing from './pages/Pricing.jsx';
-import About from './pages/About.jsx';
-import Courses from './pages/Courses.jsx';
+// import Pricing from './pages/Pricing.jsx';
+// import About from './pages/About.jsx';
+// import Courses from './pages/Courses.jsx';
 
 import './index.css';
 
@@ -29,11 +46,27 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/auth/OTP" element={<Otp />} />
         <Route path="/auth/CreatePassword" element={<CreatePassword />} />
         <Route path="/auth/success" element={<Success />} />
+        <Route path="/auth/resetpassword" element={<ResetPassword  />}  />
+
+
+        
+
+
+      {/* DASHBOARD MAIN LAYOUT */}
+      <Route path="/dashboard" element={<Dashboard />}>
+
+        {/* CHILD PAGES */}
+        <Route index element={<Overview />} />
+        <Route path="courses" element={<Courses />} />
+        <Route path="achievements" element={<Achievements />} />
+        <Route path="avatar" element={<Avatar />} />
+   </Route>
+
 
         {/* PLACEHOLDER PAGES */}
-        <Route path="/pricing" element={<Pricing />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/courses" element={<Courses />} />
+        {/* <Route path="/pricing" element={<Pricing />} /> */}
+        {/* <Route path="/about" element={<About />} /> */}
+        {/* <Route path="/courses" element={<Courses />} /> */}
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
