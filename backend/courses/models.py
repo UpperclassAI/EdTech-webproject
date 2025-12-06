@@ -90,3 +90,37 @@ class Lesson(models.Model):
 
     def __str__(self):
         return f"{self.module.title} - {self.title}"
+    
+from django.db import models
+from django.contrib.auth.models import User
+
+class Curriculum(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.TextField()
+    subject = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        verbose_name_plural = "Curricula"
+
+class Topic(models.Model):
+    curriculum = models.ForeignKey(Curriculum, on_delete=models.CASCADE, related_name='topics')
+    title = models.CharField(max_length=200)
+    order = models.IntegerField()
+    difficulty_level = models.CharField(max_length=20, choices=[
+        ('beginner', 'Beginner'),
+        ('intermediate', 'Intermediate'),
+        ('advanced', 'Advanced')
+    ])
+    content = models.TextField()  # Main content for the topic
+    learning_objectives = models.TextField()
+    
+    class Meta:
+        ordering = ['order']
+
+class Subtopic(models.Model):
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE, related_name='subtopics')
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    examples = models.JSONField(default=list)  # Store example problems
+    key_points = models.JSONField(default=list)
