@@ -1,9 +1,9 @@
-import { FiSearch, FiUser } from "react-icons/fi";
+import { FiPlusSquare, FiSearch, FiUser } from "react-icons/fi";
 import { HiOutlineBadgeCheck } from "react-icons/hi";
 import { AiOutlineSchedule } from "react-icons/ai";
-import { FaBookOpen, FaRegSmile } from "react-icons/fa";
+import { FaBookOpen, FaChartArea, FaRegSmile, FaRocket, FaSatellite, FaStar, FaStarOfLife } from "react-icons/fa";
 
-import Sidebar from "./Sidebar";
+
 import ChatBot from "./ChatBot";
 
 import {
@@ -22,7 +22,6 @@ import {
 
 import "react-circular-progressbar/dist/styles.css";
 
-// Chart Data
 const data = [
   { name: "Mon", time: 4 },
   { name: "Tue", time: 3 },
@@ -48,27 +47,22 @@ export default function Overview() {
   ];
 
   return (
-    <div className="w-full min-h-[88vh] bg-blue-50 p-4 md:p-6 flex">
-
-      {/* SIDEBAR */}
-      {/* <Sidebar /> */}
+    <div className="w-full min-h-[100vh] bg-blue-50 p-3 md:p-6 flex">
 
       {/* MAIN */}
-      <main className="flex-1 ml-4 flex flex-col gap-5">
-
-        {/* HEADER */}
-   
+      <main className="flex-1 flex flex-col gap-5">
 
         {/* FIRST ROW */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 
           {/* HERO CARD */}
-          <div className="col-span-2 bg-blue-100 rounded-xl p-4 flex justify-between items-center animate-[fadeUp_.7s_ease]">
+          <div className="col-span-1 md:col-span-2 bg-blue-100 rounded-xl p-4 flex justify-between items-center animate-[fadeUp_.7s_ease]">
             <div>
               <p className="text-sm font-bold">Upperclass AI</p>
               <p className="text-xs text-gray-500">We see the future</p>
             </div>
-            <div className="w-20 h-14 bg-white shadow rounded flex items-center justify-center text-lg">
+
+            <div className="w-16 h-12 md:w-20 md:h-14 bg-white shadow rounded flex items-center justify-center text-lg">
               ▶
             </div>
           </div>
@@ -78,13 +72,13 @@ export default function Overview() {
 
             {/* PROFILE */}
             <div className="bg-white p-4 rounded-xl shadow flex flex-col items-center animate-[fadeUp_.75s_ease]">
-              <div className="w-20 h-20 rounded-full bg-gradient-to-r from-blue-500 to-blue-700 text-white flex items-center justify-center text-xl font-bold shadow">
+              <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-r from-blue-500 to-blue-700 text-white flex items-center justify-center text-lg md:text-xl font-bold shadow">
                 PJ
               </div>
-              <p className="mt-2 text-lg font-semibold">Peter Josh</p>
+              <p className="mt-2 text-base md:text-lg font-semibold">Peter Josh</p>
               <p className="text-xs text-gray-500">Student</p>
 
-              <button className="mt-3 px-4 py-1 bg-blue-50 text-blue-600 rounded-md border border-blue-200">
+              <button className="mt-2 px-3 py-1 bg-blue-50 text-blue-600 rounded-md border border-blue-200 text-xs md:text-sm">
                 Edit Profile
               </button>
             </div>
@@ -100,7 +94,7 @@ export default function Overview() {
                     className="flex justify-between items-center bg-gray-50 p-2 rounded"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-6 h-6 bg-blue-50 rounded-full flex items-center justify-center text-blue-600">
+                      <div className="w-5 h-5 bg-blue-50 rounded-full flex items-center justify-center text-blue-600 text-xs">
                         ●
                       </div>
                       <div>
@@ -121,7 +115,7 @@ export default function Overview() {
 
             {/* MENTOR */}
             <div className="bg-white p-4 rounded-xl border border-blue-100 flex items-center gap-3 animate-[fadeUp_1s_ease]">
-              <div className="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center text-blue-600">
+              <div className="w-9 h-9 bg-blue-50 rounded-full flex items-center justify-center text-blue-600">
                 👥
               </div>
               <p className="text-sm">Connect with Mentor</p>
@@ -134,7 +128,7 @@ export default function Overview() {
 
           {/* PROGRESS CIRCLE */}
           <div className="bg-white p-4 rounded-xl border border-blue-100 flex flex-col items-center animate-[fadeUp_1.1s_ease]">
-            <div className="w-28">
+            <div className="w-24 md:w-28">
               <CircularProgressbar
                 value={82}
                 text={"82%"}
@@ -155,7 +149,7 @@ export default function Overview() {
             <ul className="space-y-3">
               {courses.map((c) => (
                 <li key={c} className="flex items-center gap-3 text-sm">
-                  <div className="w-7 h-7 bg-blue-50 rounded-full flex items-center justify-center text-blue-600">
+                  <div className="w-6 h-6 bg-blue-50 rounded-full flex items-center justify-center text-blue-600">
                     <FaBookOpen />
                   </div>
                   {c}
@@ -178,7 +172,7 @@ export default function Overview() {
               </select>
             </div>
 
-            <div className="w-full h-56">
+            <div className="w-full h-48 md:h-56">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={data}>
                   <XAxis dataKey="name" />
@@ -189,36 +183,101 @@ export default function Overview() {
               </ResponsiveContainer>
             </div>
           </div>
+{/* BUTTON GRID */}
+<div className="bg-white p-4 rounded-xl border border-blue-100 grid grid-cols-1 gap-2 text-sm animate-[fadeUp_1.25s_ease]">
 
-          {/* BUTTON GRID */}
-          <div className="bg-white p-4 rounded-xl border border-blue-100 grid grid-cols-2 gap-2 text-sm animate-[fadeUp_1.25s_ease]">
+  {/* BUTTON 1 */}
+  <button
+    className="
+      flex items-center gap-2 
+      text-blue-600 font-medium
+      py-2 px-3 rounded-lg
+      hover:bg-blue-50 
+      transition
+    "
+  >
+    <FaRocket /> Start a Project
+  </button>
 
-            <button className="flex items-center gap-2 text-blue-600">
-              <HiOutlineBadgeCheck /> Start a Project
-            </button>
+  {/* BUTTON 2 */}
+  <button
+    className="  
+     flex items-center gap-2 
+      text-blue-600 font-medium
+      py-2 px-3 rounded-lg
+      hover:bg-blue-50 
+      transition
+    "
+  >
+    <FaStarOfLife /> Ongoing Courses
+  </button>
 
-            <button className="flex items-center gap-2 text-gray-600">
-              <AiOutlineSchedule /> Ongoing Courses
-            </button>
+  {/* BUTTON 3 */}
+  <button
+    className="   flex items-center gap-2 
+      text-blue-600 font-medium
+      py-2 px-3 rounded-lg
+      hover:bg-blue-50 
+      transition
+    "
+  >
+    <FiPlusSquare /> New Courses
+  </button>
 
-            <button className="flex items-center gap-2 text-gray-600">
-              <FiUser /> View Performance
-            </button>
+  {/* BUTTON 4 */}
+  <button
+    className="   flex items-center gap-2 
+      text-blue-600 font-medium
+      py-2 px-3 rounded-lg
+      hover:bg-blue-50 
+      transition"
+  >
+    <FaChartArea /> View Performance
+  </button>
 
-            <button className="flex items-center gap-2 text-gray-600">
-              <FaRegSmile /> New Courses
-            </button>
-          </div>
+</div>
+
         </div>
 
         {/* LAST ROW */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-[fadeUp_1.3s_ease]">
-          <div className="bg-white p-4 rounded-xl border border-blue-100">
-            <p className="font-semibold mb-2">Latest Schedule</p>
-            <p className="text-sm text-gray-600">Nov 16: AI Introduction</p>
-            <p className="text-sm text-gray-600">Nov 20: Upperclass AI</p>
-          </div>
-        </div>
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-[fadeUp_1.3s_ease]">
+
+  <div className="bg-white p-4 rounded-xl border border-blue-100">
+
+    {/* LATEST SCHEDULE CARD */}
+    <div
+      className="
+        w-full h-16 
+        bg-white 
+        border border-blue-100 
+        rounded-xl 
+        flex items-center justify-between 
+        px-4 
+        shadow-sm
+        animate-[fadeUp_1.35s_ease]
+      "
+    >
+      <p className="text-sm font-semibold">Latest Schedule</p>
+
+      <button
+        className="
+          bg-blue-600 
+          text-white 
+          text-xs 
+          px-4 py-1.5 
+          rounded-lg 
+          hover:bg-blue-700 
+          transition
+        "
+      >
+        View
+      </button>
+    </div>
+
+  </div>
+
+</div>
+
       </main>
     </div>
   );
