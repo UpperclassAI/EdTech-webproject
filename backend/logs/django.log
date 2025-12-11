@@ -1,0 +1,3 @@
+INFO 2025-12-10 00:59:07,712 autoreload 4724 3144 Watching for file changes with StatReloader
+INFO 2025-12-10 10:25:58,455 autoreload 7004 8280 Watching for file changes with StatReloader
+INFO 2025-12-10 12:01:56,283 manager 2492 7504 Using FAISS vector database

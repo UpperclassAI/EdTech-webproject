@@ -1,41 +1,42 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser, School
+from .models import UpperclassUser, School, UserLearningProfile
 
-# Register the School model first
-@admin.register(School)
-class SchoolAdmin(admin.ModelAdmin):
-    list_display = ('name', 'city', 'created_at')
-    search_fields = ('name', 'city')
-
-# Custom User Admin
-class CustomUserAdmin(UserAdmin):
-    # The fields to be used in displaying the User model.
-    # These override the defaults of the standard Django User model.
-    list_display = ('email', 'first_name', 'last_name', 'role', 'school', 'is_staff')
-    list_filter = ('is_staff', 'is_superuser', 'is_active', 'role', 'school')
-    ordering = ('email',)
-    search_fields = ('email', 'first_name', 'last_name')
-
-    # Fields to display on the add/change forms
+@admin.register(UpperclassUser)
+class UpperclassUserAdmin(UserAdmin):
+    """Admin configuration for Upperclass User"""
+    
+    list_display = ('username', 'email', 'user_type', 'school_name', 'is_staff', 'is_active')
+    list_filter = ('user_type', 'is_staff', 'is_active', 'date_joined')
+    search_fields = ('username', 'email', 'school_name', 'first_name', 'last_name')
+    
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
-        ('Personal Info', {'fields': ('first_name', 'last_name', 'role', 'school')}),
+        (None, {'fields': ('username', 'password')}),
+        ('Personal Info', {'fields': ('first_name', 'last_name', 'email', 'bio', 'avatar')}),
+        ('User Type', {'fields': ('user_type', 'school_name', 'grade_level')}),
+        ('Learning Preferences', {'fields': ('preferred_learning_style', 'proficiency_level', 'interests')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
-        ('Important dates', {'fields': ('last_login', 'date_joined')}),
+        ('Important Dates', {'fields': ('last_login', 'date_joined')}),
     )
     
-    # Fields to display on the Add User form
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'first_name', 'last_name', 'role', 'school', 'is_staff', 'is_superuser', 'password', 'password2'),
+            'fields': ('username', 'email', 'password1', 'password2', 'user_type'),
         }),
     )
     
-    # Map USERNAME_FIELD to the email field
-    # (The standard UserAdmin expects 'username')
-    UserAdmin.fieldsets = fieldsets
-    UserAdmin.add_fieldsets = add_fieldsets
-    
-admin.site.register(CustomUser, CustomUserAdmin)
+    ordering = ('-date_joined',)
+
+@admin.register(School)
+class SchoolAdmin(admin.ModelAdmin):
+    list_display = ('name', 'license_key', 'subscription_tier', 'max_users', 'admin')
+    list_filter = ('subscription_tier',)
+    search_fields = ('name', 'license_key', 'admin__username')
+    raw_id_fields = ('admin', 'teachers', 'students')
+
+@admin.register(UserLearningProfile)
+class UserLearningProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'completion_rate', 'average_session_time', 'last_assessment_date')
+    search_fields = ('user__username', 'user__email')
+    readonly_fields = ('created_at', 'updated_at')
