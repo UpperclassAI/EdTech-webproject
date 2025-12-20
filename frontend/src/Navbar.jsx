@@ -39,7 +39,7 @@ export default function Navbar() {
           <div className="flex items-center gap-15 rounded-xl px-4 py-2 shadow-md bg-white">
             {[
               { path: "/", label: "Home" },
-              { path: "/courses", label: "Courses" },
+              { path: "/course", label: "Course" },
               { path: "/pricing", label: "Pricing" },
               { path: "/about", label: "About" },
             ].map((item) => (

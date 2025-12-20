@@ -28,9 +28,9 @@ import Achievements from "./dashboard/Achievements.jsx";
 import Avatar from './dashboard/avatar.jsx'; 
 
 // General pages
-// import Pricing from './pages/Pricing.jsx';
-// import About from './pages/About.jsx';
-// import Courses from './pages/Courses.jsx';
+import Pricing from './pages/Pricing.jsx';
+import About from './pages/About.jsx';
+import Course from './pages/Course.jsx';
 
 import './index.css';
 
@@ -64,9 +64,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 
         {/* PLACEHOLDER PAGES */}
-        {/* <Route path="/pricing" element={<Pricing />} /> */}
-        {/* <Route path="/about" element={<About />} /> */}
-        {/* <Route path="/courses" element={<Courses />} /> */}
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/course" element={<Course />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
