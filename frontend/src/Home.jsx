@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";  // <-- Add this
+import { ChevronRight } from "lucide-react"; // <-- Add this
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import WhyChoose from "./WhyChoose";
@@ -9,6 +11,7 @@ import TeamCarousel from "./TeamCarousel";
 import FAQSection from "./faq";
 
 import { FaQq, FaWhatsapp } from "react-icons/fa";
+
 
 export default function Home() {
   return (
@@ -71,20 +74,26 @@ export default function Home() {
           Learn Faster With Fully Adaptive<br /> AI Tools Built Around You
         </motion.p>
 
-        {/* Buttons – Fade Up */}
-        <motion.div
-          className="flex sm:flex-row gap-4 mt-6 justify-center lg:justify-start"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.3, duration: 0.8 }}
-        >
-          <button className="px-6 py-3 bg-blue-600 text-white text-lg rounded-xl shadow hover:bg-blue-700 transition">
-            Get Started
-          </button>
-          <button className="px-6 py-3 bg-white text-black text-lg rounded-xl shadow hover:bg-gray-200">
-            Why Us?
-          </button>
-        </motion.div>
+ {/* Buttons – Fade Up */}
+<motion.div
+  className="flex flex-col sm:flex-row gap-3 mt-6 justify-center lg:justify-start"
+  initial={{ opacity: 0, y: 30 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: 1.3, duration: 0.8 }}
+>
+  <Link
+    to="/auth"
+    className="inline-flex items-center justify-center gap-2 sm:gap-3 bg-blue-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-2 sm:px-12 sm:py-4 rounded-xl text-sm sm:text-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+  >
+    Get Started
+    <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+  </Link>
+  
+  <button className="px-6 py-2 sm:px-6 sm:py-3 bg-white text-black text-sm sm:text-lg rounded-xl shadow hover:bg-gray-200 transition-all duration-300">
+    Why Us?
+  </button>
+</motion.div>
+
       </div>
 
       {/* WHATSAPP FLOATING BUTTON */}

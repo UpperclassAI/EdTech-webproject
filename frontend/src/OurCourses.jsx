@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { 
   FaRobot, 
   FaPalette, 
@@ -20,7 +21,7 @@ export default function OurCourses() {
   ];
 
   return (
-    <div className="relative w-full bg-white py-16 md:py-24 px-6 md:px-20 text-white overflow-hidden">
+    <div className="relative w-full bg-white py-16 md:py-24 px-6 md:px-20 overflow-hidden text-black">
 
       {/* Animated Blur Circle */}
       <motion.div
@@ -59,26 +60,18 @@ export default function OurCourses() {
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
               whileHover={{ y: -8, scale: 1.02 }}
-              className="group relative overflow-hidden bg-blue-500 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 text-white flex flex-col items-center text-center"
+              className="group relative overflow-hidden bg-blue-500 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 text-white flex flex-col items-center text-center px-4 py-6 sm:px-6 sm:py-8"
             >
-              <div className="relative p-8 flex flex-col items-center text-center">
-                {/* Icon */}
-                <div className="mb-6 w-16 h-16 rounded-full bg-white flex items-center justify-center text-blue-500">
-                  {course.icon}
-                </div>
-
-                {/* Title */}
-                <h3 className="text-2xl md:text-3xl font-bold mb-3">{course.title}</h3>
-
-                {/* Description */}
-                <p className="mb-6">{course.description}</p>
-
-                {/* View Details Button */}
-                <button className="flex items-center justify-center text-lg font-semibold bg-blue-600 px-4 py-2 rounded-full border-r border-t hover:bg-blue-700 transition-colors">
-                  View Details
-                  <FaArrowRight className="ml-2" />
-                </button>
+              {/* Icon */}
+              <div className="mb-4 sm:mb-6 w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white flex items-center justify-center text-blue-500">
+                {course.icon}
               </div>
+
+              {/* Title */}
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-3">{course.title}</h3>
+
+              {/* Description */}
+              <p className="mb-4 sm:mb-6 text-sm sm:text-base">{course.description}</p>
 
               {/* Hover Effect Border */}
               <div className="absolute bottom-0 left-0 right-0 h-1 bg-blue-700 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
@@ -93,12 +86,14 @@ export default function OurCourses() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <button className="group relative px-10 py-4 bg-red-600 text-white text-lg font-semibold rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 overflow-hidden">
-            <span className="relative z-10 flex items-center justify-center">
-              More Courses
-              <FaArrowRight className="ml-3 group-hover:translate-x-2 transition-transform duration-300" />
-            </span>
-          </button>
+          <Link to="/course">
+            <button className="group relative px-10 py-4 bg-red-600 text-white text-lg font-semibold rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 overflow-hidden">
+              <span className="relative z-10 flex items-center justify-center">
+                More Courses
+                <FaArrowRight className="ml-3 group-hover:translate-x-2 transition-transform duration-300" />
+              </span>
+            </button>
+          </Link>
 
           <p className="mt-6 text-gray-700">
             Explore our complete course catalog
