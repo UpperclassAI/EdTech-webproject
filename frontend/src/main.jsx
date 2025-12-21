@@ -31,6 +31,7 @@ import Avatar from './dashboard/avatar.jsx';
 import Pricing from './pages/Pricing.jsx';
 import About from './pages/About.jsx';
 import Course from './pages/Course.jsx';
+import Contact from './pages/contact.jsx';
 
 import './index.css';
 
@@ -67,6 +68,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/about" element={<About />} />
         <Route path="/course" element={<Course />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

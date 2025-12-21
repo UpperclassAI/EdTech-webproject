@@ -1,21 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -39,8 +21,9 @@ export default function Navbar() {
           <div className="flex items-center gap-15 rounded-xl px-4 py-2 shadow-md bg-white">
             {[
               { path: "/", label: "Home" },
-              { path: "/course", label: "Course" },
+              { path: "/course", label: "Courses" },
               { path: "/pricing", label: "Pricing" },
+                { path: "/contact", label: "Contact" },
               { path: "/about", label: "About" },
             ].map((item) => (
               <Link
@@ -84,10 +67,11 @@ export default function Navbar() {
           ${isOpen ? "scale-y-100 opacity-100" : "scale-y-0 opacity-0 pointer-events-none"}`}
       >
         {[
-          { path: "/", label: "Home" },
-          { path: "/courses", label: "Courses" },
-          { path: "/pricing", label: "Pricing" },
-          { path: "/about", label: "About" },
+            { path: "/", label: "Home" },
+              { path: "/course", label: "Courses" },
+              { path: "/pricing", label: "Pricing" },
+                { path: "/contact", label: "Contact" },
+              { path: "/about", label: "About" },
         ].map((item) => (
           <Link
             key={item.path}

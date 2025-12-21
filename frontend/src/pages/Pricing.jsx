@@ -172,7 +172,7 @@ export default function Pricing() {
         viewport={{ once: true, margin: "-100px" }}
         className="max-w-7xl mx-auto px-6 py-24 -mt-20"
       >
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-8 ">
           {pricingTiers.map((tier, index) => (
             <PricingCard key={tier.id} tier={tier} index={index} />
           ))}
@@ -198,7 +198,7 @@ export default function Pricing() {
 
         <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
           <div className="grid grid-cols-4 border-b">
-            <div className="p-6 font-semibold text-gray-700">Feature</div>
+            <div className="p-6 font-semibold bg-blue-100 text-black">Feature</div>
             <div className="p-6 text-center font-semibold text-blue-600">Starter</div>
             <div className="p-6 text-center font-semibold text-purple-600 bg-purple-50">Pro</div>
             <div className="p-6 text-center font-semibold text-gray-800">Enterprise</div>
@@ -231,7 +231,7 @@ export default function Pricing() {
       </motion.section>
 
       {/* VALUE PROPOSITION */}
-      <section className="relative py-32 bg-gradient-to-br from-blue-50 to-indigo-50">
+      <section className="relative py-32 bg-gradient-to-br from-blue-500/70 to-indigo-50">
         <div className="absolute inset-0 bg-[url('/assets/ghj.png')] bg-cover bg-center opacity-10" />
         
         <motion.div

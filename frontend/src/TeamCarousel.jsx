@@ -94,7 +94,7 @@ export default function TeamCarousel() {
     <div className="w-full py-20 bg-gradient-to-r from-white to-blue-200">
       <div className="max-w-7xl mx-auto px-6">
         {/* Heading */}
-        <h1 className="text-5xl font-bold mb-16">
+        <h1 className="text-5xl font-bold ">
           Our <span className="text-blue-500">Team</span>
         </h1>
 
