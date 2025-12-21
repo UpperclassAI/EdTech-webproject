@@ -125,7 +125,7 @@ export default function FAQSection() {
             className="md:w-1/2 mt-8 md:mt-0 flex justify-center"
           >
             <img
-              src="/Assets/faq.png"
+              src="/assets/faqq.png"
               alt="FAQ Illustration"
               className="rounded-2xl object-cover w-full max-w-md shadow-lg"
             />
