@@ -8,8 +8,8 @@ export default function Navbar() {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="w-full fixed mt-6 top-0 left-0 z-50 bg-transparent text-xl font-mono">
-      <div className="max-w-7xl mx-auto px-9 py-4 flex justify-between items-center relative gap-9">
+    <nav className="w-full fixed mt-6 top-0 left-0 z-50 bg-transparent text-xl font-mono bg-black/80 backdrop-blur-xs py-10">
+      <div className="max-w-7xl mx-auto px-9 py-4 flex justify-between items-center relative gap-9  ">
 
         {/* LEFT — Logo */}
         <h1 className="text-2xl font-extrabold text-white tracking-wide drop-shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer">
