@@ -114,3 +114,46 @@
   scrollbar-width: none;
   scrollbar-color: #050d1a #000000;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ---------- THEME VARIABLES ---------- */
+:root {
+  --bg: #f9fafb;
+  --text: #0f172a;
+  --card: #ffffff;
+  --nav: rgba(255,255,255,0.8);
+  --border: #e5e7eb;
+}
+
+.dark {
+  --bg: #020617;
+  --text: #e5e7eb;
+  --card: #020617;
+  --nav: rgba(2,6,23,0.6);
+  --border: #1e293b;
+}
+
+/* ---------- GLOBAL ---------- */
+body {
+  background-color: var(--bg);
+  color: var(--text);
+}

@@ -1,6 +1,8 @@
+"use client";
+
 import { FaLightbulb, FaUserTie, FaShieldAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
-
+import { useTheme } from "./context/ThemeContext"; // assuming you have this context
 
 // Generate random motion values
 const randomMove = () => ({
@@ -15,9 +17,11 @@ const randomMove = () => ({
 });
 
 export default function WhyChoose() {
+  const { theme } = useTheme(); // get current theme
+
   const steps = [
     {
-      icon: <FaLightbulb className="text-blue-600 text-3xl" />,
+      icon: <FaLightbulb className={`${theme === "dark" ? "text-blue-400" : "text-blue-600"} text-3xl`} />,
       title: "Unique Learning",
       description: [
         "We stand out by offering simple, high-quality AI-powered",
@@ -25,7 +29,7 @@ export default function WhyChoose() {
       ],
     },
     {
-      icon: <FaUserTie className="text-blue-600 text-3xl" />,
+      icon: <FaUserTie className={`${theme === "dark" ? "text-blue-400" : "text-blue-600"} text-3xl`} />,
       title: "Professional",
       description: [
         "At Upperclass AI, we provide quality AI-powered lessons",
@@ -33,7 +37,7 @@ export default function WhyChoose() {
       ],
     },
     {
-      icon: <FaShieldAlt className="text-blue-600 text-3xl" />,
+      icon: <FaShieldAlt className={`${theme === "dark" ? "text-blue-400" : "text-blue-600"} text-3xl`} />,
       title: "Reliable",
       description: [
         "You get consistent, accurate, and easy-to-understand learning",
@@ -43,33 +47,42 @@ export default function WhyChoose() {
   ];
 
   return (
-    <div className="w-full bg-white py-20 px-6 md:px-20 flex flex-col md:flex-row justify-between items-start gap-10 relative">
-      
+    <div className={`w-full py-20 px-6 md:px-20 flex flex-col md:flex-row justify-between items-start gap-10 relative transition-colors ${
+      theme === "dark" ? "bg-slate-950 text-gray-200" : "bg-white text-gray-900"
+    }`}>
+
       {/* LEFT CONTENT */}
       <div className="flex-1 relative">
-        <h2 className="text-5xl md:text-6xl font-bold mb-36">
-          Why Choose <span className="text-blue-500">Upperclass AI</span>
+        <h2 className={`text-5xl md:text-6xl font-bold mb-36 transition-colors`}>
+          Why Choose <span className={`${theme === "dark" ? "text-blue-400" : "text-blue-500"}`}>Upperclass AI</span>
         </h2>
 
         {/* Vertical Line */}
-        <div className="absolute top-61 left-1 md:left-10 w-1 bg-blue-200 h-[calc(22rem)] hidden md:block"></div>
+        <div className={`absolute top-61 left-1 md:left-10 w-1 h-[calc(22rem)] hidden md:block transition-colors ${theme === "dark" ? "bg-blue-700" : "bg-blue-200"}`}></div>
 
         {/* Steps */}
         <div className="flex flex-col gap-16 relative z-10">
           {steps.map((step, idx) => (
             <div key={idx} className="flex items-start gap-5 relative">
-              
               {/* Icon with circle */}
-              <div className="bg-white p-3 rounded-full border-2 border-blue-500 z-10 flex-shrink-0">
+              <div className={`p-3 rounded-full border-2 z-10 flex-shrink-0 transition-colors ${
+                theme === "dark"
+                  ? "bg-slate-800 border-blue-400"
+                  : "bg-white border-blue-500"
+              }`}>
                 {step.icon}
               </div>
 
               {/* Text content */}
               <div className="flex-1">
-                <h3 className="text-3xl md:text-4xl font-semibold text-blue-500 mb-3">
+                <h3 className={`text-3xl md:text-4xl font-semibold mb-3 transition-colors ${
+                  theme === "dark" ? "text-blue-400" : "text-blue-500"
+                }`}>
                   {step.title}
                 </h3>
-                <p className="text-gray-700 text-sm md:text-base font-semibold leading-relaxed">
+                <p className={`text-sm md:text-base font-semibold leading-relaxed transition-colors ${
+                  theme === "dark" ? "text-gray-300" : "text-gray-700"
+                }`}>
                   {step.description.map((line, i) => (
                     <span key={i}>
                       {line}
@@ -83,10 +96,22 @@ export default function WhyChoose() {
         </div>
       </div>
 
-
       {/* RIGHT ANIMATED PATTERN */}
       <div className="hidden md:block flex-1 relative h-[500px]">
-   
+        {/* Your squares remain unchanged */}
+        <motion.div
+          className="absolute border-2 border-blue-500 w-24 h-24 top-0 right-20"
+          animate={randomMove()}
+        />
+        <motion.div
+          className="absolute border-2 border-blue-500 w-32 h-32 top-20 right-4"
+          animate={randomMove()}
+        />
+        <motion.div
+          className="absolute border-2 border-blue-500 w-28 h-28 top-40 right-24"
+          animate={randomMove()}
+        />
+      
         {/* Square 1 */}
         <motion.div
           className="absolute border-2 border-blue-500 w-24 h-24 top-0 right-20"

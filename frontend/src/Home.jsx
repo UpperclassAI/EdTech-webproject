@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -11,9 +13,11 @@ import OurTeam from "./OurTeam";
 import TeamCarousel from "./TeamCarousel";
 import FAQSection from "./faq";
 import { FaWhatsapp } from "react-icons/fa";
+import { useTheme } from "./context/ThemeContext";
 
 export default function Home() {
-  const whyChooseRef = useRef(null); // <-- ref for scrolling
+  const whyChooseRef = useRef(null); // Ref for scrolling
+  const { theme } = useTheme(); // Get current theme
 
   return (
     <div className="relative w-full h-screen font-mono overflow-x-hidden">
@@ -43,7 +47,9 @@ export default function Home() {
       {/* HERO CONTENT */}
       <div className="relative z-20 max-w-5xl mx-6 sm:mx-10 md:mx-16 h-full flex flex-col justify-center px-6 sm:px-10 md:px-16 text-center lg:text-left">
         <motion.p
-          className="text-white text-sm sm:text-xl lg:text-xl mb-7"
+          className={`text-sm sm:text-xl lg:text-xl mb-7 ${
+            theme === "dark" ? "text-gray-200" : "text-white"
+          }`}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.8 }}
@@ -52,7 +58,9 @@ export default function Home() {
         </motion.p>
 
         <motion.h1
-          className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-extrabold text-white leading-snug sm:leading-snug md:leading-tight"
+          className={`text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-extrabold leading-snug sm:leading-snug md:leading-tight ${
+            theme === "dark" ? "text-white" : "text-gray-100"
+          }`}
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.9 }}
@@ -62,7 +70,9 @@ export default function Home() {
         </motion.h1>
 
         <motion.p
-          className="text-gray-200 text-base sm:text-xl lg:text-2xl mt-4 w-full md:w-3/4 lg:w-2/3 mx-auto lg:mx-0"
+          className={`mt-4 w-full md:w-3/4 lg:w-2/3 mx-auto lg:mx-0 text-base sm:text-xl lg:text-2xl ${
+            theme === "dark" ? "text-gray-300" : "text-gray-200"
+          }`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.1, duration: 1 }}
@@ -87,7 +97,11 @@ export default function Home() {
 
           <button
             onClick={() => whyChooseRef.current?.scrollIntoView({ behavior: "smooth" })}
-            className="px-6 py-2 sm:px-6 sm:py-3 bg-white text-black text-sm sm:text-lg rounded-xl shadow hover:bg-gray-200 transition-all duration-300 flex items-center justify-center"
+            className={`px-6 py-2 sm:px-6 sm:py-3 rounded-xl shadow flex items-center justify-center transition-all duration-300 ${
+              theme === "dark"
+                ? "bg-gray-800 text-white hover:bg-gray-700"
+                : "bg-white text-black hover:bg-gray-200"
+            }`}
           >
             Why Us?
           </button>
@@ -98,7 +112,9 @@ export default function Home() {
       <motion.a
         href="https://wa.me/2348100000000"
         target="_blank"
-        className="fixed bottom-6 right-6 z-50 bg-blue-500 p-4 rounded-full shadow-2xl hover:scale-110 transition-transform"
+        className={`fixed bottom-6 right-6 z-50 p-4 rounded-full shadow-2xl hover:scale-110 transition-transform ${
+          theme === "dark" ? "bg-green-600" : "bg-blue-500"
+        }`}
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 1.4, type: "spring" }}

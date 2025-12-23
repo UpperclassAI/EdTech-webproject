@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import Navbar from "../Navbar";
 import Footer from "../footer";
@@ -19,8 +21,9 @@ import {
   Award,
   Briefcase
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
+import { useTheme } from "../context/ThemeContext"; // dark mode context
 
 /* ---------------- ANIMATION VARIANTS ---------------- */
 const fadeUp = {
@@ -43,138 +46,86 @@ const scaleUp = {
   visible: { opacity: 1, scale: 1, transition: { duration: 0.4 } },
 };
 
-/* ---------------- COURSE CATEGORIES ---------------- */
+/* ---------------- CATEGORIES ---------------- */
 const categories = [
-  { id: "all", name: "All AI Tutors", icon: BookOpen, count: 10 },
-  { id: "ai-ml", name: "AI & Machine Learning", icon: Brain, count: 3 },
-  { id: "web-dev", name: "Web Development", icon: Code, count: 3 },
-  { id: "data-science", name: "Data Science", icon: Database, count: 2 },
-  { id: "mobile", name: "Mobile Development", icon: Smartphone, count: 1 },
-  { id: "cybersecurity", name: "Cybersecurity", icon: Shield, count: 1 },
+  { id: "all", name: "All Tutors", icon: Code, count: 40 },
+  { id: "ai-ml", name: "AI & ML", icon: Brain, count: 10 },
+  { id: "web-dev", name: "Web Dev", icon: Code, count: 10 },
+  { id: "data-science", name: "Data Science", icon: Database, count: 10 },
+  { id: "mobile", name: "Mobile", icon: Smartphone, count: 10 },
 ];
 
-/* ---------------- AI TUTORS DATA (10 total) ---------------- */
+/* ---------------- AI TUTORS DATA ---------------- */
 const aiTutors = [
+  /* --- AI & ML --- */
   {
     id: 1,
-    title: "Full-Stack Web AI Tutor",
-    category: "web-dev",
-    description: "Interactive AI tutor for mastering modern web development from frontend to backend with real-world projects.",
-    level: "Beginner to Advanced",
-    students: 1245,
-    rating: 4.9,
-    modules: 24,
-    skills: ["React", "Node.js", "MongoDB", "TypeScript", "AWS"],
-    detailedDescription: "This AI tutor guides you through building complete web applications. Learn React hooks, state management, server-side rendering with Next.js, REST APIs, authentication, and deployment. Get instant code reviews and personalized learning paths."
+    title: "AI & ML Basics Tutor",
+    category: "ai-ml",
+    description: "Learn AI fundamentals and machine learning algorithms interactively.",
+    level: "Beginner",
+    students: 1500,
+    rating: 4.8,
+    modules: 20,
+    skills: ["Python", "Scikit-learn", "NumPy", "Pandas"],
+    detailedDescription: "Covers supervised and unsupervised learning, feature engineering, model evaluation, and hands-on projects."
   },
   {
     id: 2,
-    title: "AI & Machine Learning Tutor",
+    title: "Deep Learning AI Tutor",
     category: "ai-ml",
-    description: "Intelligent AI mentor for understanding and implementing machine learning algorithms and neural networks.",
+    description: "Master deep learning and neural networks with interactive projects.",
     level: "Intermediate",
-    students: 890,
-    rating: 4.8,
-    modules: 32,
-    skills: ["Python", "TensorFlow", "PyTorch", "Neural Networks"],
-    detailedDescription: "From linear regression to deep learning, this AI tutor explains complex concepts with interactive examples. Work on real datasets, build models, and understand the mathematics behind ML. Get personalized project suggestions based on your progress."
-  },
-  {
-    id: 3,
-    title: "Data Science AI Tutor",
-    category: "data-science",
-    description: "Smart tutor for data analysis, visualization, and statistical modeling with hands-on projects.",
-    level: "Beginner",
-    students: 765,
-    rating: 4.7,
-    modules: 28,
-    skills: ["Python", "Pandas", "SQL", "Tableau", "Statistics"],
-    detailedDescription: "Learn data cleaning, exploratory analysis, and storytelling with data. This AI tutor provides instant feedback on your analysis, suggests better visualization techniques, and helps you build a strong portfolio of data projects."
-  },
-  {
-    id: 4,
-    title: "Mobile Development AI Tutor",
-    category: "mobile",
-    description: "AI-powered guide for building cross-platform mobile apps with React Native and Flutter.",
-    level: "Beginner",
-    students: 540,
-    rating: 4.6,
-    modules: 20,
-    skills: ["React Native", "JavaScript", "Redux", "Mobile UI"],
-    detailedDescription: "Create beautiful mobile apps that work on both iOS and Android. Learn navigation, state management, API integration, and app store deployment. The AI tutor reviews your code, suggests optimizations, and helps debug mobile-specific issues."
-  },
-  {
-    id: 5,
-    title: "Cybersecurity AI Tutor",
-    category: "cybersecurity",
-    description: "Interactive security mentor teaching ethical hacking, network security, and threat protection.",
-    level: "Intermediate",
-    students: 420,
+    students: 980,
     rating: 4.9,
-    modules: 16,
-    skills: ["Network Security", "Ethical Hacking", "Cryptography"],
-    detailedDescription: "Learn to think like a hacker to better defend systems. This AI tutor guides you through penetration testing, vulnerability assessment, and security best practices. Practice in safe, simulated environments with real-time feedback."
+    modules: 25,
+    skills: ["TensorFlow", "Keras", "CNN", "RNN"],
+    detailedDescription: "Focuses on building CNN, RNN, LSTM models and deploying deep learning solutions."
   },
-  {
-    id: 6,
-    title: "Advanced React Patterns AI Tutor",
-    category: "web-dev",
-    description: "Master complex React patterns, performance optimization, and advanced state management techniques.",
-    level: "Advanced",
-    students: 680,
-    rating: 4.8,
-    modules: 12,
-    skills: ["React", "Performance", "State Management", "Testing"],
-    detailedDescription: "Dive deep into React internals, custom hooks, render optimization, and testing strategies. This AI tutor helps you write scalable, maintainable React code with industry best practices and architectural patterns."
-  },
-  {
-    id: 7,
-    title: "Machine Learning Engineering AI Tutor",
-    category: "ai-ml",
-    description: "AI mentor for deploying, scaling, and maintaining production ML systems with MLOps practices.",
-    level: "Advanced",
-    students: 380,
-    rating: 4.9,
-    modules: 26,
-    skills: ["MLOps", "Docker", "Kubernetes", "AWS SageMaker"],
-    detailedDescription: "Transition from ML models to production systems. Learn containerization, CI/CD for ML, model monitoring, and cloud deployment. The AI tutor reviews your pipeline architecture and suggests improvements for scalability."
-  },
-  {
-    id: 8,
-    title: "Python & Automation AI Tutor",
-    category: "web-dev",
-    description: "Learn Python programming, automation scripts, and backend development with intelligent guidance.",
-    level: "Beginner",
-    students: 920,
-    rating: 4.7,
-    modules: 18,
-    skills: ["Python", "FastAPI", "Automation", "Scripting"],
-    detailedDescription: "Master Python from basics to advanced topics. Build web APIs with FastAPI, automate repetitive tasks, and learn backend development. The AI tutor provides instant code reviews and suggests more Pythonic solutions."
-  },
-  {
-    id: 9,
-    title: "Data Engineering AI Tutor",
-    category: "data-science",
-    description: "Build data pipelines, ETL processes, and data warehouses with guided AI mentorship.",
-    level: "Intermediate",
-    students: 450,
-    rating: 4.8,
-    modules: 22,
-    skills: ["SQL", "ETL", "Data Pipelines", "Airflow", "Spark"],
-    detailedDescription: "Learn to build scalable data infrastructure. This AI tutor guides you through designing data models, creating ETL pipelines, and working with big data technologies. Get architecture reviews and optimization suggestions."
-  },
-  {
-    id: 10,
-    title: "DevOps & Cloud AI Tutor",
-    category: "cybersecurity",
-    description: "Master infrastructure as code, CI/CD pipelines, and cloud deployment with AI-powered guidance.",
-    level: "Intermediate",
-    students: 510,
-    rating: 4.7,
-    modules: 20,
-    skills: ["Docker", "Kubernetes", "Terraform", "AWS", "GitHub Actions"],
-    detailedDescription: "Learn modern DevOps practices and cloud infrastructure. This AI tutor helps you set up automated deployment pipelines, manage infrastructure as code, and optimize cloud costs. Get real-time feedback on your configurations."
-  },
+  { id: 3, title: "Reinforcement Learning Tutor", category: "ai-ml", description: "Learn reinforcement learning techniques and Q-learning algorithms.", level: "Advanced", students: 500, rating: 4.7, modules: 18, skills: ["Python", "RL", "Gym", "Deep Q-Learning"], detailedDescription: "Build RL agents and train them on simulations and games." },
+  { id: 4, title: "NLP AI Tutor", category: "ai-ml", description: "Understand natural language processing and text analysis.", level: "Intermediate", students: 750, rating: 4.8, modules: 22, skills: ["Python", "NLTK", "Spacy", "Transformers"], detailedDescription: "Work with text data, sentiment analysis, and transformer models." },
+  { id: 5, title: "Computer Vision AI Tutor", category: "ai-ml", description: "Learn image recognition and object detection techniques.", level: "Intermediate", students: 680, rating: 4.9, modules: 24, skills: ["OpenCV", "Python", "CNN", "YOLO"], detailedDescription: "Build image classification, detection, and segmentation projects." },
+  { id: 6, title: "ML Ops Tutor", category: "ai-ml", description: "Deploy machine learning models into production.", level: "Advanced", students: 410, rating: 4.7, modules: 20, skills: ["Docker", "Kubernetes", "Python", "Flask"], detailedDescription: "Learn model serving, versioning, and pipeline automation." },
+  { id: 7, title: "AI Ethics & Governance Tutor", category: "ai-ml", description: "Understand ethical implications of AI systems.", level: "Intermediate", students: 390, rating: 4.6, modules: 15, skills: ["AI Policy", "Bias Detection", "Ethics"], detailedDescription: "Covers AI fairness, bias detection, and regulatory frameworks." },
+  { id: 8, title: "Generative AI Tutor", category: "ai-ml", description: "Learn to create AI-generated content.", level: "Intermediate", students: 550, rating: 4.8, modules: 18, skills: ["Python", "GANs", "Diffusion Models"], detailedDescription: "Build generative models for images, text, and audio." },
+  { id: 9, title: "Time Series AI Tutor", category: "ai-ml", description: "Analyze and forecast time series data with AI.", level: "Intermediate", students: 470, rating: 4.7, modules: 16, skills: ["Python", "Pandas", "ARIMA", "LSTM"], detailedDescription: "Forecast trends and analyze temporal data using ML models." },
+  { id: 10, title: "AI Research Assistant Tutor", category: "ai-ml", description: "Assist in AI research with advanced modeling techniques.", level: "Advanced", students: 310, rating: 4.9, modules: 28, skills: ["Python", "PyTorch", "Research", "Mathematics"], detailedDescription: "Design experiments, run simulations, and generate research insights." },
+
+  /* --- Web Development --- */
+  { id: 11, title: "Frontend Web Development Tutor", category: "web-dev", description: "Learn HTML, CSS, and JavaScript with AI guidance.", level: "Beginner", students: 2000, rating: 4.7, modules: 18, skills: ["HTML", "CSS", "JS", "React"], detailedDescription: "Covers responsive design, DOM manipulation, and building dynamic UIs." },
+  { id: 12, title: "Backend Web Development Tutor", category: "web-dev", description: "Learn Node.js, Express, and databases with AI assistance.", level: "Intermediate", students: 1250, rating: 4.8, modules: 22, skills: ["Node.js", "Express", "MongoDB", "SQL"], detailedDescription: "Build REST APIs, integrate databases, and deploy backend services." },
+  { id: 13, title: "Full Stack Web Tutor", category: "web-dev", description: "Master both frontend and backend web development.", level: "Advanced", students: 980, rating: 4.9, modules: 26, skills: ["React", "Node.js", "MongoDB", "TypeScript"], detailedDescription: "Combine frontend and backend skills to build full applications." },
+  { id: 14, title: "React Web Tutor", category: "web-dev", description: "Specialize in building React applications.", level: "Intermediate", students: 1200, rating: 4.8, modules: 20, skills: ["React", "Redux", "Hooks"], detailedDescription: "Learn component-based design, state management, and routing." },
+  { id: 15, title: "Vue.js Web Tutor", category: "web-dev", description: "Learn Vue.js and build interactive web apps.", level: "Intermediate", students: 950, rating: 4.7, modules: 18, skills: ["Vue.js", "Vuex", "Composition API"], detailedDescription: "Create reactive web applications using Vue ecosystem." },
+  { id: 16, title: "Angular Web Tutor", category: "web-dev", description: "Build scalable applications using Angular.", level: "Intermediate", students: 850, rating: 4.7, modules: 22, skills: ["Angular", "TypeScript", "RxJS"], detailedDescription: "Covers components, services, routing, and state management." },
+  { id: 17, title: "Next.js Web Tutor", category: "web-dev", description: "Learn server-side rendering with Next.js.", level: "Advanced", students: 720, rating: 4.8, modules: 20, skills: ["Next.js", "React", "SSR"], detailedDescription: "Build optimized web apps with SEO and server-side rendering." },
+  { id: 18, title: "WordPress Tutor", category: "web-dev", description: "Learn to create websites with WordPress.", level: "Beginner", students: 1100, rating: 4.6, modules: 15, skills: ["WordPress", "PHP", "Plugins"], detailedDescription: "Build websites, customize themes, and manage content." },
+  { id: 19, title: "Web Accessibility Tutor", category: "web-dev", description: "Learn web accessibility standards.", level: "Beginner", students: 650, rating: 4.7, modules: 12, skills: ["WCAG", "HTML", "ARIA"], detailedDescription: "Ensure websites are accessible to all users." },
+  { id: 20, title: "Progressive Web App Tutor", category: "web-dev", description: "Build PWAs with offline capabilities.", level: "Intermediate", students: 550, rating: 4.8, modules: 18, skills: ["PWA", "Service Workers", "JS"], detailedDescription: "Learn caching, offline support, and push notifications." },
+
+  /* --- Data Science --- */
+  { id: 21, title: "Data Analysis Tutor", category: "data-science", description: "Learn to analyze datasets and extract insights with Python.", level: "Beginner", students: 1700, rating: 4.8, modules: 20, skills: ["Python", "Pandas", "NumPy", "Matplotlib"], detailedDescription: "Covers data cleaning, visualization, and basic statistical analysis." },
+  { id: 22, title: "Advanced Data Science Tutor", category: "data-science", description: "Master data pipelines, ML models, and advanced analytics.", level: "Advanced", students: 1100, rating: 4.9, modules: 30, skills: ["Python", "ML", "Big Data", "SQL"], detailedDescription: "Focuses on building end-to-end data pipelines, feature engineering, and predictive models." },
+  { id: 23, title: "Statistics for Data Science", category: "data-science", description: "Learn statistical concepts for data analysis.", level: "Beginner", students: 950, rating: 4.7, modules: 18, skills: ["Statistics", "Python", "R"], detailedDescription: "Covers probability, hypothesis testing, and statistical modeling." },
+  { id: 24, title: "Data Visualization Tutor", category: "data-science", description: "Master visualization techniques using Python and tools.", level: "Intermediate", students: 900, rating: 4.8, modules: 16, skills: ["Matplotlib", "Seaborn", "Tableau"], detailedDescription: "Create impactful charts and dashboards." },
+  { id: 25, title: "Big Data Tutor", category: "data-science", description: "Learn big data technologies like Spark and Hadoop.", level: "Advanced", students: 700, rating: 4.8, modules: 22, skills: ["Spark", "Hadoop", "Python"], detailedDescription: "Process large datasets efficiently and build analytics pipelines." },
+  { id: 26, title: "SQL & Databases Tutor", category: "data-science", description: "Learn database management and SQL queries.", level: "Beginner", students: 800, rating: 4.7, modules: 15, skills: ["SQL", "PostgreSQL", "MySQL"], detailedDescription: "Query, manage, and optimize relational databases." },
+  { id: 27, title: "Python for Data Science Tutor", category: "data-science", description: "Master Python for analysis and ML.", level: "Intermediate", students: 1000, rating: 4.8, modules: 20, skills: ["Python", "Pandas", "NumPy"], detailedDescription: "Work on real datasets and implement ML algorithms." },
+  { id: 28, title: "Machine Learning for Data Science", category: "data-science", description: "Apply ML models to data science projects.", level: "Intermediate", students: 750, rating: 4.8, modules: 22, skills: ["Python", "Scikit-learn", "ML"], detailedDescription: "Build predictive models and evaluate performance." },
+  { id: 29, title: "Data Cleaning & Preprocessing Tutor", category: "data-science", description: "Learn data preprocessing techniques.", level: "Beginner", students: 680, rating: 4.7, modules: 14, skills: ["Python", "Pandas", "NumPy"], detailedDescription: "Handle missing data, outliers, and normalization." },
+  { id: 30, title: "Time Series Data Science Tutor", category: "data-science", description: "Analyze temporal data for forecasting.", level: "Intermediate", students: 600, rating: 4.8, modules: 18, skills: ["Python", "ARIMA", "LSTM"], detailedDescription: "Work with time series datasets and predictive models." },
+
+  /* --- Mobile Development --- */
+  { id: 31, title: "iOS Development Tutor", category: "mobile", description: "Learn Swift and build iOS applications with AI guidance.", level: "Beginner", students: 1200, rating: 4.7, modules: 18, skills: ["Swift", "Xcode", "UIKit"], detailedDescription: "Build functional iOS apps, integrate APIs, and deploy to App Store." },
+  { id: 32, title: "Android Development Tutor", category: "mobile", description: "Build Android apps with Kotlin and AI support.", level: "Beginner", students: 1100, rating: 4.7, modules: 18, skills: ["Kotlin", "Android Studio", "UI Design"], detailedDescription: "Create interactive Android apps with modern design patterns." },
+  { id: 33, title: "Flutter Development Tutor", category: "mobile", description: "Learn cross-platform development using Flutter.", level: "Intermediate", students: 950, rating: 4.8, modules: 20, skills: ["Flutter", "Dart", "Firebase"], detailedDescription: "Build cross-platform apps with a single codebase." },
+  { id: 34, title: "React Native Tutor", category: "mobile", description: "Master React Native for mobile development.", level: "Intermediate", students: 900, rating: 4.7, modules: 20, skills: ["React Native", "JS", "Redux"], detailedDescription: "Build cross-platform apps with React ecosystem." },
+  { id: 35, title: "Mobile Game Development Tutor", category: "mobile", description: "Create mobile games with Unity and AI support.", level: "Advanced", students: 650, rating: 4.8, modules: 22, skills: ["Unity", "C#", "Game Dev"], detailedDescription: "Design and build mobile games for iOS and Android." },
+  { id: 36, title: "Mobile UI/UX Tutor", category: "mobile", description: "Learn mobile design and user experience principles.", level: "Beginner", students: 700, rating: 4.7, modules: 16, skills: ["Figma", "Adobe XD", "UI Design"], detailedDescription: "Create engaging and user-friendly mobile interfaces." },
+  { id: 37, title: "Kotlin Android Tutor", category: "mobile", description: "Specialize in Kotlin-based Android apps.", level: "Intermediate", students: 600, rating: 4.7, modules: 18, skills: ["Kotlin", "Android Studio"], detailedDescription: "Build efficient Android apps with modern Kotlin features." },
+  { id: 38, title: "SwiftUI iOS Tutor", category: "mobile", description: "Learn SwiftUI for modern iOS apps.", level: "Intermediate", students: 550, rating: 4.8, modules: 18, skills: ["SwiftUI", "Swift"], detailedDescription: "Create declarative UI apps and leverage SwiftUI animations." },
+  { id: 39, title: "Mobile App Security Tutor", category: "mobile", description: "Secure mobile apps against vulnerabilities.", level: "Advanced", students: 400, rating: 4.7, modules: 16, skills: ["Security", "Mobile Apps", "Encryption"], detailedDescription: "Implement secure login, data protection, and threat mitigation." },
+  { id: 40, title: "Cross-Platform Mobile Tutor", category: "mobile", description: "Build apps that run on multiple platforms.", level: "Intermediate", students: 500, rating: 4.8, modules: 20, skills: ["Flutter", "React Native", "Dart"], detailedDescription: "Learn techniques to maintain a single codebase for iOS and Android." },
 ];
 
 /* ---------------- LEARNING PATHS ---------------- */
@@ -221,88 +172,71 @@ const learningPaths = [
   },
 ];
 
+/* ---------------- COURSE PAGE COMPONENT ---------------- */
 export default function Course() {
+  const { theme } = useTheme();
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [hoveredTutor, setHoveredTutor] = useState(null);
 
-  const filteredTutors = aiTutors.filter(tutor => {
+  const filteredTutors = useMemo(() => aiTutors.filter(tutor => {
     const matchesCategory = selectedCategory === "all" || tutor.category === selectedCategory;
     const matchesSearch = tutor.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          tutor.description.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
-  });
+  }), [selectedCategory, searchQuery]);
+
+  const bgMain = theme === "dark" ? "bg-slate-950 text-gray-200" : "bg-gray-50 text-gray-900";
+  const cardBg = theme === "dark" ? "bg-slate-900 text-gray-200" : "bg-white text-gray-900";
+  const inputBg = theme === "dark" ? "bg-slate-800 text-gray-200 placeholder-gray-400" : "bg-white text-gray-900 placeholder-gray-500";
 
   return (
-    <div className="w-full min-h-screen bg-gray-50">
+    <div className={`w-full min-h-screen transition-colors ${bgMain}`}>
       <Navbar />
 
-      {/* HERO SECTION - Raised 5px */}
-      <section className="relative text-white py-32 bg-blue-900  to-purple-900 -mt-5">
+      {/* HERO SECTION */}
+      <section className={`relative text-white py-32 ${theme === "dark" ? "bg-slate-900" : "bg-blue-900"}`}>
         <div className="absolute inset-0 bg-[url('/assets/course.png')] bg-cover bg-center opacity-20" />
-        
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          className="relative z-10 max-w-6xl mx-auto px-6 text-center"
-        >
+        <motion.div variants={fadeUp} initial="hidden" animate="visible" className="relative z-10 max-w-6xl mx-auto px-6 text-center">
           <h1 className="text-5xl md:text-6xl font-extrabold leading-tight">
             Learn With Intelligent AI Tutors
           </h1>
-          
-          <p className="mt-6 text-xl text-blue-100 max-w-3xl mx-auto">
+          <p className={`mt-6 text-xl max-w-3xl mx-auto ${theme === "dark" ? "text-gray-300" : "text-blue-100"}`}>
             No videos, no lectures. Interactive AI tutors that adapt to your learning style and pace.
           </p>
 
           {/* SEARCH BAR */}
-          <motion.div
-            variants={fadeUp}
-            transition={{ delay: 0.2 }}
-            className="mt-12 max-w-2xl mx-auto"
-          >
+          <motion.div variants={fadeUp} transition={{ delay: 0.2 }} className="mt-12 max-w-2xl mx-auto">
             <div className="relative">
-              <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-gray-400 w-6 h-6" />
+              <Search className={`absolute left-6 top-1/2 transform -translate-y-1/2 ${theme === "dark" ? "text-gray-400" : "text-gray-400"} w-6 h-6`} />
               <input
                 type="text"
                 placeholder="Search AI tutors by skill or topic..."
-                className="w-full pl-16 pr-6 bg-white py-5 rounded-2xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-blue-500/30"
+                className={`w-full pl-16 pr-6 py-5 rounded-2xl focus:outline-none focus:ring-4 focus:ring-blue-500/30 transition ${inputBg}`}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                aria-label="Search AI tutors"
               />
             </div>
           </motion.div>
 
           {/* STATS */}
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8"
-          >
-            <Stat value="10+" label="AI Tutors" />
-            <Stat value="24/7" label="Availability" />
-            <Stat value="4.8" label="Avg Rating" />
-            <Stat value="6,500+" label="Active Learners" />
+          <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8">
+            <Stat value="40+" label="AI Tutors" theme={theme} />
+            <Stat value="24/7" label="Availability" theme={theme} />
+            <Stat value="4.8" label="Avg Rating" theme={theme} />
+            <Stat value="6,500+" label="Active Learners" theme={theme} />
           </motion.div>
         </motion.div>
       </section>
 
       {/* CATEGORIES */}
-      <motion.section
-        variants={fadeUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        className="max-w-7xl mx-auto px-6 py-12 -mt-10"
-      >
-        <div className="bg-white rounded-3xl shadow-xl p-8">
+      <motion.section variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="max-w-7xl mx-auto px-6 py-12 -mt-10">
+        <div className={`${cardBg} rounded-3xl shadow-xl p-8 transition-colors`}>
           <div className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900">Browse AI Tutors by Category</h2>
-            <p className="text-gray-600 mt-2">Find the perfect AI tutor for your learning goals</p>
+            <h2 className={`text-2xl font-bold ${theme === "dark" ? "text-gray-100" : "text-gray-900"}`}>Browse AI Tutors by Category</h2>
+            <p className={`mt-2 ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>Find the perfect AI tutor for your learning goals</p>
           </div>
-
           <div className="flex flex-wrap gap-4">
             {categories.map((category) => {
               const Icon = category.icon;
@@ -313,15 +247,19 @@ export default function Course() {
                   className={`flex items-center gap-3 px-6 py-4 rounded-2xl transition-all ${
                     selectedCategory === category.id
                       ? "bg-blue-600 text-white shadow-lg"
-                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                      : theme === "dark"
+                        ? "bg-slate-800 text-gray-300 hover:bg-slate-700"
+                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
+                  aria-label={`Select ${category.name} category`}
+                  aria-pressed={selectedCategory === category.id}
                 >
                   <Icon className="w-5 h-5" />
                   <span className="font-semibold">{category.name}</span>
                   <span className={`px-2 py-1 text-xs rounded-full ${
                     selectedCategory === category.id
                       ? "bg-white/20"
-                      : "bg-gray-300"
+                      : theme === "dark" ? "bg-gray-700" : "bg-gray-300"
                   }`}>
                     {category.count}
                   </span>
@@ -333,29 +271,21 @@ export default function Course() {
       </motion.section>
 
       {/* AI TUTORS GRID */}
-      <motion.section
-        variants={stagger}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        className="max-w-7xl mx-auto px-6 py-16"
-      >
+      <motion.section variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="max-w-7xl mx-auto px-6 py-16">
         <div className="mb-12">
-          <h2 className="text-3xl font-bold text-gray-900">
-            {selectedCategory === "all" 
-              ? "All AI Tutors" 
-              : categories.find(c => c.id === selectedCategory)?.name}
+          <h2 className={`text-3xl font-bold ${theme === "dark" ? "text-gray-100" : "text-gray-900"}`}>
+            {selectedCategory === "all" ? "All AI Tutors" : categories.find(c => c.id === selectedCategory)?.name}
           </h2>
-          <p className="text-gray-600 mt-2">
+          <p className={`${theme === "dark" ? "text-gray-300" : "text-gray-600"} mt-2`}>
             {filteredTutors.length} AI tutors available • Hover to see detailed description
           </p>
         </div>
 
         {filteredTutors.length === 0 ? (
           <div className="text-center py-20">
-            <Search className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-2xl font-semibold text-gray-700 mb-2">No AI tutors found</h3>
-            <p className="text-gray-500">Try adjusting your search or filter criteria</p>
+            <Search className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+            <h3 className={`${theme === "dark" ? "text-gray-100" : "text-gray-700"} text-2xl font-semibold mb-2`}>No AI tutors found</h3>
+            <p className={`${theme === "dark" ? "text-gray-300" : "text-gray-500"}`}>Try adjusting your search or filter criteria</p>
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -366,46 +296,35 @@ export default function Course() {
                 isHovered={hoveredTutor === tutor.id}
                 onHover={() => setHoveredTutor(tutor.id)}
                 onLeave={() => setHoveredTutor(null)}
+                theme={theme}
               />
             ))}
           </div>
         )}
 
         {/* GET STARTED BUTTON */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="text-center mt-16"
-        >
+        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-center mt-16">
           <Link
             to="/auth"
-            className="inline-flex items-center justify-center gap-3 bg-blue-600 hover:from-blue-700 hover:to-purple-700 text-white px-12 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+            className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-12 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+            aria-label="Start learning with AI tutor"
           >
             Start Learning with AI Tutor
             <ChevronRight className="w-5 h-5" />
           </Link>
-          <p className="text-gray-600 mt-4">
+          <p className={`${theme === "dark" ? "text-gray-300" : "text-gray-600"} mt-4`}>
             Get instant access to all AI tutors • No credit card required
           </p>
         </motion.div>
       </motion.section>
 
       {/* LEARNING PATHS */}
-      <section className="relative py-32 bg-gradient-to-br from-gray-900 to-blue-900 text-white">
+      <section className={`relative py-32 transition-colors ${theme === "dark" ? "bg-slate-900 text-gray-200" : "bg-gradient-to-br from-gray-900 to-blue-900 text-white"}`}>
         <div className="absolute inset-0 bg-[url('/assets/ghj.png')] bg-cover bg-center opacity-10" />
-        
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="relative z-10 max-w-7xl mx-auto px-6"
-        >
+        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="relative z-10 max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">AI-Powered Learning Paths</h2>
-            <p className="text-blue-200 max-w-2xl mx-auto">
+            <p className={`${theme === "dark" ? "text-gray-300" : "text-blue-200"} max-w-2xl mx-auto`}>
               Follow intelligent roadmaps curated by AI to become job-ready in high-demand tech roles
             </p>
           </div>
@@ -417,14 +336,13 @@ export default function Course() {
                 <motion.div
                   key={path.id}
                   variants={scaleUp}
-                  className="bg-white/10 backdrop-blur-xl rounded-3xl p-8 hover:bg-white/15 transition"
+                  className={`p-8 rounded-3xl transition-colors ${theme === "dark" ? "bg-slate-800 hover:bg-slate-700" : "bg-white/10 hover:bg-white/15"} backdrop-blur-xl`}
                 >
                   <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${path.color} flex items-center justify-center mb-6`}>
                     <Icon className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-3">{path.title}</h3>
-                  <p className="text-blue-200 mb-6">{path.description}</p>
-                  
+                  <h3 className={`${theme === "dark" ? "text-gray-100" : "text-white"} text-2xl font-bold mb-3`}>{path.title}</h3>
+                  <p className={`${theme === "dark" ? "text-gray-300" : "text-blue-200"} mb-6`}>{path.description}</p>
                   <div className="space-y-4">
                     <div className="flex items-center gap-3">
                       <Clock className="w-5 h-5 text-blue-300" />
@@ -439,8 +357,10 @@ export default function Course() {
                       <span>{path.averageSalary}/year</span>
                     </div>
                   </div>
-
-                  <button className="w-full mt-8 bg-white text-blue-900 py-3 rounded-xl font-semibold hover:bg-blue-50 transition">
+                  <button 
+                    className={`w-full mt-8 py-3 rounded-xl font-semibold transition ${theme === "dark" ? "bg-blue-600 text-white hover:bg-blue-700" : "bg-white text-blue-900 hover:bg-blue-50"}`}
+                    aria-label={`Explore ${path.title} learning path`}
+                  >
                     Explore Path
                   </button>
                 </motion.div>
@@ -450,88 +370,48 @@ export default function Course() {
         </motion.div>
       </section>
 
-      {/* WHY CHOOSE UPPERCLASS AI */}
-      <motion.section
-        variants={stagger}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        className="max-w-6xl mx-auto px-6 py-24"
-      >
+      {/* WHY CHOOSE */}
+      <motion.section variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="max-w-6xl mx-auto px-6 py-24">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            Why Learn With AI Tutors?
-          </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <h2 className={`text-4xl font-bold mb-4 ${theme === "dark" ? "text-gray-100" : "text-gray-900"}`}>Why Learn With AI Tutors?</h2>
+          <p className={`${theme === "dark" ? "text-gray-300" : "text-gray-600"} max-w-2xl mx-auto`}>
             Experience personalized, adaptive learning that traditional courses can't match
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          <BenefitCard
-            icon={Target}
-            title="Personalized Learning"
-            description="AI adapts to your pace, knowledge gaps, and learning style for optimal progress"
-          />
-          <BenefitCard
-            icon={Briefcase}
-            title="Project-Based Guidance"
-            description="Build real portfolio projects with step-by-step AI mentorship"
-          />
-          <BenefitCard
-            icon={Award}
-            title="Instant Feedback"
-            description="Get code reviews and explanations in real-time, 24/7"
-          />
-          <BenefitCard
-            icon={Users}
-            title="Always Available"
-            description="Learn anytime, anywhere - no scheduling, no waiting"
-          />
-          <BenefitCard
-            icon={Brain}
-            title="Adaptive Difficulty"
-            description="Content adjusts based on your understanding and progress"
-          />
-          <BenefitCard
-            icon={CheckCircle}
-            title="Career-Focused"
-            description="Learn skills that companies actually need and use"
-          />
+          <BenefitCard icon={Target} title="Personalized Learning" description="AI adapts to your pace, knowledge gaps, and learning style for optimal progress" theme={theme} />
+          <BenefitCard icon={Briefcase} title="Project-Based Guidance" description="Build real portfolio projects with step-by-step AI mentorship" theme={theme} />
+          <BenefitCard icon={Award} title="Instant Feedback" description="Get code reviews and explanations in real-time, 24/7" theme={theme} />
+          <BenefitCard icon={Users} title="Always Available" description="Learn anytime, anywhere - no scheduling, no waiting" theme={theme} />
+          <BenefitCard icon={Brain} title="Adaptive Difficulty" description="Content adjusts based on your understanding and progress" theme={theme} />
+          <BenefitCard icon={CheckCircle} title="Career-Focused" description="Learn skills that companies actually need and use" theme={theme} />
         </div>
       </motion.section>
 
-      {/* CTA SECTION */}
-      <motion.section
-        variants={fadeUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        className="py-24 bg-blue-800 text-white"
-      >
+      {/* CTA */}
+      <motion.section variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className={`py-24 transition-colors ${theme === "dark" ? "bg-slate-900 text-gray-200" : "bg-blue-800 text-white"}`}>
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-4xl -extrabold mb-6">
-            Start Your AI-Powered Learning Journey
-          </h2>
-          
-          <p className="text-xl text-blue-100 max-w-2xl mx-auto mb-10">
+          <h2 className="text-4xl font-extrabold mb-6">Start Your AI-Powered Learning Journey</h2>
+          <p className={`${theme === "dark" ? "text-gray-300" : "text-blue-100"} text-xl max-w-2xl mx-auto mb-10`}>
             Join thousands of learners who are mastering tech skills faster with intelligent AI tutors.
           </p>
-
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <Link
-              to="/auth/authpage"
-              className="bg-white text-blue-900 px-10 py-4 rounded-full font-semibold hover:scale-105 transition"
+            <Link 
+              to="/auth/authpage" 
+              className="px-10 py-4 rounded-full font-semibold transition hover:scale-105 text-blue-900 bg-white hover:bg-blue-50"
+              aria-label="Get started for free"
             >
               Get Started Free
             </Link>
-            
-            <button className="border-2 border-white text-white px-10 py-4 rounded-full font-semibold hover:bg-white/10 transition">
+            <button 
+              className="border-2 px-10 py-4 rounded-full font-semibold transition hover:bg-white/10 border-white text-white"
+              aria-label="Try AI tutor demo"
+            >
               Try AI Tutor Demo
             </button>
           </div>
-          
-          <p className="mt-8 text-blue-200">
+          <p className={`${theme === "dark" ? "text-gray-300" : "text-blue-200"} mt-8`}>
             Free 7-day trial • No credit card required • Cancel anytime
           </p>
         </div>
@@ -543,17 +423,19 @@ export default function Course() {
 }
 
 /* ---------------- COMPONENTS ---------------- */
-function AITutorCard({ tutor, isHovered, onHover, onLeave }) {
+function AITutorCard({ tutor, isHovered, onHover, onLeave, theme }) {
   return (
     <motion.div 
       variants={scaleUp}
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
-      className="relative bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 min-h-[280px] cursor-pointer"
+      className={`relative rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 min-h-[280px] cursor-pointer ${theme === "dark" ? "bg-slate-900 text-gray-200" : "bg-white text-gray-900"}`}
+      aria-label={`${tutor.title} - ${tutor.level} level`}
+      role="article"
     >
       <div className="p-6 h-full flex flex-col">
         <div className="flex justify-between items-start mb-4">
-          <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+          <span className={`px-3 py-1 rounded-full text-sm font-medium ${theme === "dark" ? "bg-blue-900/30 text-blue-300" : "bg-blue-100 text-blue-700"}`}>
             {tutor.level}
           </span>
           <div className="flex items-center gap-1">
@@ -562,15 +444,10 @@ function AITutorCard({ tutor, isHovered, onHover, onLeave }) {
           </div>
         </div>
 
-        <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
-          {tutor.title}
-        </h3>
-        
-        <p className="text-gray-600 mb-4 flex-grow line-clamp-3">
-          {tutor.description}
-        </p>
+        <h3 className={`text-xl font-bold mb-3 line-clamp-2 ${theme === "dark" ? "text-gray-100" : "text-gray-900"}`}>{tutor.title}</h3>
+        <p className={`mb-4 flex-grow line-clamp-3 ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>{tutor.description}</p>
 
-        <div className="flex items-center justify-between text-sm text-gray-600 mt-4">
+        <div className="flex items-center justify-between text-sm mt-4">
           <div className="flex items-center gap-2">
             <Users className="w-4 h-4" />
             <span>{tutor.students.toLocaleString()}+ learners</span>
@@ -581,36 +458,29 @@ function AITutorCard({ tutor, isHovered, onHover, onLeave }) {
           </div>
         </div>
 
-        {/* Hover Overlay with Detailed Description */}
         {isHovered && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="absolute inset-0 bg-gradient-to-br from-blue-700/95 to-indigo-700/95 backdrop-blur-sm text-white p-6 flex flex-col"
+            className={`absolute inset-0 p-6 flex flex-col backdrop-blur-sm rounded-3xl ${theme === "dark" ? "bg-slate-800/90 text-gray-200" : "bg-blue-700/90 text-white"}`}
           >
             <div className="flex-grow">
               <h4 className="text-lg font-bold mb-3">What You'll Learn</h4>
-              <p className="text-blue-100 text-sm leading-relaxed mb-4">
-                {tutor.detailedDescription}
-              </p>
-              
+              <p className="text-sm leading-relaxed mb-4">{tutor.detailedDescription}</p>
               <div className="mt-4">
                 <h5 className="font-semibold mb-2">Key Skills:</h5>
                 <div className="flex flex-wrap gap-2">
-                  {tutor.skills.slice(0, 3).map((skill, idx) => (
-                    <span key={idx} className="px-3 py-1 bg-white/20 rounded-full text-xs">
-                      {skill}
-                    </span>
+                  {tutor.skills.slice(0,3).map((skill, idx) => (
+                    <span key={idx} className="px-3 py-1 rounded-full text-xs bg-white/20">{skill}</span>
                   ))}
                   {tutor.skills.length > 3 && (
-                    <span className="px-3 py-1 bg-white/20 rounded-full text-xs">
+                    <span className="px-3 py-1 rounded-full text-xs bg-white/20">
                       +{tutor.skills.length - 3} more
                     </span>
                   )}
                 </div>
               </div>
             </div>
-            
             <div className="pt-4 border-t border-white/20 mt-4">
               <div className="flex items-center justify-center gap-2 text-sm">
                 <Clock className="w-4 h-4 text-blue-300" />
@@ -624,23 +494,23 @@ function AITutorCard({ tutor, isHovered, onHover, onLeave }) {
   );
 }
 
-function Stat({ value, label }) {
+function Stat({ value, label, theme }) {
   return (
     <motion.div variants={fadeIn} className="text-center">
       <div className="text-4xl font-bold mb-2">{value}</div>
-      <div className="text-blue-200 font-medium">{label}</div>
+      <div className={`font-medium ${theme === "dark" ? "text-gray-300" : "text-blue-200"}`}>{label}</div>
     </motion.div>
   );
 }
 
-function BenefitCard({ icon: Icon, title, description }) {
+function BenefitCard({ icon: Icon, title, description, theme }) {
   return (
-    <motion.div variants={fadeUp} className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+    <motion.div variants={fadeUp} className={`rounded-3xl p-8 shadow-lg hover:shadow-xl ${theme === "dark" ? "bg-slate-800 text-gray-200" : "bg-white text-gray-900"}`}>
       <div className="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center mb-6">
         <Icon className="w-7 h-7 text-blue-600" />
       </div>
-      <h3 className="text-xl font-bold text-gray-900 mb-3">{title}</h3>
-      <p className="text-gray-600 leading-relaxed">{description}</p>
+      <h3 className="text-xl font-bold mb-3">{title}</h3>
+      <p className={`leading-relaxed ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>{description}</p>
     </motion.div>
   );
 }
