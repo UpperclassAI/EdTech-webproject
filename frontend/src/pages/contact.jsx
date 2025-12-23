@@ -42,8 +42,8 @@ export default function Contact() {
       <Navbar />
 
       {/* HERO */}
-      <section className="relative text-white py-40 bg-[url('/assets/abt.png')] bg-cover bg-center">
-        <div className="absolute inset-0 bg-blue-900/70 backdrop-blur-[1px]" />
+      <section className="relative text-white py-40 bg-[url('/assets/ccon.png')] bg-cover bg-center">
+        <div className="absolute inset-0 bg-blue-900/80 backdrop-blur-[1px]" />
         <motion.div
           variants={fadeUp}
           initial="hidden"

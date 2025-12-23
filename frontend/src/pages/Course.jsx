@@ -238,8 +238,8 @@ export default function Course() {
       <Navbar />
 
       {/* HERO SECTION - Raised 5px */}
-      <section className="relative text-white py-32 bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 -mt-5">
-        <div className="absolute inset-0 bg-[url('/assets/abt.png')] bg-cover bg-center opacity-20" />
+      <section className="relative text-white py-32 bg-blue-900  to-purple-900 -mt-5">
+        <div className="absolute inset-0 bg-[url('/assets/course.png')] bg-cover bg-center opacity-20" />
         
         <motion.div
           variants={fadeUp}
@@ -312,7 +312,7 @@ export default function Course() {
                   onClick={() => setSelectedCategory(category.id)}
                   className={`flex items-center gap-3 px-6 py-4 rounded-2xl transition-all ${
                     selectedCategory === category.id
-                      ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
+                      ? "bg-blue-600 text-white shadow-lg"
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
                 >

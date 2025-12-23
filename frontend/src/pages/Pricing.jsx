@@ -1,3 +1,288 @@
+// "use client";
+
+// import { motion } from "framer-motion";
+// import { Check, X, Sparkles, Zap, Crown } from "lucide-react";
+// import Navbar from "../Navbar";
+// import Footer from "../footer";
+
+// /* ---------------- ANIMATIONS ---------------- */
+// const fadeUp = {
+//   hidden: { opacity: 0, y: 40 },
+//   visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
+// };
+
+// const stagger = {
+//   hidden: {},
+//   visible: { transition: { staggerChildren: 0.12 } },
+// };
+
+// const scaleUp = {
+//   hidden: { opacity: 0, scale: 0.95 },
+//   visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+// };
+
+// /* ---------------- PRICING DATA ---------------- */
+// const pricingTiers = [
+//   {
+//     id: "standard",
+//     name: "Standard",
+//     price: "$25",
+//     description: "Perfect for beginners",
+//     features: [
+//       "Beginner courses access",
+//       "Basic AI tutor",
+//       "Standard progress tracking",
+//       "Downloadable notes",
+//       "Community forum",
+//       "Beginner certificates",
+//     ],
+//     icon: Zap,
+//   },
+//   {
+//     id: "plus",
+//     name: "Plus",
+//     price: "$72",
+//     description: "Best for growing developers",
+//     popular: true,
+//     features: [
+//       "Everything in Standard",
+//       "Project workspace feedback",
+//       "Advanced courses",
+//       "Monthly mentorship",
+//       "Priority email support",
+//       "All certificates",
+//     ],
+//     icon: Sparkles,
+//   },
+//   {
+//     id: "premium",
+//     name: "Premium",
+//     price: "$135",
+//     description: "For professionals",
+//     features: [
+//       "Everything in Plus",
+//       "Portfolio building",
+//       "1-on-1 mentorship",
+//       "Offline downloads",
+//       "Weekly masterclasses",
+//     ],
+//     icon: Crown,
+//   },
+// ];
+
+// /* ---------------- FAQ ---------------- */
+// const faqs = [
+//   {
+//     q: "Can I switch plans later?",
+//     a: "Yes, you can upgrade or downgrade anytime.",
+//   },
+//   {
+//     q: "Is there a free trial?",
+//     a: "Yes, we offer a 14-day free trial.",
+//   },
+//   {
+//     q: "Do you offer refunds?",
+//     a: "We provide a 30-day money-back guarantee.",
+//   },
+// ];
+
+// export default function Pricing() {
+//   return (
+//     <div className="min-h-screen bg-[#050b18] text-white">
+//       <Navbar />
+
+//       {/* HERO */}
+//       <section className="relative py-40 bg-gradient-to-br from-black via-blue-900 to-indigo-900 text-center">
+//         <motion.div
+//           variants={fadeUp}
+//           initial="hidden"
+//           animate="visible"
+//           className="max-w-5xl mx-auto px-6"
+//         >
+//           <h1 className="text-4xl md:text-5xl font-extrabold">
+//             Here is what our <span className="text-blue-400">Pricing</span> Looks like
+//           </h1>
+//           <p className="mt-4 text-blue-200 max-w-2xl mx-auto">
+//             Transparent and flexible pricing designed to fit your learning journey.
+//           </p>
+//         </motion.div>
+//       </section>
+
+//       {/* PRICING CARDS */}
+//       <motion.section
+//         variants={stagger}
+//         initial="hidden"
+//         whileInView="visible"
+//         viewport={{ once: true }}
+//         className="-mt-32 max-w-7xl mx-auto px-6 pb-32"
+//       >
+//         <div className="grid md:grid-cols-3 gap-8">
+//           {pricingTiers.map((tier, i) => (
+//             <PricingCard key={tier.id} tier={tier} index={i} />
+//           ))}
+//         </div>
+//       </motion.section>
+
+//       {/* COMPARISON */}
+//       <section className="max-w-6xl mx-auto px-6 py-24">
+//         <h2 className="text-3xl font-bold text-center mb-12">Compare Features</h2>
+//         <div className="overflow-hidden rounded-2xl border border-white/10">
+//           {[
+//             "Course Access",
+//             "Mentorship",
+//             "Projects",
+//             "Certificates",
+//             "Priority Support",
+//           ].map((f, i) => (
+//             <div
+//               key={i}
+//               className="grid grid-cols-4 text-center border-b border-white/10"
+//             >
+//               <div className="p-5 text-left">{f}</div>
+//               <Cell yes={i < 3} />
+//               <Cell yes />
+//               <Cell yes />
+//             </div>
+//           ))}
+//         </div>
+//       </section>
+
+//       {/* VALUE */}
+//       <section className="bg-gradient-to-br from-blue-600/20 to-indigo-900/10 py-32">
+//         <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8 text-center">
+//           <Value stat="10K+" label="Active Learners" />
+//           <Value stat="92%" label="Job Placement" />
+//           <Value stat="+65%" label="Salary Increase" />
+//         </div>
+//       </section>
+
+//       {/* FAQ */}
+//       <section className="max-w-4xl mx-auto px-6 py-24">
+//         <h2 className="text-3xl font-bold text-center mb-12">
+//           Frequently Asked Questions
+//         </h2>
+//         <div className="space-y-6">
+//           {faqs.map((f, i) => (
+//             <div
+//               key={i}
+//               className="bg-white/10 backdrop-blur-xl border border-white/10 rounded-xl p-6"
+//             >
+//               <h4 className="font-semibold mb-2">{f.q}</h4>
+//               <p className="text-blue-200 text-sm">{f.a}</p>
+//             </div>
+//           ))}
+//         </div>
+//       </section>
+
+//       {/* CTA */}
+//       <section className="py-24 bg-gradient-to-br from-blue-900 to-indigo-900 text-center">
+//         <h2 className="text-4xl font-extrabold mb-6">
+//           Ready to Transform Your Career?
+//         </h2>
+//         <p className="text-blue-200 mb-10">
+//           Join thousands building real-world tech skills.
+//         </p>
+//         <div className="flex justify-center gap-6 flex-wrap">
+//           <button className="bg-white text-blue-900 px-10 py-4 rounded-full font-semibold hover:scale-105 transition">
+//             Start Free Trial
+//           </button>
+//           <button className="border border-white px-10 py-4 rounded-full hover:bg-white/10 transition">
+//             Schedule Demo
+//           </button>
+//         </div>
+//       </section>
+
+//       <Footer />
+//     </div>
+//   );
+// }
+
+// /* ---------------- COMPONENTS ---------------- */
+// function PricingCard({ tier, index }) {
+//   const Icon = tier.icon;
+
+//   return (
+//     <motion.div
+//       variants={scaleUp}
+//       transition={{ delay: index * 0.1 }}
+//       className={`relative rounded-2xl border border-white/10 bg-white/10 backdrop-blur-xl p-8
+//       hover:-translate-y-2 transition
+//       ${tier.popular ? "scale-105 border-blue-500" : "opacity-80"}`}
+//     >
+//       {tier.popular && (
+//         <span className="absolute -top-4 right-6 bg-blue-600 px-4 py-1 rounded-full text-sm">
+//           Recommended
+//         </span>
+//       )}
+
+//       <div className="flex items-center gap-4 mb-6">
+//         <div className="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center">
+//           <Icon className="text-white" />
+//         </div>
+//         <div>
+//           <h3 className="font-bold text-xl">{tier.name}</h3>
+//           <p className="text-blue-200 text-sm">{tier.description}</p>
+//         </div>
+//       </div>
+
+//       <div className="text-4xl font-bold mb-6">{tier.price}</div>
+
+//       <button
+//         className={`w-full py-3 rounded-lg font-semibold mb-6
+//         ${tier.popular ? "bg-blue-600" : "bg-white/20 hover:bg-white/30"}`}
+//       >
+//         Get it Now
+//       </button>
+
+//       <div className="space-y-3">
+//         {tier.features.map((f, i) => (
+//           <div key={i} className="flex gap-3 text-sm">
+//             <Check className="text-blue-400 w-4 h-4 mt-1" />
+//             {f}
+//           </div>
+//         ))}
+//       </div>
+//     </motion.div>
+//   );
+// }
+
+// function Cell({ yes }) {
+//   return (
+//     <div className="p-5 flex justify-center">
+//       {yes ? (
+//         <Check className="text-green-400" />
+//       ) : (
+//         <X className="text-white/30" />
+//       )}
+//     </div>
+//   );
+// }
+
+// function Value({ stat, label }) {
+//   return (
+//     <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-10 border border-white/10">
+//       <div className="text-4xl font-bold text-blue-400 mb-2">{stat}</div>
+//       <p className="text-blue-200">{label}</p>
+//     </div>
+//   );
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 "use client";
 
 import { motion } from "framer-motion";
@@ -131,7 +416,7 @@ export default function Pricing() {
       <Navbar />
 
       {/* HERO SECTION */}
-      <section className="relative text-white py-40 bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900">
+      <section className="relative text-white py-40 bg-blue-900 ">
         <div className="absolute inset-0 bg-[url('/assets/abt.png')] bg-cover bg-center opacity-20" />
         
         <motion.div
@@ -431,3 +716,14 @@ function ValueCard({ title, description, stat }) {
     </motion.div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
