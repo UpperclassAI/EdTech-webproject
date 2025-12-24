@@ -268,7 +268,7 @@
 
 import { motion } from "framer-motion";
 import Navbar from "../Navbar";
-import Footer from "../footer";
+import Footer from "../Footer";
 import TeamCarousel from "../TeamCarousel";
 import { Brain, Globe, Rocket } from "lucide-react";
 import { useTheme } from "../context/ThemeContext"; // <- theme context
@@ -304,7 +304,7 @@ export default function About() {
       {/* HERO */}
       <section className="relative py-32 md:py-40 bg-[url('/assets/abt.png')] bg-cover bg-center">
         <div className={`absolute inset-0 ${overlayHero} backdrop-blur-sm`} />
-        <MotionSection className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+        <MotionSection className="relative z-10 max-w-4xl mx-auto px-6 text-center ">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">Building the Future of Learning</h1>
           <p className={`mt-6 text-lg md:text-xl max-w-2xl mx-auto ${theme === "dark" ? "text-gray-300" : "text-blue-100"}`}>
             Upperclass AI blends technology, mentorship, and community to help learners build real-world skills with confidence.
@@ -314,7 +314,7 @@ export default function About() {
 
       {/* ABOUT CARD */}
       <MotionSection className="-mt-20 relative z-10">
-        <div className={`max-w-6xl mx-auto rounded-3xl shadow-xl p-10 sm:p-16 md:p-20 text-center ${cardBg}`}>
+        <div className={`max-w-6xl mx-auto rounded-3xl border-b-6 border-blue-600 shadow-xl p-10 sm:p-16 md:p-20 text-center ${cardBg}`}>
           <h2 className={`text-3xl sm:text-4xl font-bold mb-4 ${theme === "dark" ? "text-blue-400" : "text-blue-600"}`}>About Upperclass AI</h2>
           <p className={`max-w-3xl px-4 sm:px-8 mx-auto ${theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>
             Upperclass AI is a modern learning platform that blends tech education, mentorship, and community to help students build real-world skills with confidence.

@@ -211,7 +211,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "../Navbar";
-import Footer from "../footer";
+import Footer from "../Footer";
 import { FaComments } from "react-icons/fa";
 import { Mail, Phone, MapPin, Send, CheckCircle, XCircle } from "lucide-react";
 import { useTheme } from "../context/ThemeContext"; // <- add this

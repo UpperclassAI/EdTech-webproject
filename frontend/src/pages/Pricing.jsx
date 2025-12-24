@@ -1187,7 +1187,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Check, X, Sparkles, Zap, Crown } from "lucide-react";
 import Navbar from "../Navbar";
-import Footer from "../footer";
+import Footer from "../Footer";
 import { useTheme } from "../context/ThemeContext";
 
 /* ---------------- ANIMATION VARIANTS ---------------- */
