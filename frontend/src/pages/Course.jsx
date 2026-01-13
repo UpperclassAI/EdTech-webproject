@@ -306,7 +306,7 @@ export default function Course() {
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-center mt-16">
           <Link
             to="/auth"
-            className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-12 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+            className="inline-flex items-center justify-center gap-3 bg-red-600 hover:from-blue-700 hover:to-purple-700 text-white px-12 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
             aria-label="Start learning with AI tutor"
           >
             Start Learning with AI Tutor
@@ -398,18 +398,20 @@ export default function Course() {
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Link 
-              to="/auth/authpage" 
+              to="/auth" 
               className="px-10 py-4 rounded-full font-semibold transition hover:scale-105 text-blue-900 bg-white hover:bg-blue-50"
               aria-label="Get started for free"
             >
               Get Started Free
             </Link>
-            <button 
-              className="border-2 px-10 py-4 rounded-full font-semibold transition hover:bg-white/10 border-white text-white"
-              aria-label="Try AI tutor demo"
-            >
-              Try AI Tutor Demo
-            </button>
+           <Link to="/contact">
+  <button 
+    className="border-2 px-10 py-4 rounded-full font-semibold transition hover:bg-white/10 border-white text-white"
+    aria-label="Partner with us"
+  >
+    Partner with us
+  </button>
+</Link>
           </div>
           <p className={`${theme === "dark" ? "text-gray-300" : "text-blue-200"} mt-8`}>
             Free 7-day trial • No credit card required • Cancel anytime

@@ -268,7 +268,7 @@ export default function Contact() {
           animate="visible"
           className="relative z-10 max-w-4xl mx-auto px-6 text-center"
         >
-          <h1 className="text-5xl md:text-6xl font-extrabold">
+          <h1 className="text-5xl text-white md:text-6xl font-extrabold leading-tight ">
             Get In Touch
           </h1>
           <p className={`mt-6 text-lg ${theme === "dark" ? "text-gray-300" : "text-blue-100"}`}>
@@ -300,8 +300,8 @@ export default function Contact() {
                 Reach out to Upperclass AI for collaborations or support.
               </p>
               <div className="space-y-6">
-                <InfoItem icon={<Mail />} title="Email" value="hello@upperclass.ai" theme={theme} />
-                <InfoItem icon={<Phone />} title="Phone" value="+234 800 000 0000" theme={theme} />
+                <InfoItem icon={<Mail />} title="Email" value="upperclassai@gmail.com" theme={theme} />
+                <InfoItem icon={<Phone />} title="Phone" value="+234-814 1174 675" theme={theme} />
                 <InfoItem icon={<MapPin />} title="Location" value="Remote • Global" theme={theme} />
               </div>
             </motion.div>
@@ -372,7 +372,7 @@ export default function Contact() {
 
       {/* FLOATING CHAT BUTTON */}
       <a
-        href="https://wa.me/2348000000000"
+        href=" https://wa.link/ujeev2"
         target="_blank"
         rel="noopener noreferrer"
         className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-xl transition hover:scale-110 ${

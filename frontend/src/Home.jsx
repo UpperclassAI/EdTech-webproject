@@ -11,6 +11,7 @@ import StatsSection from "./StatsSection";
 import OurCourses from "./OurCourses";
 import OurTeam from "./OurTeam";
 import TeamCarousel from "./TeamCarousel";
+import LogoMarquee from "./mac";
 import FAQSection from "./faq";
 import { FaWhatsapp } from "react-icons/fa";
 import { useTheme } from "./context/ThemeContext";
@@ -110,7 +111,7 @@ export default function Home() {
 
       {/* WHATSAPP FLOATING BUTTON */}
       <motion.a
-        href="https://wa.me/2348100000000"
+        href=" https://wa.link/ujeev2"
         target="_blank"
         className={`fixed bottom-6 right-6 z-50 p-4 rounded-full shadow-2xl hover:scale-110 transition-transform ${
           theme === "dark" ? "bg-green-600" : "bg-blue-500"
@@ -123,6 +124,11 @@ export default function Home() {
       </motion.a>
 
       {/* PAGE SECTIONS WITH FADE-IN */}
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1 }}>
+        <LogoMarquee/>
+      </motion.div>
+
+
       <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1 }}>
         <StatsSection />
       </motion.div>
