@@ -99,6 +99,7 @@ import Overview from "./dashboard/overview.jsx";
 import Courses from "./dashboard/courses.jsx";
 import Achievements from "./dashboard/Achievements.jsx";
 import Avatar from "./dashboard/avatar.jsx";
+import Settings from "./dashboard/settings.jsx";
 
 /* GENERAL PAGES */
 import Pricing from "./pages/Pricing.jsx";
@@ -139,6 +140,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path="courses" element={<Courses />} />
             <Route path="achievements" element={<Achievements />} />
             <Route path="avatar" element={<Avatar />} />
+              <Route path="settings" element={<Settings />} />
           </Route>
 
           {/* GENERAL PAGES */}
