@@ -15,6 +15,7 @@ import LogoMarquee from "./mac";
 import FAQSection from "./faq";
 import { FaWhatsapp } from "react-icons/fa";
 import { useTheme } from "./context/ThemeContext";
+import FloatingSocialGlass from "./FloatingSocialGlass";
 
 export default function Home() {
   const whyChooseRef = useRef(null); // Ref for scrolling
@@ -108,7 +109,7 @@ export default function Home() {
           </button>
         </motion.div>
       </div>
-
+ <FloatingSocialGlass />
       {/* WHATSAPP FLOATING BUTTON */}
       <motion.a
         href=" https://wa.link/ujeev2"
@@ -148,6 +149,7 @@ export default function Home() {
       <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1 }}>
         <TeamCarousel />
       </motion.div>
+     
 
       <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1 }}>
         <FAQSection />

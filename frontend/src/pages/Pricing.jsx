@@ -66,7 +66,7 @@ const pricingTiers = [
     ],
     notIncluded: ["Enterprise-level projects", "Direct company introductions"],
     icon: Sparkles,
-    color: "from-purple-500 to-indigo-600",
+    color: "from-red-500 to-red-600",
     buttonText: "Go Pro",
   },
   {
@@ -166,7 +166,7 @@ export default function Pricing() {
   <div className="grid grid-cols-4 border-b border-gray-200 dark:border-gray-700">
     <div className="p-6 font-semibold bg-blue-100 dark:bg-gray-900 text-gray-900 dark:text-white">Feature</div>
             {pricingTiers.map((tier, idx) => (
-              <div key={idx} className={`p-6 text-center font-semibold ${tier.popular ? "text-purple-600 bg-purple-50 dark:text-purple-400 dark:bg-purple-900" : tier.id === "enterprise" ? "text-gray-800 dark:text-gray-100" : tier.id === "starter" ? "text-blue-600 dark:text-blue-400" : ""}`}>
+              <div key={idx} className={`p-6 text-center font-semibold ${tier.popular ? "text-red-600 bg-red-50 dark:text-red-400 dark:bg-red-900" : tier.id === "enterprise" ? "text-gray-800 dark:text-gray-100" : tier.id === "starter" ? "text-blue-600 dark:text-blue-400" : ""}`}>
                 {tier.name}
               </div>
             ))}
@@ -213,7 +213,7 @@ function PricingCard({ tier, index, billing, cardBg, hoverBg }) {
   return (
     <motion.div variants={scaleUp} transition={{ delay: index * 0.1 }} className={`relative rounded-3xl shadow-2xl overflow-hidden hover:-translate-y-2 transition-all duration-300 ${cardBg} ${hoverBg}`}>
       {tier.popular && (
-        <div className="absolute top-0 right-6 bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-6 py-2 rounded-b-lg font-semibold">
+        <div className="absolute top-0 right-6 bg-red-500 to-blue-500 text-white px-6 py-2 rounded-b-lg font-semibold">
           MOST POPULAR
         </div>
       )}
@@ -234,7 +234,7 @@ function PricingCard({ tier, index, billing, cardBg, hoverBg }) {
           </div>
           {tier.price !== "Custom" && <p className="text-gray-500 dark:text-gray-300 text-sm mt-2">Billed {billing}</p>}
         </div>
-        <button className={`w-full py-4 rounded-full font-semibold mb-8 transition ${tier.popular ? "bg-gradient-to-r from-purple-500 to-indigo-500 text-white hover:from-purple-600 hover:to-indigo-600" : "bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700"}`}>
+        <button className={`w-full py-4 rounded-full font-semibold mb-8 transition ${tier.popular ? "bg-red-500 to-blue-500 text-white hover:from-purple-600 hover:to-indigo-600" : "bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700"}`}>
           {tier.buttonText}
         </button>
         <div className="space-y-4">
