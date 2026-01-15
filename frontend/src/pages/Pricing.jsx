@@ -6,6 +6,8 @@ import { Check, X, Sparkles, Zap, Crown } from "lucide-react";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 import { useTheme } from "../context/ThemeContext";
+import FloatingSocialGlass from "../FloatingSocialGlass";
+
 
 /* ---------------- ANIMATION VARIANTS ---------------- */
 const fadeUp = {
@@ -155,7 +157,7 @@ export default function Pricing() {
           ))}
         </div>
       </motion.section>
-
+ <FloatingSocialGlass />
       {/* COMPARISON TABLE */}
       <motion.section variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="max-w-6xl mx-auto px-6 py-20">
         <div className="text-center mb-16">

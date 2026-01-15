@@ -22,7 +22,7 @@ export default function Home() {
   const { theme } = useTheme(); // Get current theme
 
   return (
-    <div className="relative w-full h-screen font-mono overflow-x-hidden">
+    <div className="relative w-full h-screen overflow-x-hidden">
       {/* BACKGROUND IMAGE – Fade In */}
       <motion.div
         className="absolute inset-0"

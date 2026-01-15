@@ -15,7 +15,7 @@ export default function Navbar() {
   return (
     <nav
       className={`w-full fixed mt-6 top-0 left-0 z-50
-        py-4 font-mono backdrop-blur-xs transition-colors duration-300
+        py-4  backdrop-blur-xs transition-colors duration-300
         ${
           theme === "light"
             ? "bg-transperent/20 text-black"

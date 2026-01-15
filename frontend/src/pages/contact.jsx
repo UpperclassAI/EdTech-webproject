@@ -7,6 +7,7 @@ import Footer from "../Footer";
 import { FaComments } from "react-icons/fa";
 import { Mail, Phone, MapPin, Send, CheckCircle, XCircle } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
+import FloatingSocialGlass from "../FloatingSocialGlass";
 
 /* ---------------- ANIMATION VARIANTS ---------------- */
 const fadeUp = {
@@ -78,12 +79,12 @@ export default function Contact() {
 
   return (
     <div
-      className={`w-full min-h-screen transition-colors ${
+      className={`w-full   min-h-screen transition-colors ${
         theme === "dark" ? "bg-slate-950 text-gray-200" : "bg-gray-50 text-gray-900"
       } relative`}
     >
       <Navbar />
-
+ <FloatingSocialGlass />
       {/* HERO */}
       <section
         className={`relative py-40 bg-[url('/assets/ccon.png')] bg-cover bg-center transition-colors`}

@@ -213,7 +213,7 @@ export default function FloatingSocialGlass() {
       {/* Main Glass Container */}
       <motion.div
         onClick={handleContainerClick}
-        className={`relative flex flex-col gap-3 p-3 rounded-tr-2xl rounded-br-2xl border-l-0
+        className={`relative flex flex-col gap-3 p-2 rounded-tr-4xl rounded-br-4xl border-l-0
         backdrop-blur-xl border shadow-2xl overflow-hidden cursor-pointer
         ${
           theme === "dark"
@@ -289,8 +289,8 @@ export default function FloatingSocialGlass() {
           backdrop-blur-md border-l-0 pointer-events-none
           ${
             theme === "dark"
-              ? "bg-gray-800/90 border-gray-700/60 text-gray-300"
-              : "bg-white/90 border-gray-300/60 text-gray-700"
+              ? "bg-gray-800/90 border-gray-700/60 text-white"
+              : "bg-white/90 border-gray-300/60 text-white"
           }`}
           animate={{
             rotate: isExpanded ? 0 : 180,
@@ -298,7 +298,7 @@ export default function FloatingSocialGlass() {
           }}
           transition={{ duration: 0.3, type: "spring" }}
         >
-          <ChevronRight size={14} />
+          <ChevronRight size={15} />
         </motion.div>
 
         {/* SOCIAL ICONS */}

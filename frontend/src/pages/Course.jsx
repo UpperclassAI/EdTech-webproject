@@ -24,6 +24,7 @@ import {
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext"; // dark mode context
+import FloatingSocialGlass from "../FloatingSocialGlass";
 
 /* ---------------- ANIMATION VARIANTS ---------------- */
 const fadeUp = {
@@ -193,6 +194,7 @@ export default function Course() {
   return (
     <div className={`w-full min-h-screen transition-colors ${bgMain}`}>
       <Navbar />
+       <FloatingSocialGlass />
 
       {/* HERO SECTION */}
       <section className={`relative text-white py-32 ${theme === "dark" ? "bg-slate-900" : "bg-blue-900"}`}>

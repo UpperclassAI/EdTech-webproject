@@ -12,7 +12,8 @@ export default function OurTeam() {
       <motion.div 
         className="px-6 md:px-16 py-12"
         initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }} // triggers when 30% visible
         transition={{ duration: 0.5 }}
       >
         <h2 className="text-5xl md:text-6xl font-bold text-gray-800 dark:text-gray-100 mb-6 leading-tight">
@@ -30,7 +31,8 @@ export default function OurTeam() {
             alt="AI Avatars"
             className="w-full h-full object-cover"
             initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 1, scale: 1 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, delay: 0.2 }}
           />
           

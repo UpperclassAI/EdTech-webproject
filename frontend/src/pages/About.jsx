@@ -272,6 +272,7 @@ import Footer from "../Footer";
 import TeamCarousel from "../TeamCarousel";
 import { Brain, Globe, Rocket } from "lucide-react";
 import { useTheme } from "../context/ThemeContext"; // <- theme context
+import FloatingSocialGlass from "../FloatingSocialGlass";
 
 /* ---------------- ANIMATION VARIANTS ---------------- */
 const fadeUp = { hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } } };
@@ -298,9 +299,9 @@ export default function About() {
   const overlayUnique = theme === "dark" ? "bg-gradient-to-br from-gray-900/80 via-gray-800/70 to-black/80" : "bg-gradient-to-br from-blue-900/80 via-indigo-900/70 to-black/80";
 
   return (
-    <div className={`w-full min-h-screen transition-colors duration-300 ${bgMain}`}>
+    <div className={`w-full min-h-screen transition-colors   duration-300 ${bgMain}`}>
       <Navbar />
-
+ <FloatingSocialGlass />
       {/* HERO */}
       <section className="relative py-32 md:py-40 bg-[url('/assets/abt.png')] bg-cover bg-center">
         <div className={`absolute inset-0 ${overlayHero} backdrop-blur-sm`} />
