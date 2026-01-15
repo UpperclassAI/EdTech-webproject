@@ -134,7 +134,7 @@ export default function Contact() {
               <div className="space-y-6">
                 <InfoItem icon={<Mail />} title="Email" value="upperclassai@gmail.com" theme={theme} />
                 <InfoItem icon={<Phone />} title="Phone" value="+234-814 1174 675" theme={theme} />
-                <InfoItem icon={<MapPin />} title="Location" value="Remote • Global" theme={theme} />
+                <InfoItem icon={<MapPin />} title="Location" value="18, Parkview Estate, Ikoyi, Lagos" theme={theme} />
               </div>
             </motion.div>
 
