@@ -158,7 +158,7 @@ export default function ChatBot() {
   };
 
   return (
-    <div className={`rounded-xl p-4 flex flex-col h-full max-h-[500px] border transition-colors duration-300 ${
+    <div className={`rounded-xl p-4 flex flex-col  h-full max-h-[500px] border transition-colors duration-300 ${
       theme === "dark" 
         ? "bg-gray-800 border-gray-700" 
         : "bg-white border-blue-100"
