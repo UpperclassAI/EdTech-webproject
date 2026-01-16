@@ -27,7 +27,7 @@ export default function Sidebar() {
           hidden md:flex 
           w-64 lg:w-72 
           p-6 flex-col 
-          border-r fixed left-0 top-0 bottom-0 z-30
+          border-r border-blue-200 fixed left-0 top-0 bottom-0 z-30
           transition-colors duration-300
           ${theme === "dark" 
             ? "bg-gray-900 border-gray-800 text-gray-100" 
@@ -72,32 +72,39 @@ export default function Sidebar() {
             className={`
               w-full flex items-center gap-3 px-4 py-2 rounded-lg transition-colors
               ${theme === "dark" 
-                ? "hover:bg-gray-800 text-yellow-400" 
-                : "hover:bg-blue-50 text-yellow-600"
+                ? "hover:bg-gray-800 text-blue-400" 
+                : "hover:bg-blue-50 text-blue-600"
               }
             `}
           >
             <div className="w-5 h-5 flex items-center justify-center">
               {theme === "dark" ? (
-                <FiBook className="text-yellow-400" />
+                <FiBook className="text-blue-400" />
               ) : (
-                <FiAward className="text-yellow-600" />
+                <FiAward className="text-blue-600" />
               )}
             </div>
             {theme === "dark" ? "Light Mode" : "Dark Mode"}
           </button>
 
           {/* LOGOUT */}
-          <button className={`
-            w-full flex items-center gap-3 px-4 py-2 rounded-lg transition-colors
-            ${theme === "dark" 
-              ? "hover:bg-gray-800 text-red-400" 
-              : "hover:bg-blue-50 text-red-600"
-            }
-          `}>
-            <FiPower className="w-5 h-5" />
-            Logout
-          </button>
+         
+             <button 
+             onClick={() => navigate("/auth")}
+          className={`
+                     w-full flex items-center gap-3 px-4 py-2 rounded-lg transition-colors
+                    ${theme === "dark" 
+                  ? "bg-gray-800 hover:bg-gray-700" 
+                  : "bg-blue-800 hover:bg-blue-700 text-white"
+                      }
+                    `}
+              >
+               <FiPower size={20} />
+               Logout
+                    </button>
+
+
+
         </div>
       </aside>
 

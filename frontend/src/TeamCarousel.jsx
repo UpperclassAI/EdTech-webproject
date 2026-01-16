@@ -1,12 +1,15 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { motion, useInView } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useTheme } from "./context/ThemeContext";
 
 export default function TeamCarousel() {
   const { theme } = useTheme();
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+
   const teamMembers = [
     { id: 1, name: "Billy Coster", role: "AI Developer", avatar: "/assets/team1.png", offset: "-20px" },
     { id: 2, name: "Gorgia Anna", role: "Lead Designer", avatar: "/assets/team2.png", offset: "30px" },
@@ -21,49 +24,78 @@ export default function TeamCarousel() {
   ];
 
   const [index, setIndex] = useState(0);
-  const next = () => setIndex((prev) => (prev + 1) % teamMembers.length);
-  const prev = () => setIndex((prev) => (prev - 1 + teamMembers.length) % teamMembers.length);
+  const [paused, setPaused] = useState(false);
 
-  // Auto slide
+  const next = () => setIndex((i) => (i + 1) % teamMembers.length);
+  const prev = () => setIndex((i) => (i - 1 + teamMembers.length) % teamMembers.length);
+
+  // Auto slide (pauses on hover)
   useEffect(() => {
-    const timer = setInterval(() => next(), 4000);
+    if (paused) return;
+    const timer = setInterval(next, 4000);
     return () => clearInterval(timer);
-  }, []);
+  }, [paused]);
 
-  const bgMain = theme === "dark" ? "bg-slate-950 text-gray-200" : "bg-gradient-to-r from-white to-blue-200";
-  const cardBg = theme === "dark" ? "bg-slate-800 text-gray-200" : "bg-white text-gray-900";
+  const bgMain =
+    theme === "dark"
+      ? "bg-slate-950 text-gray-200"
+      : "bg-gradient-to-r from-white to-blue-200";
+
   const textColor = theme === "dark" ? "text-gray-200" : "text-gray-900";
   const subText = theme === "dark" ? "text-gray-400" : "text-gray-600";
 
   return (
-    <div className={`w-full py-20 transition-colors duration-300 ${bgMain}`}>
+    <section
+      ref={containerRef}
+      className={`w-full py-20 transition-colors duration-500 ${bgMain}`}
+    >
       <div className="max-w-7xl mx-auto px-6">
-        <h1 className={`text-5xl font-bold mb-12 transition-colors duration-300`}>
+        {/* Heading */}
+        <motion.h1
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-5xl font-bold mb-12"
+        >
           Our <span className="text-blue-500">Team</span>
-        </h1>
+        </motion.h1>
 
-        <div className="relative overflow-hidden h-[520px] md:h-[450px]">
+        {/* Carousel */}
+        <div
+          className="relative overflow-hidden h-[520px] md:h-[450px]"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
           <motion.div
-            className="flex gap-24 items-center transition-transform duration-700"
-            animate={{ x: `-${index * 320}px`, opacity: 1 }}
+            className="flex gap-24 items-center will-change-transform"
+            animate={{
+              x: `-${index * 360}px`,
+              opacity: isInView ? 1 : 0
+            }}
             initial={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
+            transition={{
+              type: "spring",
+              stiffness: 120,
+              damping: 22
+            }}
           >
             {teamMembers.map((m) => (
               <motion.div
                 key={m.id}
                 className="flex flex-col items-center text-center"
                 style={{ marginTop: m.offset }}
-                whileHover={{ scale: 1.06 }}
-                transition={{ type: "spring", stiffness: 120 }}
+                whileHover={{ scale: 1.07 }}
+                transition={{ type: "spring", stiffness: 200, damping: 15 }}
               >
                 <img
                   src={m.avatar}
                   alt={m.name}
-                  className="w-64 h-64 md:w-72 md:h-72 rounded-full object-cover shadow-xl"
+                  className="w-64 h-64 md:w-72 md:h-72 rounded-full object-cover shadow-2xl"
                 />
-                <h3 className={`text-xl font-semibold mt-6 transition-colors duration-300 ${textColor}`}>{m.name}</h3>
-                <p className={`text-sm transition-colors duration-300 ${subText}`}>{m.role}</p>
+                <h3 className={`text-xl font-semibold mt-6 ${textColor}`}>
+                  {m.name}
+                </h3>
+                <p className={`text-sm ${subText}`}>{m.role}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -71,20 +103,28 @@ export default function TeamCarousel() {
           {/* Left Button */}
           <button
             onClick={prev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/90 dark:bg-slate-700 shadow-lg w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition"
+            className="absolute left-4 top-1/2 -translate-y-1/2
+            bg-white/90 dark:bg-slate-100
+            shadow-lg w-12 h-12 rounded-full
+            flex items-center justify-center
+            hover:scale-110 transition"
           >
-            <FaChevronLeft className={theme === "dark" ? "text-gray-200" : "text-gray-900"} />
+            <FaChevronLeft className={textColor} />
           </button>
 
           {/* Right Button */}
           <button
             onClick={next}
-            className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/90 dark:bg-slate-700 shadow-lg w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition"
+            className="absolute right-4 top-1/2 -translate-y-1/2
+            bg-white/90 dark:bg-slate-100
+            shadow-lg w-12 h-12 rounded-full
+            flex items-center justify-center
+            hover:scale-110 transition"
           >
-            <FaChevronRight className={theme === "dark" ? "text-gray-200" : "text-gray-900"} />
+            <FaChevronRight className={textColor} />
           </button>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

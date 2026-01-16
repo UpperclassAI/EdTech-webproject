@@ -34,9 +34,9 @@ export default function Overview() {
       <main className="flex flex-col gap-6">
 
         {/* FIRST ROW: HERO + PROFILE/TASKS */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:h-85 md:h-85 sm:h-400 gap-4">
           {/* HERO CARD */}
-          <div className={`col-span-1 md:col-span-2 rounded-xl p-4 flex justify-between items-center animate-[fadeUp_.7s_ease] transition-colors duration-300 ${
+          <div className={`col-span-1 md:col-span-2 rounded-xl  h-75 p-4 flex justify-between items-center animate-[fadeUp_.7s_ease] transition-colors duration-300 ${
             theme === "dark" 
               ? "bg-gray-800 border border-gray-700" 
               : "bg-blue-100"

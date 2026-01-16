@@ -118,7 +118,8 @@ export default function Contact() {
         className="-mt-20 relative z-10"
       >
         <div
-          className={`max-w-6xl mx-auto rounded-3xl border-b-[6px] border-blue-600 shadow-xl p-8 md:p-16 transition-colors ${
+          className={`max-w-6xl mx-auto rounded-3xl border-b-[6px] border-blue-600 shadow-xl p-8 md:p-16 transition-colors 
+            ${
             theme === "dark" ? "bg-slate-900" : "bg-white"
           }`}
         >

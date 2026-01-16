@@ -101,7 +101,7 @@ export default function Home() {
             onClick={() => whyChooseRef.current?.scrollIntoView({ behavior: "smooth" })}
             className={`px-6 py-2 sm:px-6 sm:py-3 rounded-xl shadow flex items-center justify-center transition-all duration-300 ${
               theme === "dark"
-                ? "bg-gray-800 text-white hover:bg-gray-700"
+                ? "bg-gray-800/10 border border-white text-white hover:bg-gray-700"
                 : "bg-white text-black hover:bg-gray-200"
             }`}
           >
