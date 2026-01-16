@@ -115,7 +115,7 @@ export default function Home() {
         href=" https://wa.link/ujeev2"
         target="_blank"
         className={`fixed bottom-6 right-6 z-50 p-4 rounded-full shadow-2xl hover:scale-110 transition-transform ${
-          theme === "dark" ? "bg-green-600" : "bg-blue-500"
+          theme === "dark" ? "bg-slate-800 text-blue-500" : "bg-blue-500"
         }`}
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}

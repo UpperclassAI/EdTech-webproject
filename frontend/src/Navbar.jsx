@@ -104,18 +104,88 @@ export default function Navbar() {
           </Link>
 
           {/* 🌙 THEME TOGGLE */}
-          <button
-            onClick={toggleTheme}
-            className="p-2.5 sm:p-3 rounded-xl bg-[var(--card)] shadow
-            hover:scale-110 transition-all duration-300"
-            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-          >
-            {theme === "dark" ? (
-              <Sun className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400" />
-            ) : (
-              <Moon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
-            )}
-          </button>
+{/* 🌙 THEME TOGGLE */}
+<button
+  onClick={toggleTheme}
+  className="relative w-16 h-9 rounded-full p-1
+  bg-gradient-to-br from-white to-gray-200
+  dark:from-black dark:to-gray-900
+  shadow-[0_8px_30px_rgba(0,0,0,0.15)]
+  dark:shadow-[0_8px_30px_rgba(0,0,0,0.4)]
+  hover:shadow-[0_12px_40px_rgba(0,0,0,0.2)]
+  dark:hover:shadow-[0_12px_40px_rgba(0,0,0,0.5)]
+  transition-all duration-1000 ease-out
+  group overflow-hidden"
+  aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+>
+  {/* Main Track with Dramatic White/Black Change */}
+  <div className={`absolute inset-0.5 rounded-full
+    shadow-inner transition-all duration-1000
+    ${theme === "dark" 
+      ? 'bg-gradient-to-b from-black to-gray-900' 
+      : 'bg-gradient-to-b from-white to-gray-100'
+    }`}>
+    <div className="relative w-full h-full">
+      
+      {/* Toggle Handle */}
+      <div className={`absolute top-1/2 -translate-y-1/2 w-7 h-7 rounded-full
+        shadow-lg flex items-center justify-center 
+        transition-all duration-1000 ease-out
+        ${theme === "dark" 
+          ? 'left-[calc(100%-2rem)] bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-700 shadow-blue-500/30' 
+          : 'left-[0.25rem] bg-gradient-to-br from-amber-400 via-orange-500 to-amber-600 shadow-amber-500/30'
+        }`}>
+        
+        {/* Icon with Glow Effect */}
+        <div className="relative z-10">
+          {theme === "dark" ? (
+            <Moon className="w-3.5 h-3.5 text-white drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+          ) : (
+            <Sun className="w-3.5 h-3.5 text-white drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]" />
+          )}
+        </div>
+        
+        {/* Handle Inner Glow */}
+        <div className={`absolute inset-0 rounded-full opacity-0 group-hover:opacity-100
+          transition-opacity duration-1000
+          ${theme === "dark" 
+            ? 'bg-gradient-to-br from-blue-400/30 to-transparent' 
+            : 'bg-gradient-to-br from-amber-300/30 to-transparent'
+          }`} />
+      </div>
+      
+      {/* Background Icons */}
+      <div className="absolute inset-0 flex items-center justify-between px-2.5">
+        <Sun className={`w-3 h-3 transition-all duration-1000
+          ${theme === "dark" 
+            ? 'text-amber-500/20 opacity-40' 
+            : 'text-amber-500/80 opacity-100 drop-shadow-[0_0_4px_rgba(245,158,11,0.3)]'
+          }`} />
+        <Moon className={`w-3 h-3 transition-all duration-1000
+          ${theme === "dark" 
+            ? 'text-blue-400/80 opacity-100 drop-shadow-[0_0_4px_rgba(59,130,246,0.3)]' 
+            : 'text-blue-400/20 opacity-40'
+          }`} />
+      </div>
+    </div>
+  </div>
+  
+  {/* Outer Border Glow */}
+  <div className={`absolute -inset-0.5 rounded-full opacity-0 group-hover:opacity-100
+    transition-opacity duration-1000 pointer-events-none
+    ${theme === "dark" 
+      ? 'bg-gradient-to-r from-blue-500/20 via-transparent to-purple-500/20' 
+      : 'bg-gradient-to-r from-amber-400/20 via-transparent to-orange-500/20'
+    }`} />
+  
+  {/* Pulsing Animation on Hover */}
+  <div className={`absolute inset-0 rounded-full opacity-0 group-hover:opacity-50
+    transition-opacity duration-1000 pointer-events-none animate-pulse
+    ${theme === "dark" 
+      ? 'bg-gradient-to-r from-blue-500/10 to-purple-500/10' 
+      : 'bg-gradient-to-r from-amber-400/10 to-orange-500/10'
+    }`} />
+</button>
 
           {/* MOBILE MENU BUTTON */}
           <button
@@ -148,7 +218,7 @@ export default function Navbar() {
             to={item.path}
             onClick={() => setIsOpen(false)}
             className={`block text-lg transition-colors duration-300 py-2
-              ${isActive(item.path) ? "text-blue-500 font-semibold" : "hover:text-blue-400"}`}
+              ${isActive(item.path) ? "text-white px-4 bg-blue-600 rounded-xl font-semibold" : "hover:text-blue-400"}`}
           >
             {item.label}
           </Link>
