@@ -27,7 +27,7 @@ export default function Sidebar() {
           hidden md:flex 
           w-64 lg:w-72 
           p-6 flex-col 
-          border-r border-blue-200 fixed left-0 top-0 bottom-0 z-30
+          border-r fixed left-0 top-0 bottom-0 z-30
           transition-colors duration-300
           ${theme === "dark" 
             ? "bg-gray-900 border-gray-800 text-gray-100" 
@@ -88,23 +88,16 @@ export default function Sidebar() {
           </button>
 
           {/* LOGOUT */}
-         
-             <button 
-             onClick={() => navigate("/auth")}
-          className={`
-                     w-full flex items-center gap-3 px-4 py-2 rounded-lg transition-colors
-                    ${theme === "dark" 
-                  ? "bg-gray-800 hover:bg-gray-700" 
-                  : "bg-blue-800 hover:bg-blue-700 text-white"
-                      }
-                    `}
-              >
-               <FiPower size={20} />
-               Logout
-                    </button>
-
-
-
+          <button className={`
+            w-full flex items-center gap-3 px-4 py-2 rounded-lg transition-colors
+            ${theme === "dark" 
+              ? "hover:bg-gray-800 text-red-400" 
+              : "hover:bg-blue-50 text-red-600"
+            }
+          `}>
+            <FiPower className="w-5 h-5" />
+            Logout
+          </button>
         </div>
       </aside>
 
@@ -112,13 +105,13 @@ export default function Sidebar() {
       <button
         onClick={() => setSidebarOpen(true)}
         className={`
-          md:hidden fixed top-5 left-4 z-50
+          md:hidden fixed top-5 right-4 z-50
           w-12 h-12 rounded-full shadow-lg 
           flex items-center justify-center 
           active:scale-90 transition-all duration-300
           ${theme === "dark" 
-            ? "bg-blue-800 text-white" 
-            : "bg-blue-600 text-white"
+            ? "bg-blue-800/50 backdrop-blur-xl text-white" 
+            : "bg-blue-600/80 backdrop-blur-xl text-white"
           }
         `}
       >
@@ -186,7 +179,7 @@ export default function Sidebar() {
 
               {/* NAV */}
               <div className="flex flex-col gap-4">
-                <MobileNavItem to="/dashboard" label="Overview" icon={<FaAddressCard />} theme={theme} />
+                <MobileNavItem to="/dashboard/" label="Overview" icon={<FaAddressCard />} theme={theme} />
                 <MobileNavItem to="/dashboard/courses" label="Courses" icon={<FiBook />} theme={theme} />
                 <MobileNavItem to="/dashboard/achievements" label="Achievements" icon={<FiAward />} theme={theme} />
                 <MobileNavItem to="/dashboard/avatar" label="Avatar" icon={<FiUser />} theme={theme} />

@@ -1,5 +1,5 @@
 import { FiPlusSquare } from "react-icons/fi";
-import { FaBookOpen, FaChartArea, FaRocket, FaStarOfLife } from "react-icons/fa";
+import { FaBookOpen, FaChartArea, FaRocket, FaStarOfLife, FaUserFriends } from "react-icons/fa";
 import ChatBot from "./ChatBot";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
@@ -65,7 +65,7 @@ export default function Overview() {
           {/* RIGHT PROFILE + TASKS */}
           <div className="flex flex-col gap-4">
             {/* PROFILE */}
-            <div className={`shadow-sm border p-4 rounded-xl flex flex-col items-center animate-[fadeUp_.75s_ease] transition-colors duration-300 ${
+            <div className={`shadow-sm border p-4 rounded-xl flex py-8 flex-col items-center animate-[fadeUp_.75s_ease] transition-colors duration-300 ${
               theme === "dark" 
                 ? "bg-gray-800 border-gray-700" 
                 : "bg-white border-blue-100"
@@ -83,13 +83,13 @@ export default function Overview() {
               }`}>
                 Student
               </p>
-              <button className={`mt-2 px-3 py-1 rounded-md border text-xs md:text-sm transition-colors duration-300 ${
+              {/* <button className={`mt-2 px-3 py-1 rounded-md border text-xs md:text-sm transition-colors duration-300 ${
                 theme === "dark" 
                   ? "bg-gray-700 text-gray-200 border-gray-600 hover:bg-gray-600" 
                   : "bg-blue-50 text-blue-600 border-blue-200 hover:bg-blue-100"
               }`}>
                 Edit Profile
-              </button>
+              </button> */}
             </div>
 
             {/* UPCOMING TASKS */}
@@ -153,25 +153,34 @@ export default function Overview() {
               <ChatBot />
             </div>
 
-            {/* MENTOR */}
-            <div className={`p-4 rounded-xl shadow-sm border flex items-center gap-3 animate-[fadeUp_1s_ease] transition-colors duration-300 ${
-              theme === "dark" 
-                ? "bg-gray-800 border-gray-700" 
-                : "bg-white border-blue-100"
-            }`}>
-              <div className={`w-9 h-9 rounded-full flex items-center justify-center transition-colors duration-300 ${
-                theme === "dark" 
-                  ? "bg-gray-700 text-blue-400" 
-                  : "bg-blue-50 text-blue-600"
-              }`}>
-                👥
-              </div>
-              <p className={`text-sm ${
-                theme === "dark" ? "text-gray-200" : "text-gray-800"
-              }`}>
-                Connect with Mentor
-              </p>
-            </div>
+          {/* MENTOR */}
+<div
+  className={`p-3 sm:p-4 rounded-xl shadow-sm border flex items-center gap-2 sm:gap-3 
+  animate-[fadeUp_1s_ease] transition-colors duration-300 ${
+    theme === "dark"
+      ? "bg-gray-800 border-gray-700"
+      : "bg-white border-blue-100"
+  }`}
+>
+  <div
+    className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-colors duration-300 ${
+      theme === "dark"
+        ? "bg-blue-700 text-blue-300"
+        : "bg-blue-50 text-blue-600"
+    }`}
+  >
+    <FaUserFriends className="w-4 h-4 sm:w-5 sm:h-5" />
+  </div>
+
+  <p
+    className={`text-xs sm:text-sm font-medium ${
+      theme === "dark" ? "text-gray-200" : "text-gray-800"
+    }`}
+  >
+    Connect with Mentor
+  </p>
+</div>
+
           </div>
         </div>
 
