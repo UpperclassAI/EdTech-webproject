@@ -8,6 +8,7 @@ import {
   Linkedin,
   ChevronRight,
   Share2,
+  Facebook,
 } from "lucide-react";
 import { useTheme } from "./context/ThemeContext";
 
@@ -29,6 +30,11 @@ const socials = [
     url: "https://linkedin.com/company/upperclassai",
      color: "#1DA1F2",
    
+  },
+  {
+    icon: Facebook,
+    url: "https://linkedin.com/company/upperclassai",
+     color: "#1DA1F2",
   },
 
  

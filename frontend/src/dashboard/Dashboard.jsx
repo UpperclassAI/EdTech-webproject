@@ -1,16 +1,4 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
 // Dashboard.jsx - Updated to include Settings route
 "use client";
 import { useState } from "react";
