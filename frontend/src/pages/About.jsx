@@ -270,7 +270,7 @@ export default function About() {
           </MotionSection>
 
           <MotionSection variants={fadeRight} className="relative h-[300px] sm:h-[400px] md:h-[550px] rounded-3xl overflow-hidden shadow-2xl group">
-            <div className="absolute inset-0 bg-[url('/assets/abt.png')] bg-cover bg-center transition-transform duration-1000 group-hover:scale-110" />
+            <div className="absolute inset-0 bg-[url('/assets/abt.png')] bg-cover bg-center transition-transform duration-7000 group-hover:scale-110 hover:duration-7000" />
             <div className="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-blue-900/40 to-transparent" />
             <div className="relative z-10 h-full flex flex-col justify-end p-6 sm:p-8">
               <div className="bg-gradient-to-r from-blue-600/90 to-blue-600/90 backdrop-blur-sm rounded-2xl p-6 max-w-md">
@@ -339,14 +339,7 @@ export default function About() {
 
       {/* TEAM SECTION */}
       <MotionSection className={`py-20 md:py-24 ${cardBg} rounded-t-3xl`}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center mb-12">
-          <h3 className={`text-3xl sm:text-4xl font-bold mb-4 ${theme === "dark" ? "text-blue-400" : "text-blue-600"}`}>
-            Meet Our <span className="bg-gradient-to-r from-blue-500 to-blue-500 bg-clip-text text-transparent">Team</span>
-          </h3>
-          <p className={`${theme === "dark" ? "text-gray-300" : "text-gray-600"} max-w-2xl mx-auto`}>
-            The passionate individuals building the future of learning, one innovation at a time.
-          </p>
-        </div>
+      
         <TeamCarousel />
       </MotionSection>
 

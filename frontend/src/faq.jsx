@@ -58,7 +58,7 @@ export default function FAQSection() {
   };
 
   return (
-    <div
+    <div id="faq"
       className={`relative w-full py-16 md:py-24 px-6 md:px-20 overflow-hidden transition-colors ${
         theme === "dark" ? "bg-slate-950 text-gray-200" : "bg-gray-50 text-gray-900"
       }`}
@@ -135,18 +135,26 @@ export default function FAQSection() {
           </div>
 
           {/* Image Right */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isVisible ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="md:w-1/2 mt-8 md:mt-0 flex justify-center"
-          >
-            <img
-              src="/assets/faqq.png"
-              alt="FAQ Illustration"
-              className="rounded-2xl object-cover w-full max-w-md shadow-lg"
-            />
-          </motion.div>
+<motion.div
+  initial={{ opacity: 0, x: 50 }}
+  animate={isVisible ? { opacity: 1, x: 0 } : {}}
+  transition={{ duration: 0.8 }}
+  className="md:w-1/2 mt-8 md:mt-0 flex justify-center"
+>
+  <div className="relative w-full max-w-md rounded-2xl overflow-hidden shadow-lg">
+    
+    <img
+      src="/assets/faqq.png"
+      alt="FAQ Illustration"
+      className="w-full h-full object-cover"
+    />
+
+    {/* Gradient Overlay */}
+    <div className="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-blue-700/40 to-transparent" />
+
+  </div>
+</motion.div>
+
         </div>
 
 
