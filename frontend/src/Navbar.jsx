@@ -14,8 +14,8 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`w-full fixed mt-6 top-0 left-0 z-50
-        py-4  backdrop-blur-xs transition-colors duration-300
+      className={`w-full fixed xl:mt-6  lg:mt-3 sm:mt-1 top-0 left-0 z-50
+        py-2  backdrop-blur-xs transition-colors duration-300
         ${
           theme === "light"
             ? "bg-transperent/20 text-black"
@@ -189,7 +189,7 @@ export default function Navbar() {
 
           {/* MOBILE MENU BUTTON */}
           <button
-            className="md:hidden text-3xl sm:text-4xl text-[var(--text)]
+            className="md:hidden bg-white/30 px-1 rounded-sm text-3xl sm:text-4xl text-[var(--text)]
             transition-all duration-300 hover:scale-110"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
