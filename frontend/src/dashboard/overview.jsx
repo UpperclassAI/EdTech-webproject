@@ -4,7 +4,8 @@ import ChatBot from "./ChatBot";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { useTheme } from "../context/ThemeContext"; // Adjust path as needed
+import { useTheme } from "../context/ThemeContext";
+import { useSettings } from "../context/SettingsContext";
 
 const data = [
   { name: "Mon", time: 4 },
@@ -18,6 +19,7 @@ const data = [
 
 export default function Overview() {
   const { theme } = useTheme();
+   const { settings } = useSettings();
   
   const upcomingTasks = [
     { name: "AI Introduction", date: "Nov 16th, 8:00 AM" },
@@ -36,9 +38,9 @@ export default function Overview() {
         {/* FIRST ROW: HERO + PROFILE/TASKS */}
         <div className="grid grid-cols-1 md:grid-cols-3 lg:h-85 md:h-85 sm:h-400 gap-4">
           {/* HERO CARD */}
-          <div className={`col-span-1 md:col-span-2 rounded-xl  h-75 p-4 flex justify-between items-center animate-[fadeUp_.7s_ease] transition-colors duration-300 ${
+          <div className={`col-span-1 md:col-span-2 rounded-xl h-75 p-4 flex justify-between items-center animate-[fadeUp_.7s_ease] transition-colors duration-300 border border-blue-500/50 ${
             theme === "dark" 
-              ? "bg-gray-800 border border-gray-700" 
+              ? "bg-gray-800 border-gray-700" 
               : "bg-blue-100"
           }`}>
             <div>
@@ -53,7 +55,7 @@ export default function Overview() {
                 We see the future
               </p>
             </div>
-            <div className={`w-16 h-12 md:w-20 md:h-14 shadow rounded flex items-center justify-center text-lg transition-colors duration-300 ${
+            <div className={`w-16 h-12 md:w-20 md:h-14 shadow rounded flex items-center justify-center text-lg transition-colors duration-300 border border-blue-500/50 ${
               theme === "dark" 
                 ? "bg-gray-700 text-gray-200" 
                 : "bg-white"
@@ -63,37 +65,32 @@ export default function Overview() {
           </div>
 
           {/* RIGHT PROFILE + TASKS */}
-          <div className="flex flex-col gap-4">
-            {/* PROFILE */}
-            <div className={`shadow-sm border p-4 rounded-xl flex py-8 flex-col items-center animate-[fadeUp_.75s_ease] transition-colors duration-300 ${
-              theme === "dark" 
-                ? "bg-gray-800 border-gray-700" 
-                : "bg-white border-blue-100"
-            }`}>
-              <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-r from-blue-500 to-blue-700 text-white flex items-center justify-center font-bold shadow">
-                PJ
-              </div>
-              <p className={`mt-2 text-base md:text-lg font-semibold ${
-                theme === "dark" ? "text-gray-100" : "text-gray-800"
-              }`}>
-                Peter Josh
-              </p>
-              <p className={`text-xs ${
-                theme === "dark" ? "text-gray-400" : "text-gray-500"
-              }`}>
-                Student
-              </p>
-              {/* <button className={`mt-2 px-3 py-1 rounded-md border text-xs md:text-sm transition-colors duration-300 ${
-                theme === "dark" 
-                  ? "bg-gray-700 text-gray-200 border-gray-600 hover:bg-gray-600" 
-                  : "bg-blue-50 text-blue-600 border-blue-200 hover:bg-blue-100"
-              }`}>
-                Edit Profile
-              </button> */}
-            </div>
+<div className="flex flex-col gap-4">
+  {/* PROFILE */}
+  <div className={`shadow-sm border p-4 rounded-xl flex py-8 flex-col items-center animate-[fadeUp_.75s_ease] transition-colors duration-300 border border-blue-500/50 ${
+    theme === "dark" 
+      ? "bg-gray-800 border-gray-700" 
+      : "bg-white border-blue-100"
+  }`}>
+    <div className={`w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-r ${
+      settings?.profileColor || "from-blue-500 to-blue-700"
+    } text-white flex items-center justify-center font-bold shadow border border-blue-500/50`}>
+      {settings?.profileInitials || settings?.displayName?.charAt(0) || settings?.username?.charAt(0) || "PJ"}
+    </div>
+    <p className={`mt-2 text-base md:text-lg font-semibold ${
+      theme === "dark" ? "text-gray-100" : "text-gray-800"
+    }`}>
+      {settings?.displayName || settings?.username || "Peter Josh"}
+    </p>
+    <p className={`text-xs ${
+      theme === "dark" ? "text-gray-400" : "text-gray-500"
+    }`}>
+      {settings?.userRole || "Student"}
+    </p>
+  </div>
 
-            {/* UPCOMING TASKS */}
-            <div className={`p-4 rounded-xl shadow-sm border animate-[fadeUp_.8s_ease] transition-colors duration-300 ${
+            {/* UPCOMING TASKS - More vertical space */}
+            <div className={`p-4 rounded-xl shadow-sm border animate-[fadeUp_.8s_ease] transition-colors duration-300 border border-blue-500/50 ${
               theme === "dark" 
                 ? "bg-gray-800 border-gray-700" 
                 : "bg-white border-blue-100"
@@ -103,18 +100,18 @@ export default function Overview() {
               }`}>
                 Upcoming Tasks
               </p>
-              <div className="max-h-40 overflow-y-auto space-y-2">
+              <div className="max-h-60 overflow-y-auto space-y-2">
                 {upcomingTasks.map((task) => (
                   <div
                     key={task.name}
-                    className={`flex justify-between items-center p-2 rounded transition-colors duration-300 ${
+                    className={`flex justify-between items-center p-2 rounded transition-colors duration-300 border border-blue-500/50 ${
                       theme === "dark" 
                         ? "bg-gray-700 hover:bg-gray-600" 
                         : "bg-blue-50 hover:bg-blue-200"
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <div className={`w-7 h-7 rounded-full flex items-center justify-center text-sm transition-colors duration-300 ${
+                      <div className={`w-7 h-7 rounded-full flex items-center justify-center text-sm transition-colors duration-300 border border-blue-500/50 ${
                         theme === "dark" 
                           ? "bg-gray-600 text-blue-400" 
                           : "bg-blue-50 text-blue-600"
@@ -144,8 +141,8 @@ export default function Overview() {
               </div>
             </div>
 
-            {/* AI TUTOR */}
-            <div className={`shadow-sm border animate-[fadeUp_.9s_ease] transition-colors duration-300 ${
+            {/* AI TUTOR - Separated as in original */}
+            <div className={`shadow-sm border animate-[fadeUp_.9s_ease] transition-colors duration-300 border border-blue-500/50 ${
               theme === "dark" 
                 ? "border-gray-700" 
                 : "border-blue-100"
@@ -153,33 +150,33 @@ export default function Overview() {
               <ChatBot />
             </div>
 
-          {/* MENTOR */}
-<div
-  className={`p-3 sm:p-4 rounded-xl shadow-sm border flex items-center gap-2 sm:gap-3 
-  animate-[fadeUp_1s_ease] transition-colors duration-300 ${
-    theme === "dark"
-      ? "bg-gray-800 border-gray-700"
-      : "bg-white border-blue-100"
-  }`}
->
-  <div
-    className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-colors duration-300 ${
-      theme === "dark"
-        ? "bg-blue-700 text-blue-300"
-        : "bg-blue-50 text-blue-600"
-    }`}
-  >
-    <FaUserFriends className="w-4 h-4 sm:w-5 sm:h-5" />
-  </div>
+            {/* MENTOR */}
+            <div
+              className={`p-3 sm:p-4 rounded-xl shadow-sm border flex items-center gap-2 sm:gap-3 
+              animate-[fadeUp_1s_ease] transition-colors duration-300 border border-blue-500/50 ${
+                theme === "dark"
+                  ? "bg-gray-800 border-gray-700"
+                  : "bg-white border-blue-100"
+              }`}
+            >
+              <div
+                className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-colors duration-300 border border-blue-500/50 ${
+                  theme === "dark"
+                    ? "bg-blue-700 text-blue-300"
+                    : "bg-blue-50 text-blue-600"
+                }`}
+              >
+                <FaUserFriends className="w-4 h-4 sm:w-5 sm:h-5" />
+              </div>
 
-  <p
-    className={`text-xs sm:text-sm font-medium ${
-      theme === "dark" ? "text-gray-200" : "text-gray-800"
-    }`}
-  >
-    Connect with Mentor
-  </p>
-</div>
+              <p
+                className={`text-xs sm:text-sm font-medium ${
+                  theme === "dark" ? "text-gray-200" : "text-gray-800"
+                }`}
+              >
+                Connect with Mentor
+              </p>
+            </div>
 
           </div>
         </div>
@@ -187,7 +184,7 @@ export default function Overview() {
         {/* SECOND ROW: PROGRESS + COURSES */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* PROGRESS CIRCLE */}
-          <div className={`p-4 rounded-xl shadow-sm border flex flex-col items-center animate-[fadeUp_1.1s_ease] transition-colors duration-300 ${
+          <div className={`p-4 rounded-xl shadow-sm border flex flex-col items-center animate-[fadeUp_1.1s_ease] transition-colors duration-300 border border-blue-500/50 ${
             theme === "dark" 
               ? "bg-gray-800 border-gray-700" 
               : "bg-white border-blue-100"
@@ -212,7 +209,7 @@ export default function Overview() {
           </div>
 
           {/* COURSES */}
-          <div className={`p-4 rounded-xl shadow-sm border animate-[fadeUp_1.15s_ease] transition-colors duration-300 ${
+          <div className={`p-4 rounded-xl shadow-sm border animate-[fadeUp_1.15s_ease] transition-colors duration-300 border border-blue-500/50 ${
             theme === "dark" 
               ? "bg-gray-800 border-gray-700" 
               : "bg-white border-blue-100"
@@ -225,7 +222,7 @@ export default function Overview() {
             <ul className="space-y-3">
               {courses.map((c) => (
                 <li key={c} className="flex items-center gap-3 text-sm">
-                  <div className={`w-6 h-6 rounded-full flex items-center justify-center transition-colors duration-300 ${
+                  <div className={`w-6 h-6 rounded-full flex items-center justify-center transition-colors duration-300 border border-blue-500/50 ${
                     theme === "dark" 
                       ? "bg-gray-700 text-blue-400" 
                       : "bg-blue-50 text-blue-600"
@@ -239,12 +236,15 @@ export default function Overview() {
               ))}
             </ul>
           </div>
+
+          {/* EMPTY COLUMN - Removed Study Stats */}
+          <div></div>
         </div>
 
         {/* THIRD ROW: BAR CHART + BUTTON GRID */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* BAR CHART */}
-          <div className={`p-4 rounded-xl shadow-sm border animate-[fadeUp_1.2s_ease] transition-colors duration-300 ${
+          <div className={`p-4 rounded-xl shadow-sm border animate-[fadeUp_1.2s_ease] transition-colors duration-300 border border-blue-500/50 ${
             theme === "dark" 
               ? "bg-gray-800 border-gray-700" 
               : "bg-white border-blue-100"
@@ -255,7 +255,7 @@ export default function Overview() {
               }`}>
                 Time Spent
               </p>
-              <select className={`text-xs px-2 py-1 rounded transition-colors duration-300 ${
+              <select className={`text-xs px-2 py-1 rounded transition-colors duration-300 border border-blue-500/50 ${
                 theme === "dark" 
                   ? "bg-gray-700 text-gray-200 border-gray-600" 
                   : "bg-blue-50 text-gray-800 border-blue-200"
@@ -296,8 +296,8 @@ export default function Overview() {
             </div>
           </div>
 
-          {/* BUTTON GRID */}
-          <div className={`p-4 rounded-xl shadow-sm border grid grid-cols-1 gap-2 text-sm animate-[fadeUp_1.25s_ease] transition-colors duration-300 ${
+          {/* BUTTON GRID - Removed Notification Settings */}
+          <div className={`p-4 rounded-xl shadow-sm border grid grid-cols-1 gap-2 text-sm animate-[fadeUp_1.25s_ease] transition-colors duration-300 border border-blue-500/50 ${
             theme === "dark" 
               ? "bg-gray-800 border-gray-700" 
               : "bg-white border-blue-100"
@@ -310,7 +310,7 @@ export default function Overview() {
             ].map((btn, i) => (
               <button
                 key={i}
-                className={`flex items-center gap-2 font-medium py-2 px-3 rounded-lg transition-colors duration-300 ${
+                className={`flex items-center gap-2 font-medium py-2 px-3 rounded-lg transition-colors duration-300 border border-blue-500/50 ${
                   theme === "dark" 
                     ? "text-blue-400 hover:bg-gray-700" 
                     : "text-blue-600 hover:bg-blue-50"
@@ -322,9 +322,9 @@ export default function Overview() {
           </div>
         </div>
 
-        {/* LAST ROW: LATEST SCHEDULE */}
+        {/* LAST ROW: LATEST SCHEDULE ONLY */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-[fadeUp_1.3s_ease]">
-          <div className={`h-16 rounded-xl shadow-sm border flex items-center justify-between px-4 animate-[fadeUp_1.35s_ease] transition-colors duration-300 ${
+          <div className={`h-16 rounded-xl shadow-sm border flex items-center justify-between px-4 animate-[fadeUp_1.35s_ease] transition-colors duration-300 border border-blue-500/50 ${
             theme === "dark" 
               ? "bg-gray-800 border-gray-700" 
               : "bg-white border-blue-100"
@@ -334,7 +334,7 @@ export default function Overview() {
             }`}>
               Latest Schedule
             </p>
-            <button className={`text-xs px-4 py-1.5 rounded-lg hover:bg-blue-700 transition-colors duration-300 ${
+            <button className={`text-xs px-4 py-1.5 rounded-lg hover:bg-blue-700 transition-colors duration-300 border border-blue-500/50 ${
               theme === "dark" 
                 ? "bg-blue-700 text-white hover:bg-blue-600" 
                 : "bg-blue-600 text-white hover:bg-blue-700"

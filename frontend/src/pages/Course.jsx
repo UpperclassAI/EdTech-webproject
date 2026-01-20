@@ -320,57 +320,111 @@ export default function Course() {
         </motion.div>
       </motion.section>
 
-      {/* LEARNING PATHS */}
-      <section className={`relative py-32 transition-colors ${theme === "dark" ? "bg-slate-900 text-gray-200" : "bg-gradient-to-br from-gray-900 to-blue-900 text-white"}`}>
-        <div className="absolute inset-0 bg-[url('/assets/ghj.png')] bg-cover bg-center opacity-10" />
-        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="relative z-10 max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">AI-Powered Learning Paths</h2>
-            <p className={`${theme === "dark" ? "text-gray-300" : "text-blue-200"} max-w-2xl mx-auto`}>
-              Follow intelligent roadmaps curated by AI to become job-ready in high-demand tech roles
-            </p>
-          </div>
+{/* LEARNING PATHS */}
+<section
+  className={`relative py-32  transition-colors ${
+    theme === "dark"
+      ? "bg-slate-900 text-gray-200"
+      : "bg-gradient-to-br from-gray-900 to-blue-900 text-white"
+  }`}
+>
+  {/* Background image */}
+  <div className="absolute inset-0 bg-[url('/assets/ghj.png')] bg-cover bg-center opacity-10" />
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {learningPaths.map((path) => {
-              const Icon = path.icon;
-              return (
-                <motion.div
-                  key={path.id}
-                  variants={scaleUp}
-                  className={`p-8 rounded-3xl transition-colors ${theme === "dark" ? "bg-slate-800 hover:bg-slate-700" : "bg-white/10 hover:bg-white/15"} backdrop-blur-xl`}
-                >
-                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${path.color} flex items-center justify-center mb-6`}>
-                    <Icon className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className={`${theme === "dark" ? "text-gray-100" : "text-white"} text-2xl font-bold mb-3`}>{path.title}</h3>
-                  <p className={`${theme === "dark" ? "text-gray-300" : "text-blue-200"} mb-6`}>{path.description}</p>
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <Clock className="w-5 h-5 text-blue-300" />
-                      <span>{path.duration}</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <BookOpen className="w-5 h-5 text-blue-300" />
-                      <span>{path.courses}</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <TrendingUp className="w-5 h-5 text-blue-300" />
-                      <span>{path.averageSalary}/year</span>
-                    </div>
-                  </div>
-                  <button 
-                    className={`w-full mt-8 py-3 rounded-xl font-semibold transition ${theme === "dark" ? "bg-blue-600 text-white hover:bg-blue-700" : "bg-white text-blue-900 hover:bg-blue-50"}`}
-                    aria-label={`Explore ${path.title} learning path`}
-                  >
-                    Explore Path
-                  </button>
-                </motion.div>
-              );
-            })}
-          </div>
-        </motion.div>
-      </section>
+  {/* Content wrapper */}
+  <motion.div
+    variants={fadeUp}
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true }}
+    className="relative z-10 max-w-7xl mx-auto px-6"
+  >
+    {/* Section header */}
+    <div className="text-center mb-16">
+      <h2 className="text-4xl font-bold mb-4">AI-Powered Learning Paths</h2>
+      <p
+        className={`max-w-2xl mx-auto ${
+          theme === "dark" ? "text-gray-300" : "text-blue-200"
+        }`}
+      >
+        Follow intelligent roadmaps curated by AI to become job-ready in
+        high-demand tech roles
+      </p>
+    </div>
+
+    {/* Learning paths grid */}
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {learningPaths.map((path) => {
+        const Icon = path.icon;
+        return (
+          <motion.div
+            key={path.id}
+            variants={scaleUp}
+            className={`flex flex-col justify-between p-8 rounded-3xl transition-colors backdrop-blur-xl ${
+              theme === "dark"
+                ? "bg-slate-800 hover:bg-slate-700"
+                : "bg-white/10 hover:bg-white/15"
+            }`}
+          >
+            {/* Icon */}
+            <div
+              className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${path.color} flex items-center justify-center mb-6`}
+            >
+              <Icon className="w-8 h-8 text-white" />
+            </div>
+
+            {/* Title & description */}
+            <div>
+              <h3
+                className={`text-2xl font-bold mb-3 ${
+                  theme === "dark" ? "text-gray-100" : "text-white"
+                }`}
+              >
+                {path.title}
+              </h3>
+              <p
+                className={`mb-6 ${
+                  theme === "dark" ? "text-gray-300" : "text-blue-200"
+                }`}
+              >
+                {path.description}
+              </p>
+
+              {/* Details */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <Clock className="w-5 h-5 text-blue-300" />
+                  <span>{path.duration}</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <BookOpen className="w-5 h-5 text-blue-300" />
+                  <span>{path.courses}</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <TrendingUp className="w-5 h-5 text-blue-300" />
+                  <span>{path.averageSalary}/year</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Explore button */}
+            <Link
+              to={`/career-path/${path.id}`}
+              className={`mt-6 w-full py-3 px-6 rounded-xl font-semibold transition ${
+                theme === "dark"
+                  ? "bg-blue-600 text-white hover:bg-blue-700"
+                  : "bg-white text-blue-900 hover:bg-blue-50"
+              }`}
+              aria-label={`Explore ${path.title} learning path`}
+            >
+              Explore Path
+            </Link>
+          </motion.div>
+        );
+      })}
+    </div>
+  </motion.div>
+</section>
 
       {/* WHY CHOOSE */}
       <motion.section variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="max-w-6xl mx-auto px-6 py-24">

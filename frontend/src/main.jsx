@@ -77,14 +77,108 @@
 
 
 
+// import React from "react";
+// import ReactDOM from "react-dom/client";
+// import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+// import App from "./App";
+
+// /* 🌙 THEME CONTEXT */
+// import { ThemeProvider } from "./context/ThemeContext";
+
+// /* AUTH PAGES */
+// import AuthPage from "./auth/AuthPage.jsx";
+// import Otp from "./auth/OTP.jsx";
+// import CreatePassword from "./auth/createpassword.jsx";
+// import Success from "./auth/success.jsx";
+// import ResetPassword from "./auth/ResetPassword.jsx";
+
+// /* DASHBOARD */
+// import Dashboard from "./dashboard/Dashboard.jsx";
+// import Overview from "./dashboard/overview.jsx";
+// import Courses from "./dashboard/courses.jsx";
+// import Achievements from "./dashboard/Achievements.jsx";
+// import Avatar from "./dashboard/avatar.jsx";
+// import Settings from "./dashboard/settings.jsx";
+
+// /* GENERAL PAGES */
+// import Pricing from "./pages/Pricing.jsx";
+// import About from "./pages/About.jsx";
+// import Course from "./pages/Course.jsx";
+// import Contact from "./pages/contact.jsx";
+
+
+// // sub
+// import CareerPath from "./CareerPath.jsx";
+// // import { courses } from "./dashboard/data.jsx";
+
+// import "./index.css";
+
+// /* ============================
+//    🌙 APPLY THEME BEFORE REACT
+//    (prevents white flash)
+// =============================== */
+// const savedTheme = localStorage.getItem("theme");
+// if (savedTheme === "dark") {
+//   document.documentElement.classList.add("dark");
+// }
+
+// ReactDOM.createRoot(document.getElementById("root")).render(
+//   <React.StrictMode>
+//     <ThemeProvider>
+//       <BrowserRouter>
+//         <Routes>
+
+//           {/* MAIN */}
+//           <Route path="/" element={<App />} />
+
+//           {/* AUTH FLOW */}
+//           <Route path="/auth" element={<AuthPage />} />
+//           <Route path="/auth/OTP" element={<Otp />} />
+//           <Route path="/auth/CreatePassword" element={<CreatePassword />} />
+//           <Route path="/auth/success" element={<Success />} />
+//           <Route path="/auth/resetpassword" element={<ResetPassword />} />
+
+//           {/* DASHBOARD */}
+//           <Route path="/dashboard" element={<Dashboard />}>
+//             <Route index element={<Overview />} />
+//             <Route path="courses" element={<Courses />} />
+//             <Route path="achievements" element={<Achievements />} />
+//             <Route path="avatar" element={<Avatar />} />
+//               <Route path="settings" element={<Settings />} />
+//           </Route>
+
+//           {/* GENERAL PAGES */}
+//           <Route path="/pricing" element={<Pricing />} />
+//           <Route path="/about" element={<About />} />
+//           <Route path="/course" element={<Course />} />
+//           <Route path="/contact" element={<Contact />} />
+//              <Route path="/career-path/:id" element={<CareerPath />} />
+         
+//         </Routes>
+//       </BrowserRouter>
+//     </ThemeProvider>
+//   </React.StrictMode>
+// );
+
+
+
+
+
+
+
+
+
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import App from "./App";
 
-/* 🌙 THEME CONTEXT */
+/* PROVIDERS */
 import { ThemeProvider } from "./context/ThemeContext";
+import { SettingsProvider } from "./context/SettingsContext";
 
 /* AUTH PAGES */
 import AuthPage from "./auth/AuthPage.jsx";
@@ -106,6 +200,7 @@ import Pricing from "./pages/Pricing.jsx";
 import About from "./pages/About.jsx";
 import Course from "./pages/Course.jsx";
 import Contact from "./pages/contact.jsx";
+import CareerPath from "./CareerPath.jsx";
 
 import "./index.css";
 
@@ -120,37 +215,40 @@ if (savedTheme === "dark") {
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ThemeProvider>
-      <BrowserRouter>
-        <Routes>
+    <SettingsProvider>
+      <ThemeProvider>
+        <BrowserRouter>
+          <Routes>
 
-          {/* MAIN */}
-          <Route path="/" element={<App />} />
+            {/* MAIN */}
+            <Route path="/" element={<App />} />
 
-          {/* AUTH FLOW */}
-          <Route path="/auth" element={<AuthPage />} />
-          <Route path="/auth/OTP" element={<Otp />} />
-          <Route path="/auth/CreatePassword" element={<CreatePassword />} />
-          <Route path="/auth/success" element={<Success />} />
-          <Route path="/auth/resetpassword" element={<ResetPassword />} />
+            {/* AUTH FLOW */}
+            <Route path="/auth" element={<AuthPage />} />
+            <Route path="/auth/OTP" element={<Otp />} />
+            <Route path="/auth/CreatePassword" element={<CreatePassword />} />
+            <Route path="/auth/success" element={<Success />} />
+            <Route path="/auth/resetpassword" element={<ResetPassword />} />
 
-          {/* DASHBOARD */}
-          <Route path="/dashboard" element={<Dashboard />}>
-            <Route index element={<Overview />} />
-            <Route path="courses" element={<Courses />} />
-            <Route path="achievements" element={<Achievements />} />
-            <Route path="avatar" element={<Avatar />} />
+            {/* DASHBOARD */}
+            <Route path="/dashboard" element={<Dashboard />}>
+              <Route index element={<Overview />} />
+              <Route path="courses" element={<Courses />} />
+              <Route path="achievements" element={<Achievements />} />
+              <Route path="avatar" element={<Avatar />} />
               <Route path="settings" element={<Settings />} />
-          </Route>
+            </Route>
 
-          {/* GENERAL PAGES */}
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/course" element={<Course />} />
-          <Route path="/contact" element={<Contact />} />
-
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
+            {/* GENERAL PAGES */}
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/course" element={<Course />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/career-path/:id" element={<CareerPath />} />
+            
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
+    </SettingsProvider>
   </React.StrictMode>
 );
