@@ -10,7 +10,7 @@ import WhyChoose from "./WhyChoose";
 import StatsSection from "./StatsSection";
 import OurCourses from "./OurCourses";
 import OurTeam from "./OurTeam";
-import TeamCarousel from "./TeamCarousel";
+import TestimonialSection from "./testimonial";
 import LogoMarquee from "./mac";
 import FAQSection from "./faq";
 import { FaWhatsapp } from "react-icons/fa";
@@ -68,11 +68,11 @@ export default function Home() {
           transition={{ delay: 0.8, duration: 0.9 }}
         >
           Empowering the <br />
-          <span>Next Generation <br /> With AI</span>
+         Next Generation <br /> <span className="text-blue-500"> With AI</span>
         </motion.h1>
 
         <motion.p
-          className={`mt-4 w-full md:w-3/4 lg:w-2/3 mx-auto lg:mx-0 text-base sm:text-xl lg:text-2xl ${
+          className={`mt-4 w-full md:w-3/4 lg:w-2/3 mx-auto lg:mx-0 text-base sm:text-sm lg:text-lg ${
             theme === "dark" ? "text-gray-300" : "text-gray-200"
           }`}
           initial={{ opacity: 0 }}
@@ -147,7 +147,7 @@ export default function Home() {
       </motion.div>
 
       <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1 }}>
-        <TeamCarousel />
+        <TestimonialSection />
       </motion.div>
      
 

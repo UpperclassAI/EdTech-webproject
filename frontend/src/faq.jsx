@@ -108,7 +108,7 @@ export default function FAQSection() {
               >
                 <button
                   onClick={() => toggleFAQ(index)}
-                  className={`w-full flex justify-between items-center px-6 py-5 font-medium text-left transition ${
+                  className={`w-full flex  border-l-4 border-blue-500 justify-between items-center px-6 py-5 font-medium text-left transition ${
                     theme === "dark" ? "hover:bg-slate-700 text-gray-200" : "hover:bg-blue-50 text-gray-900"
                   }`}
                 >
@@ -149,8 +149,15 @@ export default function FAQSection() {
           </motion.div>
         </div>
 
+
+
+
+
+
+
+
         {/* Newsletter */}
-        <div className={`mt-24 text-center py-16 rounded-2xl shadow-md transition-colors ${theme === "dark" ? "bg-slate-800 text-gray-200" : "bg-white text-gray-900"}`}>
+        <div className={`mt-24 text-center py-16 rounded-2xl  border-b-4 border-blue-500 shadow-md transition-colors ${theme === "dark" ? "bg-slate-800 text-gray-200" : "bg-white text-gray-900"}`}>
           <h2 className="text-3xl font-bold mb-4">Stay Updated</h2>
           <p className={`mb-6 ${theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>
             Subscribe to get the latest updates directly in your inbox.

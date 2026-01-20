@@ -67,7 +67,7 @@ export default function TeamCarousel() {
           onMouseLeave={() => setPaused(false)}
         >
           <motion.div
-            className="flex gap-24 items-center will-change-transform"
+            className="flex gap-24 items-center will-change-transform "
             animate={{
               x: `-${index * 360}px`,
               opacity: isInView ? 1 : 0
@@ -82,7 +82,7 @@ export default function TeamCarousel() {
             {teamMembers.map((m) => (
               <motion.div
                 key={m.id}
-                className="flex flex-col items-center text-center"
+                className="flex flex-col items-center text-center "
                 style={{ marginTop: m.offset }}
                 whileHover={{ scale: 1.07 }}
                 transition={{ type: "spring", stiffness: 200, damping: 15 }}
@@ -90,7 +90,7 @@ export default function TeamCarousel() {
                 <img
                   src={m.avatar}
                   alt={m.name}
-                  className="w-64 h-64 md:w-72 md:h-72 rounded-full object-cover shadow-2xl"
+                  className="w-64 h-64 md:w-72 md:h-72 rounded-full object-cover shadow-2xl  border-b-4 border-blue-500"
                 />
                 <h3 className={`text-xl font-semibold mt-6 ${textColor}`}>
                   {m.name}

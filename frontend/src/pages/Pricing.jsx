@@ -129,7 +129,7 @@ export default function Pricing() {
       <section className="relative py-40 bg-blue-900 text-white">
         <div className="absolute inset-0 bg-[url('/assets/abt.png')] bg-cover bg-center opacity-20" />
         <motion.div variants={fadeUp} initial="hidden" animate="visible" className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-          <h1 className="text-5xl md:text-6xl font-extrabold leading-tight">Simple, Transparent Pricing</h1>
+          <h1 className="text-5xl md:text-6xl font-extrabold leading-tight">Simple, Transparent  <span className="text-blue-500">Pricing</span> </h1>
           <p className="mt-6 text-xl text-blue-100 max-w-3xl mx-auto">
             Choose the perfect plan for your learning journey. Everything you need to build in-demand tech skills.
           </p>

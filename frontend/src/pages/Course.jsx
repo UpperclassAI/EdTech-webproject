@@ -201,7 +201,7 @@ export default function Course() {
         <div className="absolute inset-0 bg-[url('/assets/course.png')] bg-cover bg-center opacity-20" />
         <motion.div variants={fadeUp} initial="hidden" animate="visible" className="relative z-10 max-w-6xl mx-auto px-6 text-center">
           <h1 className="text-5xl md:text-6xl font-extrabold leading-tight">
-            Learn With Intelligent AI Tutors
+            Learn With Intelligent  <span className="text-blue-400">AI Tutors</span> 
           </h1>
           <p className={`mt-6 text-xl max-w-3xl mx-auto ${theme === "dark" ? "text-gray-300" : "text-blue-100"}`}>
             No videos, no lectures. Interactive AI tutors that adapt to your learning style and pace.
