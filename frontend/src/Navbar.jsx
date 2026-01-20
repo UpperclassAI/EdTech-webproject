@@ -97,7 +97,7 @@ export default function Navbar() {
             to="/auth"
             className="hidden sm:block px-6 sm:px-8 py-2.5 sm:py-3 bg-[var(--card)] text-[var(--text)]
             font-semibold rounded-xl shadow text-sm sm:text-base whitespace-nowrap
-            hover:bg-blue-500 hover:text-white
+            hover:bg-blue-600 hover:text-white
             transition-all duration-300 hover:scale-105"
           >
             Login

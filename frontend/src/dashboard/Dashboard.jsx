@@ -448,12 +448,12 @@ export default function Dashboard() {
           {/* Left: Mobile Menu + Welcome */}
           <div className="flex items-center gap-4">
             {/* Mobile Menu Button */}
-            <button
+            {/* <button
               onClick={() => setShowMobileMenu(true)}
               className={`md:hidden p-2 rounded-lg ${theme === "dark" ? "hover:bg-gray-800" : "hover:bg-gray-100"}`}
             >
               <FiMenu className="text-xl" />
-            </button>
+            </button> */}
 
             <div className={`flex-shrink-0 ${theme === "dark" ? "text-gray-100" : "text-gray-800"}`}>
               <h1 className="text-lg sm:text-xl font-semibold">

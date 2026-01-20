@@ -1,23 +1,37 @@
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   FiBook,
   FiAward,
   FiUser,
-  FiPower
+  FiPower,
+  FiSettings,
+  FiMoon,
+  FiSun
 } from "react-icons/fi";
 import { FaAddressCard, FaBars, FaTimes } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTheme } from "../context/ThemeContext"; // Adjust path as needed
+import { useTheme } from "../context/ThemeContext";
+import { useSettings } from "../context/SettingsContext"; // Add this
 
 export default function Sidebar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const { settings } = useSettings(); // Get settings
+  const navigate = useNavigate(); // For navigation
 
   // Prevent body scroll when drawer is open
   useEffect(() => {
     document.body.style.overflow = sidebarOpen ? "hidden" : "";
   }, [sidebarOpen]);
+
+  // Handle logout
+  const handleLogout = () => {
+    // Add any logout logic here (clear tokens, etc.)
+    console.log("Logging out...");
+    navigate("/auth");
+    setSidebarOpen(false);
+  };
 
   return (
     <>
@@ -37,14 +51,10 @@ export default function Sidebar() {
       >
         {/* BRANDING */}
         <div className="flex items-center gap-3 mb-10">
-          <div className={`
-            w-10 h-10 rounded-full flex items-center justify-center font-bold
-            ${theme === "dark" 
-              ? "bg-blue-700 text-white" 
-              : "bg-blue-600 text-white"
-            }
-          `}>
-            U
+          <div className={`w-10 h-10 rounded-full bg-gradient-to-r ${
+            settings?.profileColor || "from-blue-500 to-blue-700"
+          } flex items-center justify-center font-bold text-white`}>
+            {settings?.profileInitials || "U"}
           </div>
           <div>
             <p className="text-sm font-semibold">Upperclass AI</p>
@@ -57,44 +67,30 @@ export default function Sidebar() {
         </div>
 
         {/* NAV LINKS */}
-        <nav className="flex flex-col gap-4">
+        <nav className="flex flex-col gap-2">
           <NavItem to="/dashboard" label="Overview" icon={<FaAddressCard />} theme={theme} />
           <NavItem to="/dashboard/courses" label="Courses" icon={<FiBook />} theme={theme} />
           <NavItem to="/dashboard/achievements" label="Achievements" icon={<FiAward />} theme={theme} />
           <NavItem to="/dashboard/avatar" label="Avatar" icon={<FiUser />} theme={theme} />
+          <NavItem to="/dashboard/settings" label="Settings" icon={<FiSettings />} theme={theme} />
         </nav>
 
         {/* THEME TOGGLE & LOGOUT */}
         <div className="mt-auto pt-10 space-y-4">
           {/* THEME TOGGLE */}
+        
+
+          {/* LOGOUT - Link to /auth */}
           <button
-            onClick={toggleTheme}
+            onClick={handleLogout}
             className={`
-              w-full flex items-center gap-3 px-4 py-2 rounded-lg transition-colors
+              w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors
               ${theme === "dark" 
-                ? "hover:bg-gray-800 text-blue-400" 
-                : "hover:bg-blue-50 text-blue-600"
+                ? "bg-red-900/30 hover:bg-red-800/50 text-red-300" 
+                : "bg-red-100 hover:bg-red-200 text-red-600"
               }
             `}
           >
-            <div className="w-5 h-5 flex items-center justify-center">
-              {theme === "dark" ? (
-                <FiBook className="text-blue-400" />
-              ) : (
-                <FiAward className="text-blue-600" />
-              )}
-            </div>
-            {theme === "dark" ? "Light Mode" : "Dark Mode"}
-          </button>
-
-          {/* LOGOUT */}
-          <button className={`
-            w-full flex items-center gap-3 px-4 py-2 rounded-lg transition-colors
-            ${theme === "dark" 
-              ? "hover:bg-gray-800 text-red-400" 
-              : "hover:bg-blue-50 text-red-600"
-            }
-          `}>
             <FiPower className="w-5 h-5" />
             Logout
           </button>
@@ -134,13 +130,13 @@ export default function Sidebar() {
               onClick={() => setSidebarOpen(false)}
             />
 
-            {/* SLIDE UP DRAWER */}
+            {/* LEFT SIDE DRAWER */}
             <motion.div
               className={`
-                fixed bottom-0 left-0 w-full 
-                h-[85vh] sm:h-[80vh]
+                fixed top-0 left-0 w-full max-w-xs
+                h-full
                 text-white z-50 
-                p-6 rounded-t-2xl shadow-2xl 
+                p-6 shadow-2xl 
                 overflow-y-auto backdrop-blur-md
                 transition-colors duration-300
                 ${theme === "dark" 
@@ -148,54 +144,67 @@ export default function Sidebar() {
                   : "bg-blue-900/95"
                 }
               `}
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "100%" }}
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
               transition={{ type: 'spring', stiffness: 260, damping: 30 }}
             >
               {/* HEADER */}
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-lg font-semibold">Menu</h2>
-                <div className="flex items-center gap-4">
-                  {/* THEME TOGGLE IN MOBILE */}
-                  <button
-                    onClick={toggleTheme}
-                    className={`p-2 rounded-full ${
-                      theme === "dark" 
-                        ? "bg-gray-800 text-yellow-400" 
-                        : "bg-blue-800 text-yellow-300"
-                    }`}
-                  >
-                    {theme === "dark" ? "☀️" : "🌙"}
-                  </button>
-                  <button
-                    onClick={() => setSidebarOpen(false)}
-                    className="p-3 active:scale-90 transition"
-                  >
-                    <FaTimes size={22} />
-                  </button>
+              <div className="flex justify-between items-center mb-8">
+                <div className="flex items-center gap-3">
+                  <div className={`w-10 h-10 rounded-full bg-gradient-to-r ${
+                    settings?.profileColor || "from-blue-500 to-blue-700"
+                  } flex items-center justify-center font-bold text-white`}>
+                    {settings?.profileInitials || "U"}
+                  </div>
+                  <div>
+                    <h2 className="text-lg font-semibold">Menu</h2>
+                    <p className="text-sm opacity-75">{settings?.displayName || "User"}</p>
+                  </div>
                 </div>
+                <button
+                  onClick={() => setSidebarOpen(false)}
+                  className="p-3 hover:bg-white/10 rounded-full transition active:scale-90"
+                >
+                  <FaTimes size={22} />
+                </button>
               </div>
 
               {/* NAV */}
-              <div className="flex flex-col gap-4">
-                <MobileNavItem to="/dashboard/" label="Overview" icon={<FaAddressCard />} theme={theme} />
-                <MobileNavItem to="/dashboard/courses" label="Courses" icon={<FiBook />} theme={theme} />
-                <MobileNavItem to="/dashboard/achievements" label="Achievements" icon={<FiAward />} theme={theme} />
-                <MobileNavItem to="/dashboard/avatar" label="Avatar" icon={<FiUser />} theme={theme} />
+              <div className="flex flex-col gap-2">
+                <MobileNavItem to="/dashboard/" label="Overview" icon={<FaAddressCard />} theme={theme} setSidebarOpen={setSidebarOpen} />
+                <MobileNavItem to="/dashboard/courses" label="Courses" icon={<FiBook />} theme={theme} setSidebarOpen={setSidebarOpen} />
+                <MobileNavItem to="/dashboard/achievements" label="Achievements" icon={<FiAward />} theme={theme} setSidebarOpen={setSidebarOpen} />
+                <MobileNavItem to="/dashboard/avatar" label="Avatar" icon={<FiUser />} theme={theme} setSidebarOpen={setSidebarOpen} />
+               
               </div>
 
-              {/* LOGOUT */}
-              <button className={`
-                mt-10 flex items-center gap-3 px-4 py-3 rounded-lg transition-colors
-                ${theme === "dark" 
-                  ? "bg-gray-800 hover:bg-gray-700" 
-                  : "bg-blue-800 hover:bg-blue-700"
-                }
-              `}>
+              {/* THEME TOGGLE */}
+             
+
+              {/* LOGOUT - Link to /auth */}
+              <button
+                onClick={handleLogout}
+                className={`
+                  mt-6 flex items-center gap-3 px-4 py-3 rounded-lg transition-colors
+                  ${theme === "dark" 
+                    ? "bg-red-900/30 hover:bg-red-800/50 text-red-300" 
+                    : "bg-red-600 hover:bg-red-700 text-white"
+                  }
+                `}
+              >
                 <FiPower size={20} />
                 Logout
               </button>
+
+              {/* Quick Stats */}
+              <div className="mt-8 p-4 rounded-lg bg-white/10">
+                <h3 className="font-semibold mb-2 text-sm">Quick Stats</h3>
+                <div className="text-sm opacity-75">
+                  <p>Daily Goal: {settings?.studyGoals?.daily || 2}h</p>
+                  <p>Weekly Goal: {settings?.studyGoals?.weekly || 14}h</p>
+                </div>
+              </div>
             </motion.div>
           </>
         )}
@@ -211,7 +220,7 @@ function NavItem({ to, icon, label, theme }) {
       to={to}
       end
       className={({ isActive }) => {
-        const baseClasses = "px-4 py-2 rounded-lg flex items-center gap-3 transition-all duration-300 text-sm";
+        const baseClasses = "px-4 py-3 rounded-lg flex items-center gap-3 transition-all duration-300 text-sm";
         
         if (isActive) {
           return `${baseClasses} ${
@@ -224,7 +233,7 @@ function NavItem({ to, icon, label, theme }) {
         return `${baseClasses} ${
           theme === "dark" 
             ? "hover:bg-gray-800 hover:text-white text-gray-300" 
-            : "hover:bg-blue-500 hover:text-white text-gray-700"
+            : "hover:bg-blue-100 hover:text-blue-600 text-gray-700"
         }`;
       }}
     >
@@ -239,7 +248,7 @@ function NavItem({ to, icon, label, theme }) {
 }
 
 /* MOBILE NAV ITEM */
-function MobileNavItem({ to, label, icon, theme }) {
+function MobileNavItem({ to, label, icon, theme, setSidebarOpen }) {
   return (
     <NavLink
       to={to}
@@ -261,12 +270,7 @@ function MobileNavItem({ to, label, icon, theme }) {
             : "bg-blue-800/40 text-white border border-white/20"
         }`;
       }}
-      onClick={() => {
-        // Close drawer on mobile when a link is clicked
-        if (window.innerWidth < 768) {
-          document.body.style.overflow = "";
-        }
-      }}
+      onClick={() => setSidebarOpen(false)}
     >
       <div className="text-xl">{icon}</div>
       {label}

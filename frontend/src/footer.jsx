@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link"; // Import HashLink
 import { useTheme } from "./context/ThemeContext";
 import { Twitter, Facebook, Instagram, Linkedin } from "lucide-react";
 
@@ -22,7 +23,7 @@ export default function Footer() {
             <li><Link to="/about" className="hover:underline">About Us</Link></li>
             <li><Link to="/course" className="hover:underline">Courses</Link></li>
             <li><Link to="/" className="hover:underline">Blog</Link></li>
-            <li><Link to="/" className="hover:underline">Press</Link></li>
+            <li><Link to="/pricing" className="hover:underline">Pricing</Link></li>
           </ul>
         </div>
 
@@ -42,13 +43,15 @@ export default function Footer() {
           <ul className="space-y-2">
             <li><Link to="/help" className="hover:underline">Help Center</Link></li>
             <li><Link to="/contact" className="hover:underline">Contact Us</Link></li>
-  <li
-  onClick={() => faqRef.current?.scrollIntoView({ behavior: "smooth" })}
-  className="cursor-pointer hover:underline"
->
-  FAQs
-</li>
-
+            <li>
+              <HashLink 
+                to="/#faq" 
+                smooth
+                className="hover:underline hover:text-blue-300 transition-colors"
+              >
+                FAQs
+              </HashLink>
+            </li>
           </ul>
         </div>
 

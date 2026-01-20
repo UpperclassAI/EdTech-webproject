@@ -18,8 +18,9 @@ import { useTheme } from "./context/ThemeContext";
 import FloatingSocialGlass from "./FloatingSocialGlass";
 
 export default function Home() {
-  const whyChooseRef = useRef(null); // Ref for scrolling
-  const { theme } = useTheme(); // Get current theme
+  const whyChooseRef = useRef(null);
+  const faqRef = useRef(null); // Add FAQ ref
+  const { theme } = useTheme();
 
   return (
     <div className="relative w-full h-screen overflow-x-hidden">
@@ -109,7 +110,9 @@ export default function Home() {
           </button>
         </motion.div>
       </div>
- <FloatingSocialGlass />
+      
+      <FloatingSocialGlass />
+      
       {/* WHATSAPP FLOATING BUTTON */}
       <motion.a
         href=" https://wa.link/ujeev2"
@@ -125,10 +128,9 @@ export default function Home() {
       </motion.a>
 
       {/* PAGE SECTIONS WITH FADE-IN */}
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1 }}>
+      <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1 }}>
         <LogoMarquee/>
       </motion.div>
-
 
       <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1 }}>
         <StatsSection />
@@ -150,12 +152,12 @@ export default function Home() {
         <TestimonialSection />
       </motion.div>
      
-
-      <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1 }}>
+      <motion.div ref={faqRef} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1 }}>
         <FAQSection />
       </motion.div>
 
-      <Footer />
+      {/* Pass faqRef to Footer */}
+      <Footer faqRef={faqRef} />
     </div>
   );
 }

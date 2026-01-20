@@ -46,7 +46,7 @@ export default function Achievements() {
         {badges.map((b, i) => (
           <div
             key={i}
-            className={`${cardBg} rounded-xl shadow-sm p-4 flex flex-col items-center justify-center text-center h-50 hover:shadow-md transition`}
+            className={`${cardBg} rounded-xl  p-4 flex flex-col items-center justify-center  text-center h-50 hover:shadow-md transition  border border-blue-500`}
           >
             <div className="text-2xl mb-2 ">{b.split(" ")[0]}</div>
             <div className="text-sm font-medium">{b.split(" ").slice(1).join(" ")}</div>
