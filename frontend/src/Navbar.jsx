@@ -36,7 +36,7 @@ export default function Navbar() {
         {/* DESKTOP MENU (LG screens and above) */}
         <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2">
           <div
-            className="flex items-center gap-4 rounded-xl px-4 py-2 shadow-md
+            className="flex items-center gap-8 font-bold rounded-xl px-4 py-2 shadow-md
             bg-[var(--card)] border border-[var(--border)]"
           >
             {[

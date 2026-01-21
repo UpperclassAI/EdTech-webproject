@@ -8,6 +8,8 @@ import { Brain, Globe, Rocket, ArrowRight } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 import FloatingSocialGlass from "../FloatingSocialGlass";
 import { Link } from "react-router-dom";
+import ChatBot from "../CB";
+
 
 /* ---------------- ANIMATION VARIANTS ---------------- */
 const fadeUp = { 
@@ -188,6 +190,8 @@ export default function About() {
           </motion.div>
         </div>
       </MotionSection>
+
+      <ChatBot />
 
       {/* MISSION / VISION / VALUES - Enhanced with icons */}
       <MotionSection className="max-w-6xl mx-auto px-4 sm:px-6 md:px-9 py-20 md:py-24 grid grid-cols-1 sm:grid-cols-3 gap-8">
