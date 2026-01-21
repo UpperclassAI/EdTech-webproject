@@ -72,7 +72,7 @@ export default function Sidebar() {
           <NavItem to="/dashboard/courses" label="Courses" icon={<FiBook />} theme={theme} />
           <NavItem to="/dashboard/achievements" label="Achievements" icon={<FiAward />} theme={theme} />
           <NavItem to="/dashboard/avatar" label="Avatar" icon={<FiUser />} theme={theme} />
-          <NavItem to="/dashboard/settings" label="Settings" icon={<FiSettings />} theme={theme} />
+       
         </nav>
 
         {/* THEME TOGGLE & LOGOUT */}
