@@ -15,35 +15,34 @@ import { useTheme } from "./context/ThemeContext";
 
 const faqData = [
   {
-    question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.",
+    question: "What is Upperclass AI and how does it work?",
+    answer: "Upperclass AI is an innovative learning platform that combines artificial intelligence with human mentorship. Our AI system creates personalized learning paths based on your goals, skill level, and learning style, while our expert mentors provide guidance, feedback, and real-world insights."
   },
   {
-    question: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem.",
-    answer:
-      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+    question: "Do I need prior tech experience to get started?",
+    answer: "No prior experience is required! We offer courses for all levels, from complete beginners to advanced professionals. Our AI assesses your starting point and creates a customized learning path that matches your current skill level."
   },
   {
-    question: "At vero eos et accusamus et iusto odio dignissimos ducimus.",
-    answer:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium.",
+    question: "How are the AI tutors different from human mentors?",
+    answer: "AI tutors provide 24/7 instant support, personalized practice exercises, and adaptive learning recommendations. Human mentors offer deeper guidance, career advice, project feedback, and industry insights. Together, they create a comprehensive learning experience."
   },
   {
-    question: "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.",
-    answer:
-      "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.",
+    question: "What kind of projects will I work on?",
+    answer: "You'll build real-world projects that solve actual problems, from web applications and mobile apps to data analysis and AI models. Projects range from beginner-friendly websites to complex enterprise solutions, all designed to build a strong portfolio."
   },
   {
-    question: "Ut enim ad minima veniam, quis nostrum exercitationem ullam.",
-    answer:
-      "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.",
+    question: "How long does it take to complete a course?",
+    answer: "Most courses are self-paced and take 4-12 weeks to complete, depending on your schedule and prior experience. Our AI adapts to your learning speed, and you can access course materials anytime, anywhere."
   },
   {
-    question: "Quis autem vel eum iure reprehenderit qui in ea voluptate.",
-    answer:
-      "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+    question: "Are certificates recognized by employers?",
+    answer: "Yes! Our certificates are recognized by over 100+ partner companies and institutions. We focus on skill-based certification that demonstrates actual competency through project portfolios and practical assessments."
   },
+  {
+    question: "Can I switch or pause my subscription?",
+    answer: "Absolutely. You can switch plans, pause your subscription, or cancel at any time. All changes are immediate, and you retain access to completed coursework and project portfolios even after pausing."
+  },
+
 ];
 
 export default function FAQSection() {

@@ -8,20 +8,29 @@ export default function OurTeam() {
   return (
     <div className="w-full">
 
-      {/* Top-left Heading */}
-      <motion.div 
+
+
+
+            <motion.div 
         className="px-6 md:px-16 py-12"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }} // triggers when 30% visible
+        viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="text-5xl md:text-6xl font-bold text-gray-800 dark:text-gray-100 mb-6 leading-tight">
+        <h2 className={`text-5xl md:text-6xl font-bold mb-6 leading-tight ${
+          isDarkMode ? "text-gray-100" : "text-gray-900"
+        }`}>
           Lots of AI Avatars to
           <br />
-          <span className="text-blue-500">choose from</span>
+          <span className= "text-blue-500">
+            choose from
+          </span>
         </h2>
       </motion.div>
+
+
+      
 
       {/* Full-width Image */}
       <div className="w-full relative overflow-hidden">
@@ -40,7 +49,7 @@ export default function OurTeam() {
           <motion.div
             className="absolute inset-0 bg-black pointer-events-none"
             initial={false}
-            animate={{ opacity: isDarkMode ? 0.3 : 0 }}
+            animate={{ opacity: isDarkMode ? 0.6 : 0 }}
             transition={{ duration: 0.3 }}
           />
         </div>

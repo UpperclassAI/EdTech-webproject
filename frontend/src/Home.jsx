@@ -25,18 +25,34 @@ export default function Home() {
   return (
     <div className="relative w-full h-screen overflow-x-hidden">
       {/* BACKGROUND IMAGE – Fade In */}
-      <motion.div
-        className="absolute inset-0"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.4 }}
-      >
-        <img 
-          src="/assets/uhome.png"
-          alt="students"
-          className="w-full h-full object-cover"
-        />
-      </motion.div>
+<motion.div
+  className="absolute inset-0 -z-10 overflow-hidden"
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 1.4, ease: "easeOut" }}
+>
+  {/* Background Image */}
+  <img 
+    src="/assets/uhome.png"
+    alt="students learning"
+    className="w-full h-full object-cover object-center scale-105"
+    draggable={false}
+  />
+
+  {/* Dark / Light Overlay */}
+  <motion.div
+    className="absolute inset-0 pointer-events-none"
+    initial={false}
+    animate={{
+      background:
+        theme === "dark"
+          ? "linear-gradient(to bottom, rgba(0,0,0,0.65), rgba(0, 0, 0, 0.64))"
+          : "linear-gradient(to bottom, rgba(0, 0, 0, 0.07), rgba(0, 0, 0, 0.19))",
+    }}
+    transition={{ duration: 0.35, ease: "easeOut" }}
+  />
+</motion.div>
+
 
       {/* NAVBAR – Slide Down */}
       <motion.div
