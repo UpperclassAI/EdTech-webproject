@@ -101,13 +101,13 @@ export default function FAQSection() {
                 animate={isVisible ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: index * 0.1, duration: 0.6 }}
                 whileHover={{ y: -3, scale: 1.01 }}
-                className={`group rounded-2xl overflow-hidden shadow-lg transition-all duration-300 ${
+                className={`group rounded-2xl overflow-hidden shadow-lg transition-all  border-l-4 border-blue-500 duration-300 ${
                   theme === "dark" ? "bg-slate-800" : "bg-white"
                 }`}
               >
                 <button
                   onClick={() => toggleFAQ(index)}
-                  className={`w-full flex  border-l-4 border-blue-500 justify-between items-center px-6 py-5 font-medium text-left transition ${
+                  className={`w-full flex   justify-between items-center px-6 py-5 font-medium text-left transition ${
                     theme === "dark" ? "hover:bg-slate-700 text-gray-200" : "hover:bg-blue-50 text-gray-900"
                   }`}
                 >
