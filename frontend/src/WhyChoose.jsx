@@ -371,6 +371,102 @@ export default function WhyChoose() {
   animate={randomMove()}
 />
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+RIGHT ANIMATED PATTERN
+<div className="hidden md:block flex-1 relative h-[500px] overflow-hidden">
+
+  {[
+    // BIG squares
+    { size: 96, top: 30, right: 250 },
+    { size: 70, top: 150, right: 300 },
+    { size: 72, top: 70, left: 80 },
+    { size: 64, bottom: 5, left: 64 },
+    { size: 40, top: 300, right: 260 },
+
+    // MEDIUM squares
+    { size: 56, top: 32, right: 52 },
+    { size: 52, bottom: 44, left: 72 },
+    { size: 48, top: 6, right: 10 },
+    { size: 44, top: 72, right: 44 },
+    { size: 36, top: 32, right: 56 },
+
+    // SMALL squares
+    { size: 32, top: 5, right: 64 },
+    { size: 32, bottom: 10, left: 10 },
+    { size: 28, top: 96, right: 32 },
+    { size: 28, bottom: 20, left: 40 },
+    { size: 28, top: 24, right: 96 },
+    { size: 24, top: 0, right: 20 },
+    { size: 24, top: 380, right: 20 },
+    { size: 20, top: 10, right: 40 },
+    { size: 20, bottom: 32, left: 4 },
+    { size: 16, bottom: 120, left: 90 },
+    { size: 16, top: 64, right: 12 },
+  ].map((sq, i) => (
+    <motion.div
+      key={i}
+      className="absolute border-2 border-blue-500"
+      style={{
+        width: `${sq.size}px`,
+        height: `${sq.size}px`,
+        top: sq.top !== undefined ? sq.top : "auto",
+        bottom: sq.bottom !== undefined ? sq.bottom : "auto",
+        left: sq.left !== undefined ? sq.left : "auto",
+        right: sq.right !== undefined ? sq.right : "auto",
+      }}
+      animate={randomMove()}
+    />
+  ))}
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {/* Square 17 */}
 <motion.div
   className="absolute border-2 border-blue-500 w-24 h-24 top-[380px] right-[20px]"

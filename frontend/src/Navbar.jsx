@@ -100,7 +100,7 @@ export default function Navbar() {
             hover:bg-blue-600 hover:text-white
             transition-all duration-300 hover:scale-105"
           >
-            Login
+            Log in
           </Link>
 
           {/* 🌙 THEME TOGGLE */}
@@ -231,7 +231,7 @@ export default function Navbar() {
           transition-all duration-300 hover:bg-blue-700"
           onClick={() => setIsOpen(false)}
         >
-          Login
+          Log in
         </Link>
 
         {/* 🌙 MOBILE THEME TOGGLE */}
