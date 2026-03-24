@@ -71,7 +71,7 @@ export default function StatsSection() {
           : "bg-gradient-to-r from-blue-50 to-indigo-50"
       }`}
     >
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 " >
         {stats.map((stat, index) => (
           <motion.div
             key={index}
@@ -80,10 +80,10 @@ export default function StatsSection() {
             transition={{ duration: 0.6, delay: index * 0.15 }}
             viewport={{ once: true, margin: "-100px" }}
             whileHover={{ y: -10 }}
-            className={`flex flex-col items-center text-center p-8 md:p-10 rounded-2xl border backdrop-blur-xl shadow-lg hover:shadow-2xl transition-all ${
+            className={`flex flex-col items-center text-center p-8 md:p-10 rounded-2xl border-t-2 backdrop-blur-xl shadow-2xl  hover:shadow-2xl transition-all ${
               theme === "dark"
                 ? "bg-slate-900/80 border-slate-700"
-                : "bg-white/80 border-blue-100"
+                : "bg-white/80 border-blue-500 shadow-blue-950/40 "
             }`}
           >
             {/* Icon */}

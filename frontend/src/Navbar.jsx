@@ -15,13 +15,14 @@ export default function Navbar() {
   return (
     <nav
       className={`w-full fixed xl:mt-6  lg:mt-3 sm:mt-1 top-0 left-0 z-50
-        py-2  backdrop-blur-xs transition-colors duration-300
+        py-2  transition-colors duration-300
         ${
           theme === "light"
-            ? "bg-transperent/20 text-black"
-            : "bg-black/10 text-gray-100"
+            ? "bg-transperent/80  backdrop-blur-xs text-black"
+            : "bg-black/15 backdrop-blur-lg text-gray-100"
         }`}
     >
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-9 py-4 flex justify-between items-center relative gap-4 sm:gap-6">
 
         {/* LOGO - Pushed to the left */}
@@ -37,7 +38,7 @@ export default function Navbar() {
         <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2">
           <div
             className="flex items-center gap-8 font-bold rounded-xl px-4 py-2 shadow-md
-            bg-[var(--card)] border border-[var(--border)]"
+            bg-[var(--card)] border border-blue-500/30"
           >
             {[
               { path: "/", label: "Home" },
@@ -53,7 +54,7 @@ export default function Navbar() {
                   ${
                     isActive(item.path)
                       ? "bg-blue-600 text-white scale-105 shadow"
-                      : "text-[var(--text)] hover:bg-blue-600 hover:text-white"
+                      : "text-[var(--text)] hover:bg-blue-600/70 hover:text-white "
                   }`}
               >
                 {item.label}
@@ -149,7 +150,7 @@ export default function Navbar() {
         <div className={`absolute inset-0 rounded-full opacity-0 group-hover:opacity-100
           transition-opacity duration-1000
           ${theme === "dark" 
-            ? 'bg-gradient-to-br from-blue-400/30 to-transparent' 
+            ? 'bg-gradient-to-br from-blue-600/30 to-transparent' 
             : 'bg-gradient-to-br from-amber-300/30 to-transparent'
           }`} />
       </div>
@@ -163,8 +164,8 @@ export default function Navbar() {
           }`} />
         <Moon className={`w-3 h-3 transition-all duration-1000
           ${theme === "dark" 
-            ? 'text-blue-400/80 opacity-100 drop-shadow-[0_0_4px_rgba(59,130,246,0.3)]' 
-            : 'text-blue-400/20 opacity-40'
+            ? 'text-blue-600/80 opacity-100 drop-shadow-[0_0_4px_rgba(59,130,246,0.3)]' 
+            : 'text-blue-600/20 opacity-40'
           }`} />
       </div>
     </div>
@@ -218,7 +219,7 @@ export default function Navbar() {
             to={item.path}
             onClick={() => setIsOpen(false)}
             className={`block text-lg transition-colors duration-300 py-2
-              ${isActive(item.path) ? "text-white px-4 bg-blue-600 rounded-xl font-semibold" : "hover:text-blue-400"}`}
+              ${isActive(item.path) ? "text-white px-4 bg-blue-600 rounded-xl font-semibold" : "hover:text-blue-600"}`}
           >
             {item.label}
           </Link>

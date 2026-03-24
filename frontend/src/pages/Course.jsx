@@ -238,7 +238,7 @@ export default function Course() {
   }, [selectedCategory, searchQuery]);
 
   const bgMain = theme === "dark" ? "bg-slate-950 text-gray-200" : "bg-gray-50 text-gray-900";
-  const cardBg = theme === "dark" ? "bg-slate-900 text-gray-200" : "bg-white text-gray-900";
+  const cardBg = theme === "dark" ? "bg-gradient-to-br from-slate-900 to-slate-800 text-gray-200" : "bg-gradient-to-br from-white to-gray-50 text-gray-900 ";
   const inputBg = theme === "dark" ? "bg-slate-800 text-gray-200 placeholder-gray-400" : "bg-white text-gray-900 placeholder-gray-500";
 
   return (
@@ -247,9 +247,9 @@ export default function Course() {
       <FloatingSocialGlass />
 
       {/* HERO SECTION */}
-      <section className={`relative text-white py-32 ${theme === "dark" ? "bg-slate-900" : "bg-blue-900"}`}>
+      <section className={`relative  text-white py-32 ${theme === "dark" ? "bg-slate-900" : "bg-blue-900"}`}>
         <div className="absolute inset-0 bg-[url('/assets/course.png')] bg-cover bg-center opacity-20" />
-        <motion.div variants={fadeUp} initial="hidden" animate="visible" className="relative z-10 max-w-6xl mx-auto px-6 text-center">
+        <motion.div variants={fadeUp} initial="hidden" animate="visible" className="relative z-10  max-w-6xl mx-auto px-6 text-center">
           <h1 className="text-5xl md:text-6xl font-extrabold leading-tight">
             Learn With Intelligent <span className="text-blue-400">AI Tutors</span> 
           </h1>
@@ -264,7 +264,7 @@ export default function Course() {
               <input
                 type="text"
                 placeholder="Search AI tutors by skill or topic..."
-                className={`w-full pl-16 pr-6 py-5 rounded-2xl focus:outline-none focus:ring-4 focus:ring-blue-500/30 transition ${inputBg}`}
+                className={`w-full pl-16 pr-6 py-5 rounded-2xl border-l-2 border-r-2 border-blue-400 focus:outline-none focus:ring-4 focus:ring-blue-500/30 transition ${inputBg}`}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 aria-label="Search AI tutors"
@@ -281,16 +281,22 @@ export default function Course() {
           </motion.div>
         </motion.div>
       </section>
+
+
+
 {/* CATEGORIES SECTION - UNIFIED FOR MOBILE & PC */}
 <motion.section 
   variants={fadeUp} 
   initial="hidden" 
   whileInView="visible" 
   viewport={{ once: true }} 
-  className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 -mt-8 sm:-mt-10"
+  className="max-w-7xl mx-auto px-4 sm:px-6 py-9 sm:py-12 -mt-8 sm:-mt-10  "
 >
-  <div className={`${cardBg} rounded-2xl sm:rounded-3xl shadow-lg sm:shadow-xl p-6 sm:p-8 sm:py-7 border-b-4 sm:border-b-6 border-blue-600 transition-colors`}>
-    <div className="mb-6 sm:mb-8">
+  
+  <div className={`${cardBg} rounded-2xl sm:rounded-3xl  shadow-lg sm:shadow-xl p-6 sm:p-8 sm:py-7 border-b-4 sm:border-b-6 border-blue-600 transition-colors`}>
+    
+    <div className="mb-6 sm:mb-8 " >
+      
       <h2 className={`text-xl sm:text-2xl md:text-3xl font-bold text-center ${theme === "dark" ? "text-gray-100" : "text-gray-900"}`}>
         Browse AI Tutors by Category
       </h2>
@@ -393,7 +399,7 @@ export default function Course() {
             </p>
           </div>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-1 lg:grid-cols-4 gap-5">
             {filteredTutors.map((tutor) => (
               <AITutorCard 
                 key={tutor.id} 
@@ -474,6 +480,7 @@ export default function Course() {
                       : "bg-white/10 hover:bg-white/15"
                   }`}
                 >
+                  
                   {/* Icon */}
                   <div
                     className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${path.color} flex items-center justify-center mb-6`}
@@ -569,6 +576,7 @@ export default function Course() {
         viewport={{ once: true }} 
         className={`py-24 transition-colors ${theme === "dark" ? "bg-slate-900 text-gray-200" : "bg-blue-800 text-white"}`}
       >
+        
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-extrabold mb-6">Start Your AI-Powered Learning Journey</h2>
           <p className={`${theme === "dark" ? "text-gray-300" : "text-blue-100"} text-xl max-w-2xl mx-auto mb-10`}>
@@ -577,14 +585,14 @@ export default function Course() {
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Link 
               to="/auth" 
-              className="px-10 py-4 rounded-full font-semibold transition hover:scale-105 text-blue-900 bg-white hover:bg-blue-50"
+              className="px-10 py-4 rounded-full font-semibold transition hover:scale-105 text-blue-900 bg-white hover:bg-blue-500 hover:text-white"
               aria-label="Get started for free"
             >
               Get Started Free
             </Link>
             <Link to="/contact">
               <button 
-                className="border-2 px-10 py-4 rounded-full font-semibold transition hover:bg-white/10 border-white text-white"
+                className="border-2 px-10 py-4 rounded-full font-semibold transition hover:bg-white hover:text-black border-white text-white"
                 aria-label="Partner with us"
               >
                 Partner with us
@@ -615,6 +623,36 @@ function AITutorCard({ tutor, isHovered, onHover, onLeave, theme }) {
       aria-label={`${tutor.title} - ${tutor.level} level`}
       role="article"
     >
+      
+{/* clip art */}
+
+
+
+
+
+      <motion.div
+        className={`absolute top-0 right-0 w-552 h-152 rounded-full filter  opacity-30 z-1 ${
+          theme === "dark" ? "bg-blue-900/50" : "bg-blue-400/50"
+        }`}
+        animate={{
+          x: [0, -10, 0],
+          y: [0, 10, 0],
+          transition: { duration: 6, repeat: Infinity, repeatType: "mirror" }
+        }}
+      />
+
+
+
+
+
+
+
+
+
+
+
+
+
       <div className="p-6 h-full flex flex-col">
         <div className="flex justify-between items-start mb-4">
           <span className={`px-3 py-1 rounded-full text-sm font-medium ${
@@ -678,6 +716,7 @@ function AITutorCard({ tutor, isHovered, onHover, onLeave, theme }) {
                 </div>
               </div>
             </div>
+            
             <div className="pt-4 border-t border-white/20 mt-4">
               <div className="flex items-center justify-center gap-2 text-sm">
                 <Clock className="w-4 h-4 text-blue-300" />
@@ -698,9 +737,12 @@ function Stat({ value, label, theme }) {
       <div className={`font-medium ${theme === "dark" ? "text-gray-300" : "text-blue-200"}`}>
         {label}
       </div>
+      
     </motion.div>
   );
 }
+
+
 
 function BenefitCard({ icon: Icon, title, description, theme }) {
   return (
@@ -710,6 +752,7 @@ function BenefitCard({ icon: Icon, title, description, theme }) {
         theme === "dark" ? "bg-slate-800 text-gray-200" : "bg-white text-gray-900"
       }`}
     >
+      
       <div className="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center mb-6">
         <Icon className="w-7 h-7 text-blue-600" />
       </div>

@@ -66,8 +66,8 @@ export default function Testimonial() {
 
   const bg =
     theme === "dark"
-      ? "bg-slate-950 text-gray-200"
-      : "bg-gradient-to-b from-white to-blue-50";
+      ? "bg-gradient-to-b from-slate-950  to-blue-950 text-gray-200"
+      : "bg-gradient-to-b from-white to-blue-400/20";
 
   const card =
     theme === "dark"

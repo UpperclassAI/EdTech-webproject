@@ -35,7 +35,7 @@ export default function Home() {
   <img 
     src="/assets/uhome.png"
     alt="students learning"
-    className="w-full h-full object-cover object-center scale-105"
+    className="w-full h-full object-cover  scale-105"
     draggable={false}
   />
 
@@ -85,7 +85,7 @@ export default function Home() {
           transition={{ delay: 0.8, duration: 0.9 }}
         >
           Empowering the <br />
-         Next Generation <br /> <span className="text-blue-500"> With AI</span>
+         Next Generation <br /> <span className="text-blue-600"> With AI</span>
         </motion.h1>
 
         <motion.p
@@ -108,7 +108,7 @@ export default function Home() {
         >
           <Link
             to="/auth"
-            className="inline-flex items-center justify-center gap-2 sm:gap-3 bg-blue-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-2 sm:px-12 sm:py-4 rounded-xl text-sm sm:text-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+            className="inline-flex items-center justify-center gap-2 sm:gap-3 bg-blue-600 hover:from-white hover:text-black  hover:bg-white text-white px-6 py-2 sm:px-12 sm:py-4 rounded-xl text-sm sm:text-lg font-semibold transition-all duration-800 hover:scale-105 shadow-lg hover:shadow-xl"
           >
             Get Started
             <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -118,8 +118,8 @@ export default function Home() {
             onClick={() => whyChooseRef.current?.scrollIntoView({ behavior: "smooth" })}
             className={`px-6 py-2 sm:px-6 sm:py-3 rounded-xl shadow flex items-center justify-center transition-all duration-300 ${
               theme === "dark"
-                ? "bg-gray-800/10 border border-white text-white hover:bg-gray-700"
-                : "bg-white text-black hover:bg-gray-200"
+                ? "bg-gray-800/10 border border-white text-white hover:border-blue-600 hover:bg-blue-500/20 cursor-help"
+                : "bg-white text-black  hover:bg-blue-600 hover:text-white cursor-help"
             }`}
           >
             Why Us?
@@ -134,7 +134,7 @@ export default function Home() {
         href=" https://wa.link/ujeev2"
         target="_blank"
         className={`fixed bottom-6 right-6 z-50 p-4 rounded-full shadow-2xl hover:scale-110 transition-transform ${
-          theme === "dark" ? "bg-slate-800 text-blue-500" : "bg-blue-500"
+          theme === "dark" ? "bg-slate-800 text-blue-500" : "bg-blue-600"
         }`}
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}

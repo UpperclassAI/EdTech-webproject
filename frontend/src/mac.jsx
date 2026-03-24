@@ -6,13 +6,24 @@ import { useTheme } from "./context/ThemeContext";
 export default function EnhancedLogoMarquee() {
   const { theme } = useTheme();
 
-  // Create an array of 5 logos
-  const logos = Array(5).fill("/assets/logo.png");
+  // Create an array of logo paths - you can add different logos here
+  const logos = [
+    "/assets/logo.png",
+    "/assets/logo.png", // Add more varied logos if available
+    "/assets/logo.png",
+    "/assets/logo.png",
+    "/assets/logo.png",
+  ];
+
+  // If you only have one logo, duplicate it to create a varied array
+  const uniqueLogos = logos.length === 1 ? Array(5).fill(logos[0]) : logos;
 
   return (
     <motion.section
       className={`w-full py-20 transition-colors overflow-hidden ${
-        theme === "dark" ? "bg-gradient-to-b from-slate-900 to-slate-950" : "bg-gradient-to-b from-blue-50 to-indigo-50"
+        theme === "dark" 
+          ? "bg-gradient-to-b from-slate-900 to-slate-950" 
+          : "bg-gradient-to-b from-blue-50 to-blue-50"
       }`}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
@@ -27,23 +38,35 @@ export default function EnhancedLogoMarquee() {
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6 }}
           >
-            Trusted by Top <span className=" text-blue-500">Institutions</span>
+            Trusted by Top <span className="text-blue-500">Institutions</span>
           </motion.h3>
+          
           <motion.p 
-            className="text-lg md:text-xl text-black dark:text-gray-500 max-w-3xl mx-auto"
+            className={`text-lg md:text-xl max-w-3xl mx-auto ${
+              theme === "dark" ? "text-gray-400" : "text-gray-600"
+            }`}
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             Our platform is recognized and used by leading educational institutions worldwide
           </motion.p>
+           <div className="mt-6 w-10 h-1 mx-auto my-2 rounded-full bg-gradient-to-r from-blue-400 to-blue-600" />
         </div>
 
         {/* Marquee Container */}
         <div className="relative overflow-hidden mb-20">
-          {/* Gradient Overlays - Responsive */}
-          <div className="absolute left-0 top-0 bottom-0 w-12 md:w-20 lg:w-32 z-10 bg-gradient-to-r from-[var(--card)] to-transparent" />
-          <div className="absolute right-0 top-0 bottom-0 w-12 md:w-20 lg:w-32 z-10 bg-gradient-to-l from-[var(--card)] to-transparent" />
+          {/* Gradient Overlays - Fixed with proper dark mode support */}
+          <div className={`absolute left-0 top-0 bottom-0 w-12 md:w-20 lg:w-32 z-10 bg-gradient-to-r ${
+            theme === "dark" 
+              ? "from-slate-950/70" 
+              : "from-blue-50"
+          } to-transparent`} />
+          <div className={`absolute right-0 top-0 bottom-0 w-12 md:w-20 lg:w-32 z-10 bg-gradient-to-l ${
+            theme === "dark" 
+              ? "from-slate-950/70" 
+              : "from-blue-50"
+          } to-transparent`} />
 
           {/* First Marquee - Scroll Left */}
           <motion.div
@@ -60,7 +83,7 @@ export default function EnhancedLogoMarquee() {
               },
             }}
           >
-            {[...logos, ...logos, ...logos].map((logo, index) => (
+            {[...uniqueLogos, ...uniqueLogos, ...uniqueLogos].map((logo, index) => (
               <div
                 key={`first-${index}`}
                 className="flex-shrink-0 w-32 h-16 md:w-48 md:h-24 lg:w-56 lg:h-28 flex items-center justify-center"
@@ -89,7 +112,7 @@ export default function EnhancedLogoMarquee() {
               },
             }}
           >
-            {[...logos, ...logos, ...logos].map((logo, index) => (
+            {[...uniqueLogos, ...uniqueLogos, ...uniqueLogos].map((logo, index) => (
               <div
                 key={`second-${index}`}
                 className="flex-shrink-0 w-32 h-16 md:w-48 md:h-24 lg:w-56 lg:h-28 flex items-center justify-center"

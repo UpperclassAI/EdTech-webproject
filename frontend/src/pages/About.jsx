@@ -161,7 +161,7 @@ export default function About() {
       </section>
 
       {/* ABOUT CARD - Elevated with glass effect */}
-      <MotionSection className="-mt-12 md:-mt-20 relative z-20 px-4 sm:px-6">
+      <MotionSection className="-mt-12 md:-mt-20 relative z-20  px-4 sm:px-6">
         <div className={`max-w-6xl mx-auto rounded-3xl border-b-[6px] border-blue-600 shadow-2xl p-8 sm:p-12 md:p-16 text-center ${cardBg} border border-t-white/10 border-l-white/10 border-r-white/10 backdrop-blur-lg`}>
           <motion.h2 
             className={`text-3xl sm:text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r ${theme === "dark" ? "from-blue-400 to-blue-400" : "from-blue-600 to-blue-600"} bg-clip-text text-transparent`}

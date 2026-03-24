@@ -54,11 +54,13 @@ export default function WhyChoose() {
       {/* LEFT CONTENT */}
       <div className="flex-1 relative">
         <h2 className={`text-5xl md:text-6xl font-bold mb-36 transition-colors`}>
-          Why Choose <span className={`${theme === "dark" ? "text-blue-400" : "text-blue-500"}`}>Upperclass AI</span>
+          Why Choose <span className={`${theme === "dark" ? "text-blue-500" : "text-blue-500"}`}>Upperclass AI</span>
         </h2>
 
+          
+
         {/* Vertical Line */}
-        <div className={`absolute top-61 left-1 md:left-10 w-1 h-[calc(22rem)] hidden md:block transition-colors ${theme === "dark" ? "bg-blue-700" : "bg-blue-200"}`}></div>
+        <div className={`absolute top-61 left-1 md:left-7 w-1 h-[calc(22rem)] hidden md:block transition-colors ${theme === "dark" ? "bg-blue-700" : "bg-blue-500"}`}></div>
 
         {/* Steps */}
         <div className="flex flex-col gap-16 relative z-10">

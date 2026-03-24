@@ -129,8 +129,8 @@ export default function Pricing() {
       <FloatingSocialGlass />
 
       {/* HERO */}
-      <section className="relative py-40 bg-blue-900 text-white">
-        <div className="absolute inset-0 bg-[url('/assets/abt.png')] bg-cover bg-center opacity-20" />
+       <section className={`relative text-white py-32 ${theme === "dark" ? "bg-slate-900" : "bg-blue-900"}`}>
+        <div className="absolute inset-0 bg-[url('/assets/abt.png')] bg-cover m bg-center opacity-20" />
         <motion.div variants={fadeUp} initial="hidden" animate="visible" className="relative z-10 max-w-6xl mx-auto px-6 text-center">
           <h1 className="text-5xl md:text-6xl font-extrabold leading-tight">Simple, Transparent <span className="text-blue-500">Pricing</span></h1>
           <p className="mt-6 text-xl text-blue-100 max-w-3xl mx-auto">
@@ -141,6 +141,7 @@ export default function Pricing() {
             className="mt-12 inline-flex items-center gap-4 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 cursor-pointer select-none"
             onClick={toggleBilling}
           >
+            
             <span className="font-semibold">Billed {billing === "monthly" ? "Monthly" : "Annually"}</span>
             <div className="relative w-14 h-7 bg-blue-500 rounded-full">
               <div className={`absolute top-1 w-5 h-5 bg-white rounded-full transition-all ${billing === "monthly" ? "left-1" : "right-1"}`} />
@@ -151,6 +152,44 @@ export default function Pricing() {
           </motion.div>
         </motion.div>
       </section>
+
+
+{/* <__________________DESIGN AREA____________________> */}
+
+ <motion.div
+        className={`absolute buttom-700 right-0 lg:w-72 lg:h-72  sm:w-12 sm:h-12 filter  opacity-30 z-1 ${
+          theme === "dark" ? " border border-blue-600" : "bg-blue-400/50"
+        }`}
+        animate={{
+          x: [0, -20, 0],
+          y: [0, 20, 0],
+          transition: { duration: 6, repeat: Infinity, repeatType: "mirror" }
+        }}
+      />
+
+
+
+
+
+
+
+ <motion.div
+        className={`absolute buttom-150 left-0 lg:w-72 lg:h-72  sm:w-12 sm:h-12filter  opacity-30 z-1 ${
+          theme === "dark" ? " border border-blue-600" : "bg-blue-400/50"
+        }`}
+        animate={{
+          x: [0, -20, 0],
+          y: [0, 20, 0],
+          transition: { duration: 6, repeat: Infinity, repeatType: "mirror" }
+        }}
+      />
+{/* <_______________________FINISH___________________________> */}
+
+
+
+
+
+
 
       {/* PRICING CARDS */}
       <motion.section variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="max-w-7xl mx-auto px-6 py-24 -mt-20">
@@ -201,6 +240,43 @@ export default function Pricing() {
             ))}
           </div>
           
+
+
+
+
+
+
+
+
+
+
+
+          {/* <__________________DESIGN AREA____________________> */}
+
+ <motion.div
+        className={`absolute buttom-0 right-0 lg:w-72 lg:h-72  sm:w-12 sm:h-12 rounded-bl-full filter  opacity-30 z-1 ${
+          theme === "dark" ? " bg-blue-600" : "bg-blue-400/50"
+        }`}
+     
+      />
+
+
+
+
+
+
+
+ <motion.div
+        className={`absolute buttom-0 left-0 lg:w-72 lg:h-72  sm:w-12 sm:h-12  rounded-br-full filter  opacity-30  ${
+          theme === "dark" ? " bg-blue-600" : "bg-blue-400/50"
+        }`}
+       
+      />
+{/* <_______________________FINISH___________________________> */}
+
+
+
+
           {/* Table Rows */}
           {allFeatures.map((feature, idx) => (
             <div 
@@ -269,7 +345,7 @@ export default function Pricing() {
               className={`${cardBg} rounded-2xl p-8  border-r-6 border-blue-500  shadow-lg hover:shadow-xl hover:border  cursor-pointer ${cardHoverBg}`} 
               onClick={() => toggleFaq(index)}
             >
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between  items-center">
                 <h3 className={`text-xl font-semibold ${theme === "dark" ? "text-gray-100" : "text-gray-900"}`}>
                   {faq.question}
                 </h3>

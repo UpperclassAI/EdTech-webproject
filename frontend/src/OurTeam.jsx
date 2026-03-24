@@ -47,9 +47,9 @@ export default function OurTeam() {
           
           {/* Animated dark mode overlay */}
           <motion.div
-            className="absolute inset-0 bg-black pointer-events-none"
+            className="absolute inset-0 bg-slate-950  mix-blend-multiply pointer-events-none"
             initial={false}
-            animate={{ opacity: isDarkMode ? 0.6 : 0 }}
+            animate={{ opacity: isDarkMode ? 0.857685 : 0 }}
             transition={{ duration: 0.3 }}
           />
         </div>

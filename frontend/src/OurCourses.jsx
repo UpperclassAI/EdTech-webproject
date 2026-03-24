@@ -15,6 +15,7 @@ import { useTheme } from "./context/ThemeContext";
 
 export default function OurCourses() {
   const { theme } = useTheme();
+  
 
   const courses = [
     { 
@@ -68,8 +69,8 @@ export default function OurCourses() {
 
       {/* Animated Blur Circle */}
       <motion.div
-        className={`absolute top-0 right-0 w-172 h-172 rounded-full filter blur-3xl opacity-40 z-1 ${
-          theme === "dark" ? "bg-blue-900/50" : "bg-blue-400/50"
+        className={`absolute top-0 right-0 w-872 h-12 rounded-full filter blur-xl opacity-80 z-1 ${
+          theme === "dark" ? "bg-blue-900/50 opacity-10 " : "bg-blue-400/20 opacity-10 "
         }`}
         animate={{
           x: [0, -20, 0],
@@ -77,6 +78,33 @@ export default function OurCourses() {
           transition: { duration: 6, repeat: Infinity, repeatType: "mirror" }
         }}
       />
+
+
+       {/* Animated Blur Circle */}
+      <motion.div
+        className={`absolute top-50 left-0 w-872 h-12  filter blur-xl opacity-80 z-1 ${
+          theme === "dark" ? "bg-blue-900/50 opacity-10 " : "bg-blue-400/20 opacity-10 "
+        }`}
+        animate={{
+          x: [0, -20, 0],
+          y: [0, 20, 0],
+          transition: { duration: 6, repeat: Infinity, repeatType: "mirror" }
+        }}
+      />
+
+
+ {/* Animated Blur Circle */}
+      <motion.div
+        className={`absolute top-100 right-0 w-872 h-12 rounded-full filter blur-xl opacity-80 z-1 ${
+          theme === "dark" ? "bg-blue-900/50 opacity-10 " : "bg-blue-400/20 opacity-10 "
+        }`}
+        animate={{
+          x: [0, -20, 0],
+          y: [0, 20, 0],
+          transition: { duration: 6, repeat: Infinity, repeatType: "mirror" }
+        }}
+      />
+
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
@@ -91,12 +119,14 @@ export default function OurCourses() {
           }`}>
             Our <span className="text-blue-500">Courses</span>
           </h1>
+           
           <p className={`text-lg md:text-xl max-w-3xl mx-auto ${
             theme === "dark" ? "text-gray-300" : "text-gray-700"
           }`}>
             Discover our comprehensive range of courses designed to help you master 
             the most in-demand skills in today's digital world.
-          </p>
+          </p>  
+           <div className="mt-6 w-10 h-1 mx-auto my-2 rounded-full bg-gradient-to-r from-blue-400 to-blue-600" />
         </motion.div>
 
         {/* Courses Grid */}
@@ -112,7 +142,7 @@ export default function OurCourses() {
               className={`group relative overflow-hidden rounded-2xl shadow-lg flex flex-col items-center text-center px-4 py-6 sm:px-6 sm:py-8 transition-all duration-300 cursor-pointer ${
                 theme === "dark"
                   ? "bg-slate-900 shadow-slate-900/50 text-gray-200 border border-slate-700"
-                  : "bg-blue-500 shadow-lg text-white"
+                  : "bg-blue-600 shadow-lg text-white"
               }`}
             >
               {/* Icon */}

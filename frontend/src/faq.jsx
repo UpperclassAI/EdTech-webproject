@@ -13,6 +13,7 @@ import { motion, useInView } from "framer-motion";
 import { FaArrowRight } from "react-icons/fa";
 import { useTheme } from "./context/ThemeContext";
 
+
 const faqData = [
   {
     question: "What is Upperclass AI and how does it work?",
@@ -88,6 +89,7 @@ export default function FAQSection() {
           <p className={`text-lg md:text-xl max-w-3xl mx-auto ${theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>
             Have questions? We've got answers. Explore our most common FAQs below.
           </p>
+           <div className="mt-6 w-10 h-1 mx-auto my-2 rounded-full bg-gradient-to-r from-blue-400 to-blue-600" />
         </motion.div>
 
         {/* Two-column layout */}
@@ -102,7 +104,7 @@ export default function FAQSection() {
                 transition={{ delay: index * 0.1, duration: 0.6 }}
                 whileHover={{ y: -3, scale: 1.01 }}
                 className={`group rounded-2xl overflow-hidden shadow-lg transition-all  border-l-4 border-blue-500 duration-300 ${
-                  theme === "dark" ? "bg-slate-800" : "bg-white"
+                  theme === "dark" ? "bg-slate-800" : "bg-blue-100/80"
                 }`}
               >
                 <button

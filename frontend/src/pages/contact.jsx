@@ -216,6 +216,8 @@ export default function Contact() {
         theme === "dark" ? "bg-slate-950 text-gray-200" : "bg-gray-50 text-gray-900"
       } relative`}
     >
+
+      
       <Navbar />
       <FloatingSocialGlass />
 
@@ -242,6 +244,57 @@ export default function Contact() {
           </p>
         </motion.div>
       </section>
+
+
+      {/* design area--------------------------------------- */}
+     <motion.div
+        className={`absolute top-150 right-0 w-12 h-72 filter  opacity-80 z-1 ${
+          theme === "dark" ? "bg-blue-900/50 " : "bg-blue-400/50"
+        }`}
+        animate={{
+          x: [0, -20, 0],
+          y: [0, 20, 0],
+          transition: { duration: 6, repeat: Infinity, repeatType: "mirror" }
+        }}
+      />
+    <motion.div
+        className={`absolute buttom-150 left-0 w-12 h-72 filter  opacity-80 z-1 ${
+          theme === "dark" ? "bg-blue-900/50  " : "bg-blue-400/50"
+        }`}
+        animate={{
+          x: [0, -20, 0],
+          y: [0, 20, 0],
+          transition: { duration: 6, repeat: Infinity, repeatType: "mirror" }
+        }}
+      />
+
+       <motion.div
+        className={`absolute buttom-150 left-1 w-12 h-72 filter  opacity-80 z-1 ${
+          theme === "dark" ? " border-blue-600" : "bg-blue-400/50"
+        }`}
+        animate={{
+          x: [0, -20, 0],
+          y: [0, 20, 0],
+          transition: { duration: 6, repeat: Infinity, repeatType: "mirror" }
+        }}
+      />
+
+
+
+          <motion.div
+        className={`absolute top-150 right-7 w-12 h-72 filter  opacity-80 z-1 ${
+          theme === "dark" ? "bg-blue-900/50 " : "bg-blue-400/50"
+        }`}
+        animate={{
+          x: [0, -60, 0],
+          y: [50, 20, 50],
+          transition: { duration: 6, repeat: Infinity, repeatType: "mirror" }
+        }}
+      />
+
+
+{/* <-----------------------finish------------------------> */}
+
 
       {/* CONTACT CARD */}
       <motion.section
@@ -540,3 +593,25 @@ function Textarea({ label, theme, ...props }) {
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
